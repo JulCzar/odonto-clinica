@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+:root {
+  --font-family: 'Montserrat', 'Open Sans', 'Roboto', sans-serif !important;
+}
+
+* {
+  font-size: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+	color: unset;
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+body {
+	color: var(--text-color);
+	font-family: var(--font-family);
+}
+
+.container {
+	background: var(--surface-b);
+	display: flex;
+	min-height: 100vh;
+}
+
+.content {
+	padding-top: 70px;
+	width: 100vw;
+}
+
+.card {
+  --width: auto;
+	background: var(--surface-e);
+	box-shadow: 0 2px 1px -1px rgb(0 0 0 / 20%), 0 1px 1px 0 rgb(0 0 0 / 14%), 0 1px 3px 0 rgb(0 0 0 / 12%);
+	border-radius: 4px;
+	margin-bottom: 2rem;
+	padding: 2rem;
+	width: var(--width);
+	-webkit-box-shadow: 0 2px 1px -1px rgb(0 0 0 / 20%), 0 1px 1px 0 rgb(0 0 0 / 14%), 0 1px 3px 0 rgb(0 0 0 / 12%);
+}
+
+.input-wrapper {
+  --cols: 1;
+  --gap: 0;
+	display: grid;
+	grid-template-columns: repeat(var(--cols), 1fr);
+	gap: var(--gap);
+}
+
+.card-header.title {
+	border-bottom: .25px solid var(--text-color);
+	font-size: 1.7rem;
+	font-weight: 300;
+	margin-bottom: 1.25rem;
+	width: 100%;
+}
