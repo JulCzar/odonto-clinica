@@ -1,0 +1,52 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui" template="/WEB-INF/template.xhtml">
+
+    <ui:define name="sidebar"/>
+    <ui:define name="content">
+        <div class='card ui-fluid' style="--width: 600px">
+            <h3 class="card-header title">Cadastro</h3>
+            <h:form>
+                <div class="input-wrapper" style="--cols: 2; --gap: 10px">
+                    <div class='p-field'>
+                        <p:outputLabel for='@next' value="Nome"/>
+                        <p:inputText id='name' name='name' required="true" value="#{patientController.entity.physicalPerson.name}"/>
+                    </div>
+                    <div class='p-field'>
+                        <p:outputLabel for='@next' value="Sobrenome"/>
+                        <p:inputText id='lastname' name='lastname' required="true" value="#{patientController.entity.physicalPerson.lastname}"/>
+                    </div>
+                </div>
+                <div class='p-field'>
+                    <p:outputLabel for='@next' value="Email"/>
+                    <p:inputText id='email' name='email' required="true" value="#{patientController.entity.physicalPerson.email}"/>
+                </div>
+                <div class="p-grid">
+                    <div class='p-field p-col-5'>
+                        <p:outputLabel for='@next' value="CPF"/>
+                        <p:inputMask mask="999.999.999-99" id='cpf' name='cpf' required="true" value="#{patientController.entity.physicalPerson.cpf}"/>
+                    </div>
+                    <div class='p-field p-col-2'>
+                        <p:outputLabel for='@next' value="Área"/>
+                        <p:inputMask mask="(99)" id='area' required="true" value="#{patientController.entity.phone.area}"/>
+                    </div>
+                    <div class='p-field p-col-5'>
+                        <p:outputLabel for='@next' value="Telefone"/>
+                        <p:inputMask mask="9 9999-9999" id='number' required="true" value="#{patientController.entity.phone.number}"/>
+                    </div>
+                </div>
+                <div class='p-field'>
+                    <p:outputLabel for='@next' value="Senha"/>
+                    <p:password id="password" styleClass="p-col-12" required="true" toggleMask="true" value="#{patientController.entity.physicalPerson.password}" redisplay="true" />
+                </div>
+                <div class='p-field'>
+                    <p:outputLabel for='@next' value="Confirmação de Senha"/>
+                    <p:password id="password-confirm" styleClass="p-col-12" required="true" toggleMask="true" redisplay="true" />
+                </div>
+                <p:commandButton actionListener="#{patientController.store}" update="@form messages" value="Cadastrar" styleClass="p-mt-3"/>
+            </h:form>
+        </div>
+    </ui:define>
+</ui:composition>

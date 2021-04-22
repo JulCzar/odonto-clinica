@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" lang="en">
+
+<h:head>
+	<f:facet name="first">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+	</f:facet>
+	<h:outputStylesheet library="webjars" name="font-awesome/5.12.0/css/all.min-jsf.css" />
+	<h:outputStylesheet library="webjars" name="font-awesome/5.12.0/css/v4-shims.min-jsf.css" />
+	<h:outputStylesheet name="primeicons/primeicons.css" library="primefaces" />
+	<h:outputStylesheet name="primeflex.min.css" library="css"/>
+	<h:outputStylesheet name="index.css" library="css"/>
+	<ui:insert name="head" />
+</h:head>
+
+<h:body>
+	<div class="container">
+	<p:growl id="messages" showDetail="true" />
+	<div class="layout-wrapper">
+		<ui:insert name="sidebar">
+			<ui:include src="./sidebar.xhtml" />
+		</ui:insert>
+
+		<div class="container">
+			<div class="content p-d-flex p-jc-center p-ai-center layout-content">
+				<ui:insert name="content"/>
+			</div>
+		</div>
+	</div>
+
+	</div>
+	<h:outputStylesheet name="layout/script/layout.js"/>
+	<h:outputScript name="layout/script/layout.js"/>
+</h:body>
+
+</html>

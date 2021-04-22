@@ -1,9 +1,18 @@
 package br.czar.odonto.model;
 
+import javax.persistence.Entity;
+import javax.persistence.OneToOne;
+import javax.persistence.Transient;
 import java.util.List;
 
-public class Patient extends PhysicalPerson {
+@Entity
+public class Patient extends DefaultEntity<Patient>{
+	private static final long serialVersionUID = 6160416917272552149L;
+	@OneToOne
 	private Phone phone;
+	@OneToOne
+	private PhysicalPerson physicalPerson;
+	@Transient
 	private List<Allergie> allergies;
 	
 	public Phone getPhone() {
@@ -12,29 +21,21 @@ public class Patient extends PhysicalPerson {
 	public void setPhone(Phone phone) {
 		this.phone = phone;
 	}
+	public PhysicalPerson getPhysicalPerson() {
+		return physicalPerson;
+	}
+	public void setPhysicalPerson(PhysicalPerson physicalPerson) {
+		this.physicalPerson = physicalPerson;
+	}
 	public List<Allergie> getAllergies() {
 		return allergies;
 	}
 	public void setAllergies(List<Allergie> allergies) {
 		this.allergies = allergies;
 	}
+
 	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + ((allergies == null) ? 0 : allergies.hashCode());
-		result = prime * result + ((phone == null) ? 0 : phone.hashCode());
-		return result;
-	}
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (!super.equals(obj))
-			return false;
-		if (!(obj instanceof Patient))
-			return false;
-		
-		return true;
+	public String toString() {
+		return "Patient = { id: " + getId() + ", name: " + physicalPerson.getName() + ", email: " + physicalPerson.getEmail()+ ", address: " + physicalPerson.getAddress() + ", cpf: " + physicalPerson.getCpf() + ", password: " + physicalPerson.getPassword() + ", lastname: " + physicalPerson.getLastname() + ", phone: " + phone + ", allergies: " + allergies + " }";
 	}
 }

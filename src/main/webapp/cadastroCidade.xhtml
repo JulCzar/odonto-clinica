@@ -1,0 +1,33 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+    <ui:define name="sidebar"/>
+    <ui:define name="content">
+        <div class='card ui-fluid' style="--width: 400px">
+            <h3 class="card-header title">Cadastrar Cidade</h3>
+            <h:form>
+                <div class='p-field'>
+                    <p:outputLabel for="@next">Nome</p:outputLabel>
+                    <p:inputText id='city' value="#{cityController.entity.name}" requiredMessage="O Campo não pode ficar vazio" required="true"/>
+                </div>
+                <div class="p-grid">
+                    <div class='p-field p-col-4'>
+                        <p:outputLabel for="@next">Sigla</p:outputLabel>
+                        <p:inputText id='code' value="#{cityController.entity.code}" oninput="(function (i) { i.value = i.value.toUpperCase() })(this)"  requiredMessage="O Campo não pode ficar vazio" required="true"/>
+                    </div>
+                    <div class="p-field p-col-8">
+                        <p:outputLabel for="@next" value="Estado"/>
+                        <p:selectOneMenu id="group" value="#{cityController.entity.state}">
+                            <f:selectItem itemLabel="Selecione Um" itemValue=""/>
+                            <f:selectItems value="#{cityController.states}" var="s" itemLabel="#{s.name}"/>
+                        </p:selectOneMenu>
+                    </div>
+                </div>
+                <p:commandButton actionListener="#{cityController.store}" update="@form messages" process="@form" value="Cadastrar" styleClass="p-mt-3"/>
+            </h:form>
+        </div>
+    </ui:define>
+</ui:composition>

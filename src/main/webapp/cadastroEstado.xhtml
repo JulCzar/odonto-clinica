@@ -1,0 +1,23 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui" template="/WEB-INF/template.xhtml">
+
+    <ui:define name="sidebar"/>
+    <ui:define name="content">
+        <div class='card ui-fluid' style="--width: 400px">
+            <h3 class="card-header title">Cadastrar Estado</h3>
+            <h:form>
+                <div class='p-field'>
+                    <p:outputLabel for="name">Nome</p:outputLabel>
+                    <p:inputText id='name' value="#{stateController.entity.name}" requiredMessage="O Campo não pode ficar vazio" required="true"/>
+                </div>
+                <div class='p-field'>
+                    <p:outputLabel for="uf">Sigla</p:outputLabel>
+                    <p:inputText id='uf' value="#{stateController.entity.uf}" maxlength="2" oninput="(function (i) { i.value = i.value.toUpperCase() })(this)" requiredMessage="O Campo não pode ficar vazio" required="true"/>
+                </div>
+                <p:commandButton actionListener="#{stateController.store}" update="@form messages" process="@form" value="Cadastrar" styleClass="p-mt-3"/>
+            </h:form>
+        </div>
+    </ui:define>
+</ui:composition>

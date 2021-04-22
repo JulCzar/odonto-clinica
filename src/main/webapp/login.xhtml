@@ -1,0 +1,27 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui" template="/WEB-INF/template.xhtml">
+
+    <ui:define name="sidebar"/>
+    <ui:define name="content">
+        <div class='card ui-fluid' style="--width: 400px">
+            <h3 class="card-header title">Login</h3>
+            <h:form>
+                <div class="p-field">
+                    <p:outputLabel for="email" styleClass="p-d-block">Email</p:outputLabel>
+                    <p:inputText id="email" styleClass="p-d-block" value="#{loginController.patient.email}"/>
+                </div>
+                <div class="p-field">
+                    <p:outputLabel for="password" styleClass="p-d-block">Senha</p:outputLabel>
+                    <p:inputText id="password" styleClass="p-d-block" value="#{loginController.patient.password}"/>
+                </div>
+                <div>
+                    <p>Não possui conta? <h:commandLink actionListener='#{redirect.to("cadastrar")}'>Cadastrar-se</h:commandLink></p>
+                    <a href='#'>Esqueceu sua senha?</a>
+                </div>
+                <p:commandButton actionListener="#{loginController.login}" update="@form" value="logar" styleClass="p-mt-3"/>
+            </h:form>
+        </div>
+    </ui:define>
+</ui:composition>

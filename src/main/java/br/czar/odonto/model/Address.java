@@ -1,14 +1,23 @@
 package br.czar.odonto.model;
 
-import javax.validation.constraints.NotNull;
+import javax.persistence.*;
 
+@Entity
 public class Address {
-	@NotNull
+	@Id
+	private Integer id;
+	@OneToOne
 	private City city;
 	private String number;
 	private String street;
 	private String department;
 	
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
 	public City getCity() {
 		return city;
 	}
