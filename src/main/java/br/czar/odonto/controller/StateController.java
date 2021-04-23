@@ -22,7 +22,6 @@ public class StateController extends Controller<State> {
 
   public StateController() {
     Flash flash = FacesContext.getCurrentInstance().getExternalContext().getFlash();
-    flash.keep("state-to-edit");
     entity = (State) flash.get("state-to-edit");
   }
 
@@ -46,22 +45,10 @@ public class StateController extends Controller<State> {
     }
     return states;
   }
-  public void destroy(State entity) {
-    Repository<State> repo = new Repository<State>();
-    System.out.println(entity);
-    try {
-      repo.beginTransaction();
-      repo.remove(entity);
-      repo.commitTransaction();
-      states = null;
-      Util.addInfoMessage("Estado removido com sucesso.");
-
-    } catch (RepositoryException e) {
-      e.printStackTrace();
-      Util.addErrorMessage("Erro ao remover o Estado.");
-    } finally {
-      clear();
-    }
+  public void destroy(State state) {
+    this.entity = state;
+    destroy();
+    states = null;
   }
 
   public void edit(State s) {

@@ -22,7 +22,6 @@ public class CityController extends Controller<City> {
 
   public CityController() {
     Flash flash = FacesContext.getCurrentInstance().getExternalContext().getFlash();
-    flash.keep("city-to-edit");
     entity = (City) flash.get("city-to-edit");
   }
 
@@ -48,21 +47,9 @@ public class CityController extends Controller<City> {
     return cities;
   }
   public void destroy(City city) {
-    Repository<City> repo = new Repository<City>();
-    System.out.println(city);
-    try {
-      repo.beginTransaction();
-      repo.remove(city);
-      repo.commitTransaction();
-      this.cities = null;
-
-      Util.addInfoMessage("Estado removido com sucesso.");
-    } catch (RepositoryException e) {
-      e.printStackTrace();
-      Util.addErrorMessage("Erro ao remover o Estado.");
-    } finally {
-      clear();
-    }
+    this.entity = city;
+    destroy();
+    cities = null;
   }
 
   public void edit(City s) {

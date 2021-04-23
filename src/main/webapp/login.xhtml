@@ -9,11 +9,11 @@
             <h:form>
                 <div class="p-field">
                     <p:outputLabel for="@next" value="Email"/>
-                    <p:inputText id="email" value="#{loginController.patient.physicalPerson.email}" requiredMessage="Informe o email para realizar o login" required="true"/>
+                    <p:inputText id="email" value="#{loginController.login}" requiredMessage="Informe o email para realizar o login" required="true"/>
                 </div>
                 <div class="p-field">
                     <p:outputLabel for="@next" value="Senha"/>
-                    <p:inputText id="password" value="#{loginController.patient.physicalPerson.password}" requiredMessage="Informe a senha para realizar o login" required="true"/>
+                    <p:inputText id="password" value="#{loginController.senha}" requiredMessage="Informe a senha para realizar o login" required="true"/>
                 </div>
                 <div>
                     <p>Não possui conta? <p:commandLink process="@this" actionListener='#{redirect.to("cadastro/paciente")}'>Cadastrar-se</p:commandLink></p>

@@ -5,61 +5,33 @@
                 xmlns:p="http://primefaces.org/ui" template="/WEB-INF/template/main.xhtml">
 
     <ui:define name="content">
-        <div class='card ui-fluid' style="--width: 400px">
+        <div class='card ui-fluid' style="height: 100%">
             <h:form id="form">
                 <div class="card crud-demo">
                     <p:growl id="messages" showDetail="true"/>
 
                     <p:toolbar>
                         <p:toolbarGroup>
-                            <p:commandButton value="New" icon="pi pi-plus" actionListener="#{redirect.to('/OdontoClinica/cadastro/paciente')}"
-                                             oncomplete="PF('manageProductDialog').show()"
-                                             styleClass="ui-button-success" style="margin-right: .5rem">
-                            </p:commandButton>
-                        </p:toolbarGroup>
-                        <p:toolbarGroup align="right">
-                            <p:fileUpload mode="simple" skinSimple="true" label="Import" chooseIcon="pi pi-download"/>
-                            <p:commandButton value="Export" icon="pi pi-upload" styleClass="ui-button-help" ajax="false">
-                                <p:dataExporter type="pdf" target="dt-products" fileName="products"/>
-                            </p:commandButton>
+                            <p:commandButton value="New" icon="pi pi-plus" actionListener="#{redirect.to('/OdontoClinica/cadastro/paciente')}" oncomplete="PF('manageProductDialog').show()" styleClass="ui-button-success"/>
                         </p:toolbarGroup>
                     </p:toolbar>
 
-                    <p:dataTable id="dt-products" widgetVar="dtProducts" var="p" value="#{patientController.patients}"
-                                 reflow="true" styleClass="products-table"
-                                 rowKey="#{p.id}" paginatorPosition="bottom">
-                        <f:facet name="header">
-                            <div class="products-table-header">
-                                <span style="font-weight: bold">PRODUCTS</span>
+                    <p:dataTable id="dt-patient" widgetVar="dtPatient" var="patient" value="#{patientController.patients}"
+                                 reflow="true" styleClass="patient-table" 
+                                 rowKey="#{patient.id}" paginatorPosition="bottom">
 
-                                <span class="filter-container ui-input-icon-left">
-                        <i class="pi pi-search"/>
-                        <p:inputText id="globalFilter" onkeyup="PF('dtProducts').filter()" placeholder="Search"/>
-                    </span>
-
-                            </div>
-                        </f:facet>
-
-
-                        <p:column selectionMode="multiple" exportable="false"/>
-
-                        <p:column headerText="Code" sortBy="#{p.id}" >
-                            <h:outputText value="#{p.id}"/>
+                        <p:column headerText="Code" >
+                            <h:outputText value="#{patient.id}"/>
                         </p:column>
-                        <p:column headerText="Name" sortBy="#{p.physicalPerson.name}">
-                            <h:outputText value="#{p.physicalPerson.name}"/>
+                        <p:column headerText="Name" >
+                            <h:outputText value="#{patient.physicalPerson.name}"/>
                         </p:column>
-                        <p:column exportable="false">
-                            <p:commandButton icon="pi pi-pencil" update=":form:manage-product-content"
-                                             oncomplete="PF('manageProductDialog').show()"
-                                             styleClass="edit-button rounded-button ui-button-success" process="@this">
-                                <f:setPropertyActionListener value="#{p}" target="#{redirect.to('edit/patient?p=' + '#{p.id}')}"/>
-                                <p:resetInput target=":form:manage-product-content"/>
-                            </p:commandButton>
-                            <p:commandButton class="ui-button-warning rounded-button" icon="pi pi-trash" process="@this"
-                                             oncomplete="PF('deleteProductDialog').show()">
-                                <f:setPropertyActionListener value="#{p}" target="#{patientController.clear}"/>
-                            </p:commandButton>
+                        <p:column headerText="CPF" >
+                            <h:outputText value="#{patient.physicalPerson.cpf}"/>
+                        </p:column>
+                        <p:column exportable="false" headerText="Ações">
+                            <p:commandButton icon="pi pi-pencil" update="@form" styleClass="edit-button rounded-button ui-button-success" process="@this" actionListener="#{patientController.edit(patient)}"/>
+                            <p:commandButton class="ui-button-warning rounded-button p-ml-3" icon="pi pi-trash" process="@this" update="@form" oncomplete="PF('deleteProductDialog').show()" actionListener="#{patientController.destroy(patient)}"/>
                         </p:column>
 
                     </p:dataTable>

@@ -5,7 +5,7 @@
                 xmlns:p="http://primefaces.org/ui" template="/WEB-INF/template/main.xhtml">
 
     <ui:define name="content">
-        <div class='card ui-fluid'>
+        <div class='card ui-fluid' style="height: 100%">
             <h:form id="form">
                 <div class="card crud-demo">
                     <p:growl id="messages" showDetail="true"/>
@@ -16,8 +16,8 @@
                         </p:toolbarGroup>
                     </p:toolbar>
 
-                    <p:dataTable id="dt-products" widgetVar="dtEstados" var="state" value="#{stateController.states}"
-                                 reflow="true" styleClass="products-table"
+                    <p:dataTable id="dt-state" widgetVar="dtState" var="state" value="#{stateController.states}"
+                                 reflow="true" styleClass="state-table"
                                  rowKey="#{state.id}" paginatorPosition="bottom">
 
                         <p:column headerText="Code" >

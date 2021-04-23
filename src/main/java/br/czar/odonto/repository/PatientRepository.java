@@ -18,14 +18,26 @@ public class PatientRepository extends Repository<Patient> {
   }
   public List<Patient> findAll() throws RepositoryException {
     EntityManager em = getEntityManager();
-    StringBuilder jpql = new StringBuilder();
-    jpql.append("SELECT ")
-            .append(" p ")
-            .append("FROM ")
-            .append(" Patient p ")
-            .append("ORDER BY p.name ");
 
-    Query q = em.createQuery(jpql.toString());
+    String jpql = "SELECT p FROM Patient p ORDER BY p.physicalPerson.name";
+    Query q = em.createQuery(jpql);
     return (List<Patient>)(q.getResultList());
+  }
+
+  public List<Patient> findByEmail(String email) throws RepositoryException{
+    try {
+      EntityManager em = JPAUtil.getEntityManager();
+
+      String jpql = "SELECT p FROM Patient p WHERE p.physicalPerson.email = :email ORDER BY p.id";
+      Query query = em.createQuery(jpql);
+      query.setParameter("email",  email  );
+
+      return query.getResultList();
+    } catch (Exception e) {
+      System.out.println("Erro ao realizar uma consulta ao banco.");
+      e.printStackTrace();
+      throw new RepositoryException("Erro ao realizar uma consulta ao banco.");
+    }
+
   }
 }
