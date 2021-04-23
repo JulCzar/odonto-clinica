@@ -31,19 +31,22 @@ public class Util {
 		addMessage(null, FacesMessage.SEVERITY_INFO, msg);
 	}
 	
-	public static void addInfoWarnMessage(String msg) {
+	public static void addWarnMessage(String msg) {
 		addMessage(null, FacesMessage.SEVERITY_WARN, msg);
 	}
 	
 	private static void addMessage(String clientId, Severity severity, String msg) {
 		FacesContext.getCurrentInstance()
-      .addMessage(clientId, new FacesMessage(severity, msg, null));
+			.addMessage(clientId, new FacesMessage(severity, msg, null));
 	}
 	
 	public static void redirect(String page) {
+		String destination = page;
+		if (!page.contains(".xhtml"))
+			destination += ".xhtml";
 		try {
 			FacesContext.getCurrentInstance()
-				.getExternalContext().redirect(page);
+				.getExternalContext().redirect(destination);
 		} catch (IOException e) {
 			e.printStackTrace();
 			addErrorMessage("Problemas ao redirecionar a página.");

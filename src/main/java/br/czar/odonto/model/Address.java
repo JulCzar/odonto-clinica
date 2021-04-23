@@ -7,6 +7,10 @@ public class Address {
 	@Id
 	private Integer id;
 	@OneToOne
+	@MapsId
+	@JoinColumn(name = "physicalPerson_id")
+	private PhysicalPerson physicalPerson;
+	@OneToOne
 	private City city;
 	private String number;
 	private String street;
@@ -41,6 +45,12 @@ public class Address {
 	}
 	public void setDepartment(String department) {
 		this.department = department;
+	}
+	public PhysicalPerson getPhysicalPerson() {
+		return physicalPerson;
+	}
+	public void setPhysicalPerson(PhysicalPerson p) {
+		physicalPerson = p;
 	}
 	@Override
 	public int hashCode() {

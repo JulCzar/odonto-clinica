@@ -46,6 +46,6 @@ public class Clinic extends Person {
 	}
 	@Override
 	public String toString() {
-		return "Clinic = { id: " + getId() + ", name: " + getName() + ", email: " + getEmail()+ ", address: " + getAddress() +  "companyName: " + companyName + ", cnpj: " + cnpj + " }";
+		return "Clinic = { id: " + getId() + ", name: " + getName() + ", email: " + getEmail() +  "companyName: " + companyName + ", cnpj: " + cnpj + " }";
 	}
 }

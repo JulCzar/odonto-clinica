@@ -56,7 +56,7 @@ public class Repository<T extends DefaultEntity<T>> {
 
       em.merge(entity);
     }catch (Exception e) {
-      System.out.println("Erro ao salvar" + entity + " - Repository");
+      System.out.println("Erro ao salvar " + entity + " - Repository");
       e.printStackTrace();
       throw new RepositoryException("Erro ao Salvar");
     }

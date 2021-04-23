@@ -3,7 +3,7 @@
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:p="http://primefaces.org/ui"
-                template="/WEB-INF/template.xhtml">
+                template="/WEB-INF/template/mainNoSidebar.xhtml">
     <ui:define name="sidebar"/>
     <ui:define name="content">
         <div class='card ui-fluid' style="--width: 400px">
@@ -20,9 +20,9 @@
                     </div>
                     <div class="p-field p-col-8">
                         <p:outputLabel for="@next" value="Estado"/>
-                        <p:selectOneMenu id="group" value="#{cityController.entity.state}">
+                        <p:selectOneMenu id="group" value="#{cityController.entity.state}" required="true">
                             <f:selectItem itemLabel="Selecione Um" itemValue=""/>
-                            <f:selectItems value="#{cityController.states}" var="s" itemLabel="#{s.name}"/>
+                            <f:selectItems value="#{stateController.states}" var="state" itemLabel="#{state.name}"/>
                         </p:selectOneMenu>
                     </div>
                 </div>

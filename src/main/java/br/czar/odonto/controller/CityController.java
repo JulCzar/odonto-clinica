@@ -1,19 +1,30 @@
 package br.czar.odonto.controller;
 
+import br.czar.odonto.aplication.RepositoryException;
+import br.czar.odonto.aplication.Util;
 import br.czar.odonto.model.City;
 import br.czar.odonto.model.State;
-import br.czar.odonto.repository.StateRepository;
+import br.czar.odonto.repository.CityRepository;
+import br.czar.odonto.repository.Repository;
 
-import javax.enterprise.context.SessionScoped;
+import javax.faces.context.FacesContext;
+import javax.faces.context.Flash;
+import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import java.util.ArrayList;
 import java.util.List;
 
 @Named
-@SessionScoped
+@ViewScoped
 public class CityController extends Controller<City> {
   private static final long serialVersionUID = 6606464699712173219L;
-  private List<State> states;
+  private List<City> cities;
+
+  public CityController() {
+    Flash flash = FacesContext.getCurrentInstance().getExternalContext().getFlash();
+    flash.keep("city-to-edit");
+    entity = (City) flash.get("city-to-edit");
+  }
 
   @Override
   public City getEntity() {
@@ -24,16 +35,40 @@ public class CityController extends Controller<City> {
     return entity;
   }
 
-  public List<State> getStates() {
-    if (states == null) {
-      StateRepository sr = new StateRepository();
+  public List<City> getCities() {
+    CityRepository sr = new CityRepository();
+    if (cities == null) {
       try {
-        states = sr.findAll();
+        cities = sr.findAll();
       } catch (Exception e) {
-        states = new ArrayList<>();
         e.printStackTrace();
+        return new ArrayList<>();
       }
     }
-    return states;
+    return cities;
+  }
+  public void destroy(City city) {
+    Repository<City> repo = new Repository<City>();
+    System.out.println(city);
+    try {
+      repo.beginTransaction();
+      repo.remove(city);
+      repo.commitTransaction();
+      this.cities = null;
+
+      Util.addInfoMessage("Estado removido com sucesso.");
+    } catch (RepositoryException e) {
+      e.printStackTrace();
+      Util.addErrorMessage("Erro ao remover o Estado.");
+    } finally {
+      clear();
+    }
+  }
+
+  public void edit(City s) {
+    Flash flash = FacesContext.getCurrentInstance().getExternalContext().getFlash();
+
+    flash.put("city-to-edit", s);
+    Util.redirect("/OdontoClinica/cadastro/cidade");
   }
 }

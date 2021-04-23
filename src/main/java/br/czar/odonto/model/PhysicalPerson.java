@@ -1,16 +1,23 @@
 package br.czar.odonto.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
+import br.czar.odonto.aplication.Util;
+
+import javax.persistence.*;
 
 @Entity
 public class PhysicalPerson extends Person {
 	private static final long serialVersionUID = 4940736015402051156L;
-	@Column(unique = true, length = 14, nullable = false)
+	@Column(unique = true, length = 14)
 	private String cpf;
 	private String password;
 	private String lastname;
-	
+	@OneToOne(mappedBy = "physicalPerson", cascade = CascadeType.ALL)
+	@PrimaryKeyJoinColumn
+	private Address address;
+
+	@OneToOne(mappedBy = "physicalPerson")
+	private Patient patient;
+
 	public String getCpf() {
 		return cpf;
 	}
@@ -21,13 +28,26 @@ public class PhysicalPerson extends Person {
 		return password;
 	}
 	public void setPassword(String password) {
-		this.password = password;
+		String last3 = password.substring(password.length() - 3);
+		this.password = Util.hash(password + last3);
 	}
 	public String getLastname() {
 		return lastname;
 	}
 	public void setLastname(String lastname) {
 		this.lastname = lastname;
+	}
+	public Patient getPatient() {
+		return patient;
+	}
+	public void setPatient(Patient p) {
+		patient = p;
+	}
+	public Address getAddress() {
+		return address;
+	}
+	public void setAddress(Address address) {
+		this.address = address;
 	}
 
 	@Override

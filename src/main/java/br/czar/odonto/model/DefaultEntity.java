@@ -9,8 +9,8 @@ import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
 public class DefaultEntity<T> implements Serializable {
-	private static final long serialVersionUID = 1191286015134874793L;
-	@Id
+  private static final long serialVersionUID = 1191286015134874793L;
+  @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;
 
@@ -31,6 +31,7 @@ public class DefaultEntity<T> implements Serializable {
   }
 
   @Override
+  @SuppressWarnings("rawtypes")
   public boolean equals(Object obj) {
     if (this == obj)
       return true;
@@ -39,11 +40,7 @@ public class DefaultEntity<T> implements Serializable {
     if (getClass() != obj.getClass())
       return false;
     DefaultEntity other = (DefaultEntity) obj;
-    if (id == null) {
-      if (other.id != null)
-        return false;
-    } else if (!id.equals(other.id))
-      return false;
-    return true;
+    if (id == null) return other.id == null;
+    else return id.equals(other.id);
   }
 }

@@ -5,6 +5,7 @@ import java.io.Serializable;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
+import br.czar.odonto.aplication.Util;
 import br.czar.odonto.model.Patient;
 
 @Named
@@ -14,13 +15,14 @@ public class LoginController implements Serializable {
   private Patient patient;
 
   public Patient getPatient() {
-    if (patient == null)
-      this.patient = new Patient();
-
+    if (patient == null) {
+      patient = new Patient();
+    }
     return patient;
   }
 
   public void login() {
     System.out.println(patient);
+    Util.redirect("cadastro");
   }
 }
