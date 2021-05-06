@@ -5,9 +5,11 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Size;
+import java.io.Serial;
 
 @Entity
 public class State extends DefaultEntity<State> {
+	@Serial
 	private static final long serialVersionUID = -8567810764030735286L;
 	@Column(unique = true)
 	private String name;

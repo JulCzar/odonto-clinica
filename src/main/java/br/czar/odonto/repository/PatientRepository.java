@@ -26,7 +26,7 @@ public class PatientRepository extends Repository<Patient> {
 
   public List<Patient> findByEmail(String email) throws RepositoryException{
     try {
-      EntityManager em = JPAUtil.getEntityManager();
+      EntityManager em = getEntityManager();
 
       String jpql = "SELECT p FROM Patient p WHERE p.physicalPerson.email = :email ORDER BY p.id";
       Query query = em.createQuery(jpql);

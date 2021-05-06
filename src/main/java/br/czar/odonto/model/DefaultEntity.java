@@ -1,5 +1,6 @@
 package br.czar.odonto.model;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 import javax.persistence.GeneratedValue;
@@ -9,6 +10,7 @@ import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
 public class DefaultEntity<T> implements Serializable {
+  @Serial
   private static final long serialVersionUID = 1191286015134874793L;
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)

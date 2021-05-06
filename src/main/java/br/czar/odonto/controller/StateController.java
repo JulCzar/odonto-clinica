@@ -11,18 +11,21 @@ import javax.faces.context.Flash;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
+import java.io.Serial;
 import java.util.ArrayList;
 import java.util.List;
 
 @Named
 @ViewScoped
 public class StateController extends Controller<State> {
+  private static final String FLASH_KEY = "state-to-edit";
+  @Serial
   private static final long serialVersionUID = 8359431366697498877L;
   private List<State> states;
 
   public StateController() {
     Flash flash = FacesContext.getCurrentInstance().getExternalContext().getFlash();
-    entity = (State) flash.get("state-to-edit");
+    entity = (State) flash.get(FLASH_KEY);
   }
 
   @Override
@@ -51,10 +54,10 @@ public class StateController extends Controller<State> {
     states = null;
   }
 
-  public void edit(State s) {
+  public void edit(State state) {
     Flash flash = FacesContext.getCurrentInstance().getExternalContext().getFlash();
 
-    flash.put("state-to-edit", s);
+    flash.put(FLASH_KEY, state);
     Util.redirect("/OdontoClinica/cadastro/estado");
   }
 }

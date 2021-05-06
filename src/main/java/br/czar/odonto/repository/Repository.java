@@ -9,7 +9,7 @@ import javax.persistence.EntityTransaction;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
-public class Repository<T extends DefaultEntity<T>> {
+public class Repository<T extends DefaultEntity<? super T>> {
   protected EntityManager em = null;
 
   public Repository() {

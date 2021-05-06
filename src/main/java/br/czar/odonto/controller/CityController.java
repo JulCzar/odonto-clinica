@@ -5,24 +5,26 @@ import br.czar.odonto.aplication.Util;
 import br.czar.odonto.model.City;
 import br.czar.odonto.model.State;
 import br.czar.odonto.repository.CityRepository;
-import br.czar.odonto.repository.Repository;
 
 import javax.faces.context.FacesContext;
 import javax.faces.context.Flash;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
+import java.io.Serial;
 import java.util.ArrayList;
 import java.util.List;
 
 @Named
 @ViewScoped
 public class CityController extends Controller<City> {
+  @Serial
   private static final long serialVersionUID = 6606464699712173219L;
+  private static final String FLASH_KEY = "city-to-edit";
   private List<City> cities;
 
   public CityController() {
     Flash flash = FacesContext.getCurrentInstance().getExternalContext().getFlash();
-    entity = (City) flash.get("city-to-edit");
+    entity = (City) flash.get(FLASH_KEY);
   }
 
   @Override
@@ -35,10 +37,10 @@ public class CityController extends Controller<City> {
   }
 
   public List<City> getCities() {
-    CityRepository sr = new CityRepository();
+    CityRepository cr = new CityRepository();
     if (cities == null) {
       try {
-        cities = sr.findAll();
+        cities = cr.findAll();
       } catch (Exception e) {
         e.printStackTrace();
         return new ArrayList<>();
@@ -52,10 +54,10 @@ public class CityController extends Controller<City> {
     cities = null;
   }
 
-  public void edit(City s) {
+  public void edit(City city) {
     Flash flash = FacesContext.getCurrentInstance().getExternalContext().getFlash();
 
-    flash.put("city-to-edit", s);
+    flash.put(FLASH_KEY, city);
     Util.redirect("/OdontoClinica/cadastro/cidade");
   }
 }

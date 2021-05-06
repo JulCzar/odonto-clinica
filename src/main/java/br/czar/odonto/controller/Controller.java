@@ -5,9 +5,11 @@ import br.czar.odonto.aplication.Util;
 import br.czar.odonto.model.DefaultEntity;
 import br.czar.odonto.repository.Repository;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 public abstract class Controller<T extends DefaultEntity<T>> implements Serializable {
+  @Serial
   private static final long serialVersionUID = 7067708678056325040L;
   protected T entity;
 

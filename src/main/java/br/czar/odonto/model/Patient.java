@@ -1,21 +1,23 @@
 package br.czar.odonto.model;
 
+import java.io.Serial;
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Transient;
-import java.util.List;
 
 @Entity
 public class Patient extends DefaultEntity<Patient>{
+	@Serial
 	private static final long serialVersionUID = 6160416917272552149L;
-	@OneToOne(mappedBy = "patient", cascade = CascadeType.ALL)
-	@PrimaryKeyJoinColumn
+	@OneToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@JoinColumn(name = "id_telefone", unique = true)
 	private Phone phone;
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(referencedColumnName = "id")
+	@OneToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@JoinColumn(name = "id_physical_person", unique = true)
 	private PhysicalPerson physicalPerson;
 	@Transient
 	private List<Allergie> allergies;
@@ -25,14 +27,12 @@ public class Patient extends DefaultEntity<Patient>{
 	}
 	public void setPhone(Phone phone) {
 		this.phone = phone;
-		this.phone.setPatient(this);
 	}
 	public PhysicalPerson getPhysicalPerson() {
 		return physicalPerson;
 	}
 	public void setPhysicalPerson(PhysicalPerson physicalPerson) {
 		this.physicalPerson = physicalPerson;
-		this.physicalPerson.setPatient(this);
 	}
 	public List<Allergie> getAllergies() {
 		return allergies;

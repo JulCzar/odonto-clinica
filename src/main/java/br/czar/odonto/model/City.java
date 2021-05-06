@@ -3,9 +3,12 @@ package br.czar.odonto.model;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import java.io.Serial;
 
 @Entity
 public class City extends DefaultEntity<City> {
+	@Serial
+	private static final long serialVersionUID = -2687606907373481013L;
 	private String name;
 	private String code;
 	@ManyToOne

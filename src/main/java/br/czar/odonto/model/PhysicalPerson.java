@@ -3,20 +3,19 @@ package br.czar.odonto.model;
 import br.czar.odonto.aplication.Util;
 
 import javax.persistence.*;
+import java.io.Serial;
 
 @Entity
 public class PhysicalPerson extends Person {
+	@Serial
 	private static final long serialVersionUID = 4940736015402051156L;
 	@Column(unique = true, length = 14)
 	private String cpf;
 	private String password;
 	private String lastname;
-	@OneToOne(mappedBy = "physicalPerson", cascade = CascadeType.ALL)
-	@PrimaryKeyJoinColumn
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "id_endereco", unique = true)
 	private Address address;
-
-	@OneToOne(mappedBy = "physicalPerson")
-	private Patient patient;
 
 	public String getCpf() {
 		return cpf;
@@ -36,12 +35,6 @@ public class PhysicalPerson extends Person {
 	}
 	public void setLastname(String lastname) {
 		this.lastname = lastname;
-	}
-	public Patient getPatient() {
-		return patient;
-	}
-	public void setPatient(Patient p) {
-		patient = p;
 	}
 	public Address getAddress() {
 		return address;

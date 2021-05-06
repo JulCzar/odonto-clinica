@@ -6,12 +6,6 @@
 	--scrollbar-thumb-BG: #0003;
 }
 
-* {
-	font-size: 100%;
-	margin: 0;
-	padding: 0;
-}
-
 a {
 	color: unset;
 	text-decoration: none;
@@ -28,6 +22,8 @@ body {
 	overflow-x: hidden;
 	scrollbar-color: var(--scrollbar-thumb-BG) var(--surface-e);
 	scrollbar-width: thin;
+	margin: 0;
+	padding: 0;
 }
 
 ::-webkit-scrollbar {

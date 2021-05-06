@@ -1,5 +1,6 @@
 package br.czar.odonto.controller;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 import javax.enterprise.context.SessionScoped;
@@ -17,8 +18,9 @@ import br.czar.odonto.repository.PatientRepository;
 @Named
 @SessionScoped
 public class LoginController implements Serializable {
-  private static final SessionStorage sessionStorage = SessionStorage.getInstance();
+  @Serial
   private static final long serialVersionUID = -2398636258131681199L;
+  private static final SessionStorage sessionStorage = SessionStorage.getInstance();
   private Patient patient;
   private String login;
   private String senha;

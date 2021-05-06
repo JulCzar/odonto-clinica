@@ -1,12 +1,13 @@
 package br.czar.odonto.repository;
 
-import br.czar.odonto.aplication.JPAUtil;
-import br.czar.odonto.aplication.RepositoryException;
-import br.czar.odonto.model.City;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-import java.util.List;
+
+import br.czar.odonto.aplication.JPAUtil;
+import br.czar.odonto.aplication.RepositoryException;
+import br.czar.odonto.model.City;
 
 public class CityRepository extends Repository<City> {
   public CityRepository() {
@@ -15,16 +16,12 @@ public class CityRepository extends Repository<City> {
   public CityRepository(EntityManager em) {
     super(em);
   }
+  @SuppressWarnings("unchecked")
   public List<City> findAll() throws RepositoryException {
     EntityManager em = getEntityManager();
-    StringBuilder jpql = new StringBuilder();
-    jpql.append("SELECT ")
-            .append(" c ")
-            .append("FROM ")
-            .append(" City c ")
-            .append("ORDER BY c.name ");
+    String jpql = "SELECT c FROM City c ORDER BY c.name";
 
-    Query q = em.createQuery(jpql.toString());
+    Query q = em.createQuery(jpql);
     return (List<City>)(q.getResultList());
   }
 }
