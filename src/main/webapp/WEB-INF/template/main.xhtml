@@ -14,24 +14,24 @@
 	<h:outputStylesheet name="primeicons/primeicons.css" library="primefaces" />
 	<h:outputStylesheet name="primeflex.min.css" library="css"/>
 	<h:outputStylesheet name="index.css" library="css"/>
+	<h:outputStylesheet name="styles.css" library="css"/>
 	<ui:insert name="head" />
 </h:head>
 
 <h:body>
 	<div class="container">
-	<p:growl id="messages"/>
-	<div class="layout-wrapper">
-		<ui:insert name="sidebar">
-			<ui:include src="topbar.xhtml" />
-		</ui:insert>
-
-		<div class="container">
-			<div class="content p-d-flex p-jc-center p-ai-center layout-content">
+		<p:growl id="messages"/>
+		<div class="layout-wrapper">
+			<ui:insert name="sidebar">
+				<ui:include src="topbar.xhtml" />
+			</ui:insert>
+		</div>
+		<div class="limiter p-mx-auto f-w p-d-flex p-ai-center layout-content">
+			<div class="p-p-3 card p-mt-5 f-w limiter">
 				<ui:insert name="content"/>
 			</div>
 		</div>
-	</div>
-
+		<ui:include src="footer.xhtml"/>
 	</div>
 	<h:outputStylesheet name="layout/script/layout.js"/>
 	<h:outputScript name="layout/script/layout.js"/>

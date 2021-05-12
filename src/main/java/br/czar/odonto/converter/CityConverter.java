@@ -15,14 +15,14 @@ public class CityConverter implements Converter<City> {
   public City getAsObject(FacesContext context, UIComponent component, String value) {
     if (value == null || value.isEmpty()) return null;
 
-    CityRepository sr = new CityRepository();
-    City state = null;
+    CityRepository cr = new CityRepository();
+    City city = null;
     try {
-      state = sr.find(Integer.valueOf(value.trim()));
+      city = cr.find(Integer.valueOf(value.trim()));
     } catch (RepositoryException e) {
       e.printStackTrace();
     }
-    return state;
+    return city;
   }
 
   @Override

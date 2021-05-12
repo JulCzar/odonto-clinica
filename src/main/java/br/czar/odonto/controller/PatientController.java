@@ -74,8 +74,8 @@ public class PatientController extends Controller<Patient> {
   }
 
   public List<City> getCities() {
-    CityRepository cr = new CityRepository();
     if (cities == null) {
+      CityRepository cr = new CityRepository();
       try {
         cities = cr.findAll();
       } catch (Exception e) {
