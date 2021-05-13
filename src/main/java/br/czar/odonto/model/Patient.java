@@ -16,7 +16,7 @@ public class Patient extends DefaultEntity<Patient>{
 	@OneToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	@JoinColumn(name = "id_telefone", unique = true)
 	private Phone phone;
-	@OneToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@OneToOne(cascade = { CascadeType.PERSIST, CascadeType.ALL })
 	@JoinColumn(name = "id_physical_person", unique = true)
 	private PhysicalPerson physicalPerson;
 	@Transient

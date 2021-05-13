@@ -4,38 +4,34 @@
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:p="http://primefaces.org/ui" template="/WEB-INF/template/main.xhtml">
 
-    <ui:define name="content">
-        <div class='card ui-fluid'>
-            <h:form id="form">
-                <div class="card crud-demo">
-                    <p:growl id="messages" showDetail="true"/>
+	<ui:define name="content">
+		<div class='card ui-fluid'>
+			<h:form id="form">
+				<div class="card crud-demo">
+					<p:growl id="messages" showDetail="true"/>
 
-                    <p:toolbar>
-                        <p:toolbarGroup>
-                            <p:commandButton value="New" icon="pi pi-plus" actionListener="#{redirect.to('/OdontoClinica/cadastro/cidade')}" oncomplete="PF('manageProductDialog').show()" styleClass="ui-button-success"/>
-                        </p:toolbarGroup>
-                    </p:toolbar>
+					<h3 class="card-header title">Cidades</h3>
+					<p:dataTable id="dt-city" widgetVar="dtCity" var="city" value="#{cityController.cities}"
+											 reflow="true" styleClass="city-table" paginatorPosition="bottom">
 
-                    <p:dataTable id="dt-city" widgetVar="dtCity" var="city" value="#{cityController.cities}"
-                                 reflow="true" styleClass="city-table" paginatorPosition="bottom">
+						<p:column headerText="Code" >
+							<h:outputText value="#{city.id}"/>
+						</p:column>
+						<p:column headerText="Name" >
+							<h:outputText value="#{city.name}"/>
+						</p:column>
+						<p:column headerText="Sigla" >
+							<h:outputText value="#{city.code}"/>
+						</p:column>
+						<p:column exportable="false" headerText="Ações" styleClass="p-d-flex p-jc-center">
+							<p:commandButton icon="pi pi-pencil" update="@form" styleClass="edit-button rounded-button ui-button-success" process="@this" actionListener="#{cityController.edit(city)}"/>
+							<p:commandButton class="ui-button-warning rounded-button p-ml-3" icon="pi pi-trash" process="@this" update="@form" actionListener="#{cityController.destroy(city)}"/>
+						</p:column>
 
-                        <p:column headerText="Code" >
-                            <h:outputText value="#{city.id}"/>
-                        </p:column>
-                        <p:column headerText="Name" >
-                            <h:outputText value="#{city.name}"/>
-                        </p:column>
-                        <p:column headerText="Sigla" >
-                            <h:outputText value="#{city.code}"/>
-                        </p:column>
-                        <p:column exportable="false" headerText="Ações">
-                            <p:commandButton icon="pi pi-pencil" update="@form" styleClass="edit-button rounded-button ui-button-success" process="@this" actionListener="#{cityController.edit(city)}"/>
-                            <p:commandButton class="ui-button-warning rounded-button p-ml-3" icon="pi pi-trash" process="@this" update="@form" actionListener="#{cityController.destroy(city)}"/>
-                        </p:column>
-
-                    </p:dataTable>
-                </div>
-            </h:form>
-        </div>
-    </ui:define>
+					</p:dataTable>
+					<p:commandButton value="Novo" actionListener="#{redirect.to('/OdontoClinica/cadastro/cidade')}" styleClass="ui-button-success p-mt-3"/>
+				</div>
+			</h:form>
+		</div>
+	</ui:define>
 </ui:composition>

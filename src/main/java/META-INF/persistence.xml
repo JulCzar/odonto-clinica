@@ -9,6 +9,7 @@
 		<class>br.czar.odonto.model.City</class>
 		<class>br.czar.odonto.model.State</class>
 		<class>br.czar.odonto.model.DefaultEntity</class>
+		<class>br.czar.odonto.model.Dentist</class>
 
 		<properties>
 			<!-- DB Driver -->

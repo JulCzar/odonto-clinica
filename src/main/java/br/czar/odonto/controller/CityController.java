@@ -14,7 +14,7 @@ import java.io.Serial;
 import java.util.ArrayList;
 import java.util.List;
 
-@Named
+@Named("cityController")
 @ViewScoped
 public class CityController extends Controller<City> {
   @Serial

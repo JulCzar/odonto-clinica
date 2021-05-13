@@ -16,6 +16,8 @@ public class PatientRepository extends Repository<Patient> {
   public PatientRepository(EntityManager em) {
     super(em);
   }
+
+	@SuppressWarnings("unchecked")
   public List<Patient> findAll() throws RepositoryException {
     EntityManager em = getEntityManager();
 
@@ -24,6 +26,7 @@ public class PatientRepository extends Repository<Patient> {
     return (List<Patient>)(q.getResultList());
   }
 
+	@SuppressWarnings("unchecked")
   public List<Patient> findByEmail(String email) throws RepositoryException{
     try {
       EntityManager em = getEntityManager();
@@ -32,7 +35,7 @@ public class PatientRepository extends Repository<Patient> {
       Query query = em.createQuery(jpql);
       query.setParameter("email",  email  );
 
-      return query.getResultList();
+      return (List<Patient>)(query.getResultList());
     } catch (Exception e) {
       System.out.println("Erro ao realizar uma consulta ao banco.");
       e.printStackTrace();

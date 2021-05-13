@@ -40,3 +40,7 @@
 	margin-bottom: 1.25rem;
 	width: 100%;
 }
+
+.ui-wizard-step-titles {
+	display: none;
+}

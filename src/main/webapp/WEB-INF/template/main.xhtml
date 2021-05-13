@@ -22,16 +22,18 @@
 	<div class="container">
 		<p:growl id="messages"/>
 		<div class="layout-wrapper">
-			<ui:insert name="sidebar">
+			<ui:insert name="topbar">
 				<ui:include src="topbar.xhtml" />
 			</ui:insert>
 		</div>
-		<div class="limiter p-mx-auto f-w p-d-flex p-ai-center layout-content">
-			<div class="p-p-3 card p-mt-5 f-w limiter">
+		<div class="limiter p-mx-auto f-w p-d-flex p-jc-center p-ai-center layout-content">
+			<div class="p-p-3 card p-mt-5 f-w limiter p-fluid">
 				<ui:insert name="content"/>
 			</div>
 		</div>
-		<ui:include src="footer.xhtml"/>
+		<ui:insert name="footer">
+			<ui:include src="footer.xhtml"/>
+		</ui:insert>
 	</div>
 	<h:outputStylesheet name="layout/script/layout.js"/>
 	<h:outputScript name="layout/script/layout.js"/>

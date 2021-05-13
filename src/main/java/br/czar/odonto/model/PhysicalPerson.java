@@ -36,6 +36,11 @@ public class PhysicalPerson extends Person {
 	public void setLastname(String lastname) {
 		this.lastname = lastname;
 	}
+
+	public String getFullName() {
+		return super.getName() + " " + lastname;
+	}
+
 	public Address getAddress() {
 		return address;
 	}

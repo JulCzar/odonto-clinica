@@ -38,6 +38,9 @@ public class Address extends DefaultEntity<Address> {
 	public void setDepartment(String department) {
 		this.department = department;
 	}
+	public String getFullAddress() {
+		return street + ", " + department + " " + number + " " + city.getName() + "-" + city.getState().getUf();
+	}
 	@Override
 	public String toString() {
 		return "Address = {city: " + city + ", number: " + number + ", street: " + street + ", department: "

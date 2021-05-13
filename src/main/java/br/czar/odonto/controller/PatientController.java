@@ -19,6 +19,7 @@ import br.czar.odonto.model.PhysicalPerson;
 import br.czar.odonto.model.State;
 import br.czar.odonto.repository.CityRepository;
 import br.czar.odonto.repository.PatientRepository;
+import org.primefaces.event.FlowEvent;
 
 @Named
 @ViewScoped
@@ -28,13 +29,39 @@ public class PatientController extends Controller<Patient> {
   private static final String FLASH_KEY = "patient-to-edit";
   private List<Patient> patients;
   private List<City> cities;
+  private Integer index;
 
   public PatientController() {
     Flash flash = FacesContext.getCurrentInstance().getExternalContext().getFlash();
     entity = (Patient) flash.get(FLASH_KEY);
   }
 
-  @Override
+  public Integer getIndex() {
+  	if (index == null) index = 0;
+  	return index;
+	}
+
+	private void setIndex(Integer i) {
+  	index = i;
+	}
+
+	public void increaseIndex() {
+		setIndex(getIndex() + 1);
+	}
+
+	public void decreaseIndex() {
+		if (index == null || index.equals(0)) return;
+
+		setIndex(getIndex() - 1);
+	}
+
+	@Override
+	public void store() {
+		super.store();
+		Util.redirect("/OdontoClinica/lista/paciente");
+	}
+
+	@Override
   public Patient getEntity() {
     if (entity == null) {
       entity = new Patient();

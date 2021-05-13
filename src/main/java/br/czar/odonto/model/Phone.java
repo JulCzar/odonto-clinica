@@ -25,6 +25,9 @@ public class Phone extends DefaultEntity<Phone> {
 	public void setNumber(String number) {
 		this.number = number;
 	}
+	public String getFullNumber() {
+		return "("+area+") " + number;
+	}
 
 	@Override
 	public String toString() {
