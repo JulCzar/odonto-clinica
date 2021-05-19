@@ -1,22 +1,29 @@
 package br.czar.odonto.model;
 
+import javax.persistence.*;
 import java.io.Serial;
 import java.util.List;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Transient;
 
 @Entity
 public class Patient extends DefaultEntity<Patient>{
 	@Serial
 	private static final long serialVersionUID = 6160416917272552149L;
-	@OneToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@OneToOne(
+		cascade = {
+			CascadeType.PERSIST,
+			CascadeType.MERGE
+		},
+		fetch = FetchType.LAZY
+	)
 	@JoinColumn(name = "id_telefone", unique = true)
 	private Phone phone;
-	@OneToOne(cascade = { CascadeType.PERSIST, CascadeType.ALL })
+	@OneToOne(
+		cascade = {
+			CascadeType.PERSIST,
+			CascadeType.ALL
+		},
+		fetch = FetchType.LAZY
+	)
 	@JoinColumn(name = "id_physical_person", unique = true)
 	private PhysicalPerson physicalPerson;
 	@Transient

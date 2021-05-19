@@ -9,7 +9,7 @@
 .limiter { max-width: var(--max-container-width) }
 .top-bar, .footer { background: var(--surface-a); }
 .top-bar .title {
-  font-family: Montserrat;
+  font-family: Montserrat, sans-serif;
   font-size: 2rem;
   padding-right: 1.5rem;
   margin: 0;

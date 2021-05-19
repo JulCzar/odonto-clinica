@@ -13,7 +13,10 @@ public class PhysicalPerson extends Person {
 	private String cpf;
 	private String password;
 	private String lastname;
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(
+		cascade = CascadeType.ALL,
+		fetch = FetchType.LAZY
+	)
 	@JoinColumn(name = "id_endereco", unique = true)
 	private Address address;
 

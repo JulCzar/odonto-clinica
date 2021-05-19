@@ -1,15 +1,23 @@
 package br.czar.odonto.model;
 
 import javax.persistence.*;
+import java.io.Serial;
 import java.util.List;
 
 @Entity
 public class Dentist extends DefaultEntity<Dentist> {
+	@Serial
 	private static final long serialVersionUID = 1483241996299043812L;
 	@Transient
 	private List<String> specializations;
 	private String register;
-	@OneToOne(cascade = { CascadeType.PERSIST, CascadeType.ALL })
+	@OneToOne(
+		cascade = {
+			CascadeType.PERSIST,
+			CascadeType.ALL
+		},
+		fetch = FetchType.LAZY
+	)
 	@JoinColumn(name = "id_physical_person", unique = true)
 	private PhysicalPerson physicalPerson;
 	public List<String> getSpecializations() {

@@ -1,7 +1,7 @@
 package br.czar.odonto.model;
 
 import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import java.io.Serial;
 
@@ -11,7 +11,7 @@ public class City extends DefaultEntity<City> {
 	private static final long serialVersionUID = -2687606907373481013L;
 	private String name;
 	private String code;
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	private State state;
 	
 	public String getName() {

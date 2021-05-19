@@ -2,8 +2,6 @@ package br.czar.odonto.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Size;
 import java.io.Serial;
 

@@ -7,7 +7,13 @@ import java.io.Serial;
 public class Address extends DefaultEntity<Address> {
 	@Serial
 	private static final long serialVersionUID = -924620831899993085L;
-	@OneToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@OneToOne(
+		cascade = {
+			CascadeType.PERSIST,
+			CascadeType.MERGE
+		},
+		fetch = FetchType.LAZY
+	)
 	@JoinColumn(name = "id_city", unique = true)
 	private City city;
 	private String number;
