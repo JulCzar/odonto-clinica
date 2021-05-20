@@ -3,6 +3,7 @@ package br.czar.odonto.controller;
 import java.io.Serial;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.stream.Collectors;
 
 import javax.faces.context.FacesContext;
@@ -124,4 +125,14 @@ public class PatientController extends Controller<Patient> {
                     ))
             .collect(Collectors.toList());
   }
+
+  public List<City> filterCities(String name) {
+  	return getCities()
+			.stream()
+			.filter(c -> c.getName()
+				.toLowerCase()
+				.startsWith(name.toLowerCase())
+			)
+			.collect(Collectors.toList());
+	}
 }

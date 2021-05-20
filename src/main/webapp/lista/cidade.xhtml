@@ -23,7 +23,7 @@
 						<p:column headerText="Sigla" >
 							<h:outputText value="#{city.code}"/>
 						</p:column>
-						<p:column exportable="false" headerText="Ações" styleClass="p-d-flex p-jc-center">
+						<p:column exportable="false" headerText="Ações" styleClass="p-text-center">
 							<p:commandButton icon="pi pi-pencil" update="@form" styleClass="edit-button rounded-button ui-button-success" process="@this" actionListener="#{cityController.edit(city)}"/>
 							<p:commandButton class="ui-button-warning rounded-button p-ml-3" icon="pi pi-trash" process="@this" update="@form" actionListener="#{cityController.destroy(city)}"/>
 						</p:column>

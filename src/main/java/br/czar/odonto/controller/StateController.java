@@ -14,6 +14,8 @@ import javax.inject.Named;
 import java.io.Serial;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+import java.util.stream.Collectors;
 
 @Named
 @ViewScoped
@@ -60,4 +62,15 @@ public class StateController extends Controller<State> {
     flash.put(FLASH_KEY, state);
     Util.redirect("/OdontoClinica/cadastro/estado");
   }
+
+  public List<State> filterStates(String name) {
+  	String filterName = name.toLowerCase();
+  	return getStates().stream().filter(s -> {
+  		String stateName = s.getName().toLowerCase();
+  		String UF = s.getUf().toLowerCase();
+  		if (stateName.startsWith(filterName)) return true;
+
+			return UF.startsWith(filterName);
+		}).collect(Collectors.toList());
+	}
 }
