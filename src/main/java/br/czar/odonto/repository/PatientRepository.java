@@ -41,6 +41,5 @@ public class PatientRepository extends Repository<Patient> {
       e.printStackTrace();
       throw new RepositoryException("Erro ao realizar uma consulta ao banco.");
     }
-
   }
 }

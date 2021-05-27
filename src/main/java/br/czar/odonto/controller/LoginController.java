@@ -5,13 +5,10 @@ import java.io.Serializable;
 
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
-import javax.persistence.EntityManager;
-import javax.persistence.Query;
 
-import br.czar.odonto.aplication.JPAUtil;
 import br.czar.odonto.aplication.RepositoryException;
-import br.czar.odonto.aplication.SessionStorage;
 import br.czar.odonto.aplication.Util;
+import br.czar.odonto.aplication.storage.SessionStorage;
 import br.czar.odonto.model.Patient;
 import br.czar.odonto.repository.PatientRepository;
 
@@ -20,7 +17,6 @@ import br.czar.odonto.repository.PatientRepository;
 public class LoginController implements Serializable {
   @Serial
   private static final long serialVersionUID = -2398636258131681199L;
-  private static final SessionStorage sessionStorage = SessionStorage.getInstance();
   private Patient patient;
   private String login;
   private String senha;
@@ -52,7 +48,7 @@ public class LoginController implements Serializable {
       String senha = getSenha();
       String last3 = senha.substring(senha.length() - 3);
       if (p.getPhysicalPerson().getPassword().equals(Util.hash((senha + last3))))
-        sessionStorage.setItem("logged-user", p);
+        SessionStorage.setItem("logged-user", p);
       Util.redirect("/OdontoClinica/index");
     } catch (RepositoryException e) {
       Util.addErrorMessage("Usuario ou senha incorretos!");

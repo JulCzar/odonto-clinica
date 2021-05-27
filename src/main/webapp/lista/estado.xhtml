@@ -25,7 +25,7 @@
 						<p:column headerText="Sigla" >
 							<h:outputText value="#{state.uf}"/>
 						</p:column>
-						<p:column exportable="false" headerText="Ações" styleClass="p-d-flex p-jc-center">
+						<p:column exportable="false" headerText="Ações" styleClass="p-text-center">
 							<p:commandButton icon="pi pi-pencil" update="@form" styleClass="edit-button rounded-button ui-button-success" process="@this" actionListener="#{stateController.edit(state)}"/>
 							<p:commandButton class="ui-button-warning rounded-button p-ml-3" icon="pi pi-trash" process="@this" update="@form" oncomplete="PF('deleteProductDialog').show()" actionListener="#{stateController.destroy(state)}"/>
 						</p:column>

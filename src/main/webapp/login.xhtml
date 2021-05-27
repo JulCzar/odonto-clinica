@@ -1,26 +1,31 @@
-<ui:composition xmlns="http://www.w3.org/1999/xhtml"
-                xmlns:ui="http://java.sun.com/jsf/facelets"
-                xmlns:h="http://java.sun.com/jsf/html"
-                xmlns:p="http://primefaces.org/ui" template="/WEB-INF/template/mainNoSidebar.xhtml">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+								xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui"
+								template="/WEB-INF/template/mainNoSidebar.xhtml">
 
-    <ui:define name="content">
-        <div class='card ui-fluid p-mt-5' style="--width: 400px">
-            <h3 class="card-header title">Login</h3>
-            <h:form>
-                <div class="p-field">
-                    <p:outputLabel for="@next" value="Email"/>
-                    <p:inputText id="email" value="#{loginController.login}" requiredMessage="Informe o email para realizar o login" required="true"/>
-                </div>
-                <div class="p-field">
-                    <p:outputLabel for="@next" value="Senha"/>
-                    <p:inputText id="password" value="#{loginController.senha}" requiredMessage="Informe a senha para realizar o login" required="true"/>
-                </div>
-                <div>
-                    <p>Não possui conta? <p:commandLink process="@this" actionListener='#{redirect.to("cadastro/paciente")}'>Cadastrar-se</p:commandLink></p>
-                    <a href='#'>Esqueceu sua senha?</a>
-                </div>
-                <p:commandButton actionListener="#{loginController.login}" process="@this email password" update="@form messages" value="logar" styleClass="p-mt-3"/>
-            </h:form>
-        </div>
-    </ui:define>
+	<ui:define name="content">
+		<div class='card ui-fluid p-mt-5' style="--width: 400px">
+			<h3 class="card-header title">Login</h3>
+			<h:form>
+				<div class="p-field">
+					<p:outputLabel for="@next" value="Email" />
+					<p:inputText id="email" value="#{loginController.login}"
+											 requiredMessage="Informe o email para realizar o login" required="true" />
+				</div>
+				<div class="p-field">
+					<p:outputLabel for="@next" value="Senha" />
+					<p:inputText id="password" value="#{loginController.senha}"
+											 requiredMessage="Informe a senha para realizar o login" required="true" />
+				</div>
+				<div>
+					<p>Não possui conta? <p:commandLink process="@this" actionListener='#{redirect.to("cadastro/paciente")}'>
+						Cadastrar-se</p:commandLink>
+					</p>
+					<p:commandLink process="@this" actionListener='#{redirect.to("senha/esqueci")}'>Esqueceu sua senha?
+					</p:commandLink>
+				</div>
+				<p:commandButton actionListener="#{loginController.login}" process="@this email password"
+												 update="@form messages" value="logar" styleClass="p-mt-3" />
+			</h:form>
+		</div>
+	</ui:define>
 </ui:composition>

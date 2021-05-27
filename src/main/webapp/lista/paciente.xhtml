@@ -19,7 +19,7 @@
 					<p:column headerText="CPF">
 						<h:outputText value="#{patient.physicalPerson.cpf}" />
 					</p:column>
-					<p:column exportable="false" headerText="Ações" styleClass='p-d-flex p-jc-center'>
+					<p:column exportable="false" headerText="Ações" styleClass='p-text-center'>
 						<p:commandButton icon="pi pi-pencil" update="@form"
 							styleClass="edit-button rounded-button ui-button-success" process="@this"
 							actionListener="#{patientController.edit(patient)}" />

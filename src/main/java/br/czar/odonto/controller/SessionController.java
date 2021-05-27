@@ -3,7 +3,7 @@ package br.czar.odonto.controller;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 
-import br.czar.odonto.aplication.SessionStorage;
+import br.czar.odonto.aplication.storage.SessionStorage;
 import br.czar.odonto.aplication.Util;
 import br.czar.odonto.model.Patient;
 
@@ -12,10 +12,9 @@ import br.czar.odonto.model.Patient;
 @RequestScoped
 public class SessionController {
 	public static final String LOGGED_USER = "logged-user";
-	public static final SessionStorage sessionStorage = SessionStorage.getInstance();
 	
 	public Patient getUserdata() {
-		Object obj = sessionStorage.getItem(LOGGED_USER);
+		Object obj = SessionStorage.getItem(LOGGED_USER);
 		
 		if (obj == null) obj = new Patient();
 		
@@ -33,7 +32,7 @@ public class SessionController {
 	}
 	
 	public void logout() {
-		sessionStorage.setItem(LOGGED_USER, null);
+		SessionStorage.setItem(LOGGED_USER, null);
 		Util.redirect("/OdontoClinica/login");
 	}
 }

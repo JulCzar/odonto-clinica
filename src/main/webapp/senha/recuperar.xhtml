@@ -1,0 +1,43 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+								xmlns:ui="http://java.sun.com/jsf/facelets"
+								xmlns:h="http://java.sun.com/jsf/html"
+								xmlns:f="http://java.sun.com/jsf/core"
+								xmlns:p="http://primefaces.org/ui"
+								template="/WEB-INF/template/main.xhtml">
+
+	<ui:define name="sidebar"/>
+	<ui:define name="content">
+		<h:form styleClass="p-grid">
+			<h3 class="card-header title">Alterar senha</h3>
+
+			<p:inputText
+				styleClass="p-col-12"
+				value="#{changePasswordController.code}"
+				placeholder="Código recebido por email"
+				required="true"
+				requiredMessage="O campo não pode ficar vazio"
+			/>
+			<p:inputText
+				styleClass="p-col-6"
+				value="#{changePasswordController.password}"
+				placeholder="Insira sua nova senha"
+				required="true"
+				requiredMessage="O campo não pode ficar vazio"
+			/>
+			<p:inputText
+				styleClass="p-col-6"
+				placeholder="Confirme sua senha"
+				required="true"
+				requiredMessage="O campo não pode ficar vazio"
+			/>
+
+			<p:commandButton
+				styleClass="p-ml-3 p-col-3"
+				process="@form"
+				actionListener="#{changePasswordController.changePassword}"
+				update="@form messages"
+				value="Recuperar"
+			/>
+		</h:form>
+	</ui:define>
+</ui:composition>
