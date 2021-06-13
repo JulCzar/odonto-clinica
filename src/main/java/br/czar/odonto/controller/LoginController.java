@@ -19,44 +19,44 @@ import br.czar.odonto.repository.PatientRepository;
 @Named("authenticate")
 @ViewScoped
 public class LoginController implements Serializable {
-  @Serial
-  private static final long serialVersionUID = -2398636258131681199L;
-  private Patient patient;
+	@Serial
+	private static final long serialVersionUID = -2398636258131681199L;
+	private Patient patient;
 
-  public Patient getPatient() {
-    if (patient == null) {
-      patient = new Patient();
-      patient.setPhysicalPerson(new PhysicalPerson());
-    }
-    return patient;
-  }
+	public Patient getPatient() {
+		if (patient == null) {
+			patient = new Patient();
+			patient.setPhysicalPerson(new PhysicalPerson());
+		}
+		return patient;
+	}
 
-  public String getEmail() {
-    return getPatient().getPhysicalPerson().getEmail();
-  }
-  public void setEmail(String email) {
-    getPatient().getPhysicalPerson().setEmail(email);
-  }
-  public String getPassword() {
-    return getPatient().getPhysicalPerson().getPassword();
-  }
-  public void setPassword(String password) {
+	public String getEmail() {
+		return getPatient().getPhysicalPerson().getEmail();
+	}
+	public void setEmail(String email) {
+		getPatient().getPhysicalPerson().setEmail(email);
+	}
+	public String getPassword() {
+		return getPatient().getPhysicalPerson().getPassword();
+	}
+	public void setPassword(String password) {
 		getPatient().getPhysicalPerson().setPassword(password);
-  }
+	}
 
-  public void login() {
-    PatientRepository pr = new PatientRepository();
-    try {
+	public void login() {
+		PatientRepository pr = new PatientRepository();
+		try {
 			Security.encript(getPatient().getPhysicalPerson());
-      Patient p = pr.findByCredentials(getEmail(), getPassword());
+			Patient p = pr.findByCredentials(getEmail(), getPassword());
 
 			SessionStorage.setItem("logged-user", p);
-      Util.redirect("/OdontoClinica/index");
-    } catch (NoResultException e) {
+			Util.redirect("/OdontoClinica/index");
+		} catch (NoResultException e) {
 			Util.addErrorMessage("Usuario ou senha incorretos!");
 		} catch (RepositoryException e) {
 			Util.addErrorMessage("Erro Interno no servidor!");
 			e.printStackTrace();
 		}
-  }
+	}
 }

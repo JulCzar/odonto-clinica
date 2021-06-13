@@ -1,21 +1,18 @@
-<ui:composition xmlns="http://www.w3.org/1999/xhtml"
-                xmlns:ui="http://java.sun.com/jsf/facelets"
-                xmlns:p="http://primefaces.org/ui">
-
-    <div class="layout-sidebar">
-        <ul id="layout-menu" class="layout-menu">
-            <li>
-                <p:commandLink action='#{redirect.to("lista/paciente")}'>
-                    <i class="pi pi-globe" />
-                    <span>Listar Pacientes</span>
-                </p:commandLink>
-            </li>
-            <li>
-                <p:commandLink action='#{redirect.to("lista/estado")}'>
-                    <i class="pi pi-globe" />
-                    <span>Listar Estados</span>
-                </p:commandLink>
-            </li>
-        </ul>
-    </div>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
+	<div class="layout-sidebar">
+		<ul id="layout-menu" class="layout-menu">
+			<li>
+				<p:commandLink action='#{redirect.to("lista/paciente")}'>
+					<i class="pi pi-globe" />
+					<span>Listar Pacientes</span>
+				</p:commandLink>
+			</li>
+			<li>
+				<p:commandLink action='#{redirect.to("lista/estado")}'>
+					<i class="pi pi-globe" />
+					<span>Listar Estados</span>
+				</p:commandLink>
+			</li>
+		</ul>
+	</div>
 </ui:composition>

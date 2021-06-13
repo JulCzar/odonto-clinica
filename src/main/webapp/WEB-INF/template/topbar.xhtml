@@ -1,16 +1,15 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
 								xmlns:h="http://java.sun.com/jsf/html"
 								xmlns:ui="http://java.sun.com/jsf/facelets"
-								xmlns:p="http://primefaces.org/ui"
-								xmlns:f="http://java.sun.com/jsf/core">
+								xmlns:p="http://primefaces.org/ui">
 
 	<h:form styleClass="top-bar f-w p-ai-center">
 		<div class="p-d-flex p-mx-auto p-jc-between p-ai-center limiter p-py-3">
 			<div class="p-d-flex p-ai-center title">Odonto Clinica</div>
 			<p:tabMenu styleClass="p-ml-auto" activeIndex="-1">
 				<p:menuitem value="Home" outcome="/index"/>
-				<p:menuitem value="Gestão" outcome="/gerir"/>
-				<p:menuitem rendered="#{sessionController.isLogged() != true}" value="Login" outcome="/login" icon="fas fa-sign-in-alt"/>
+				<p:menuitem rendered="#{sessionController.logged}" value="Gestão" outcome="/gerir"/>
+				<p:menuitem rendered="#{!sessionController.logged}" value="Login" outcome="/login" icon="fas fa-sign-in-alt"/>
 			</p:tabMenu>
 			<p:avatar id="avatar" rendered="#{sessionController.logged}" styleClass="p-ml-3 p-mr-2" size="large" shape="circle">
 				<img alt="avatar" src="https://ui-avatars.com/api/?name=#{sessionController.userName}%26color=ffffff%26background=6a86a1"/>
