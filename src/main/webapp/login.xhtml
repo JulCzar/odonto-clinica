@@ -8,12 +8,12 @@
 			<h:form>
 				<div class="p-field">
 					<p:outputLabel for="@next" value="Email" />
-					<p:inputText id="email" value="#{loginController.login}"
+					<p:inputText id="email" value="#{authenticate.email}"
 											 requiredMessage="Informe o email para realizar o login" required="true" />
 				</div>
 				<div class="p-field">
 					<p:outputLabel for="@next" value="Senha" />
-					<p:inputText id="password" value="#{loginController.senha}"
+					<p:inputText id="password" value="#{authenticate.password}"
 											 requiredMessage="Informe a senha para realizar o login" required="true" />
 				</div>
 				<div>
@@ -23,7 +23,7 @@
 					<p:commandLink process="@this" actionListener='#{redirect.to("senha/esqueci")}'>Esqueceu sua senha?
 					</p:commandLink>
 				</div>
-				<p:commandButton actionListener="#{loginController.login}" process="@this email password"
+				<p:commandButton actionListener="#{authenticate.login}" process="@this email password"
 												 update="@form messages" value="logar" styleClass="p-mt-3" />
 			</h:form>
 		</div>

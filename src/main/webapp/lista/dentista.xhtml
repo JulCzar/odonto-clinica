@@ -1,6 +1,6 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui"
-	template="/WEB-INF/template/main.xhtml">
+	template="/WEB-INF/template/mainManagement.xhtml">
 
 	<ui:define name="content">
 		<h:form id="form">
@@ -8,7 +8,7 @@
 				<p:growl id="messages" showDetail="true" />
 				<h3 class="card-header title">Dentista</h3>
 				<p:dataTable id="dt-patient" widgetVar="dtPatient" var="dentist" value="#{dentistController.dentists}"
-					reflow="true" styleClass="patient-table" rowKey="#{patient.id}" paginatorPosition="bottom">
+					reflow="true" styleClass="patient-table" rowKey="#{dentist.id}" paginatorPosition="bottom">
 
 					<p:column headerText="Code">
 						<h:outputText value="#{dentist.id}" />

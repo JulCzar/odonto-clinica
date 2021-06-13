@@ -30,8 +30,7 @@ public class PhysicalPerson extends Person {
 		return password;
 	}
 	public void setPassword(String password) {
-		String last3 = password.substring(password.length() - 3);
-		this.password = Util.hash(password + last3);
+		this.password = password;
 	}
 	public String getLastname() {
 		return lastname;

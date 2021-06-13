@@ -4,57 +4,59 @@ import java.io.Serial;
 import java.io.Serializable;
 
 import javax.enterprise.context.SessionScoped;
+import javax.faces.view.ViewScoped;
 import javax.inject.Named;
+import javax.persistence.NoResultException;
 
 import br.czar.odonto.aplication.RepositoryException;
 import br.czar.odonto.aplication.Util;
 import br.czar.odonto.aplication.storage.SessionStorage;
 import br.czar.odonto.model.Patient;
+import br.czar.odonto.model.PhysicalPerson;
+import br.czar.odonto.model.Security;
 import br.czar.odonto.repository.PatientRepository;
 
-@Named
-@SessionScoped
+@Named("authenticate")
+@ViewScoped
 public class LoginController implements Serializable {
   @Serial
   private static final long serialVersionUID = -2398636258131681199L;
   private Patient patient;
-  private String login;
-  private String senha;
 
   public Patient getPatient() {
     if (patient == null) {
       patient = new Patient();
+      patient.setPhysicalPerson(new PhysicalPerson());
     }
     return patient;
   }
 
-  public String getLogin() {
-    return login;
+  public String getEmail() {
+    return getPatient().getPhysicalPerson().getEmail();
   }
-  public void setLogin(String login) {
-    this.login = login;
+  public void setEmail(String email) {
+    getPatient().getPhysicalPerson().setEmail(email);
   }
-  public String getSenha() {
-    return this.senha;
+  public String getPassword() {
+    return getPatient().getPhysicalPerson().getPassword();
   }
-  public void setSenha(String senha) {
-    this.senha = senha;
+  public void setPassword(String password) {
+		getPatient().getPhysicalPerson().setPassword(password);
   }
 
   public void login() {
     PatientRepository pr = new PatientRepository();
     try {
-      Patient p = pr.findByEmail(getLogin()).get(0);
-      String senha = getSenha();
-      String last3 = senha.substring(senha.length() - 3);
-      if (p.getPhysicalPerson().getPassword().equals(Util.hash((senha + last3))))
-        SessionStorage.setItem("logged-user", p);
+			Security.encript(getPatient().getPhysicalPerson());
+      Patient p = pr.findByCredentials(getEmail(), getPassword());
+
+			SessionStorage.setItem("logged-user", p);
       Util.redirect("/OdontoClinica/index");
-    } catch (RepositoryException e) {
-      Util.addErrorMessage("Usuario ou senha incorretos!");
-      e.printStackTrace();
-    } catch (IndexOutOfBoundsException e) {
-      Util.addErrorMessage("Usuario ou senha incorretos!");
-    }
+    } catch (NoResultException e) {
+			Util.addErrorMessage("Usuario ou senha incorretos!");
+		} catch (RepositoryException e) {
+			Util.addErrorMessage("Erro Interno no servidor!");
+			e.printStackTrace();
+		}
   }
 }

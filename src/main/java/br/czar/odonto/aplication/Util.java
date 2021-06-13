@@ -72,9 +72,5 @@ public class Util {
     });
 
     return found[0];
-	}	
-	
-	public static String hash(String valor) {
-		return DigestUtils.sha256Hex(valor);
 	}
 }

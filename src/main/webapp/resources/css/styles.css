@@ -6,6 +6,19 @@
 }
 
 .f-w { width: 100vw }
+.block { 
+	background: var(--surface-e);
+	border-radius: 4px;
+
+}
+.pannel-menu-container {
+	padding: 0;
+	background: white;
+	border-radius: 4px;
+}
+.pannel-menu-container .p-panelmenu-panel {
+	box-shadow: none;
+}
 .limiter { max-width: var(--max-container-width) }
 .top-bar, .footer { background: var(--surface-a); }
 .top-bar .title {
@@ -43,4 +56,12 @@
 
 .ui-wizard-step-titles {
 	display: none;
+}
+@media print {
+	.pannel-menu-container {
+		display: none;
+	}
+	.block { 
+		flex-direction: column;
+	}
 }

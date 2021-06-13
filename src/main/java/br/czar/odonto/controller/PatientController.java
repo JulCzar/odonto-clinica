@@ -12,12 +12,7 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
 import br.czar.odonto.aplication.Util;
-import br.czar.odonto.model.Address;
-import br.czar.odonto.model.City;
-import br.czar.odonto.model.Patient;
-import br.czar.odonto.model.Phone;
-import br.czar.odonto.model.PhysicalPerson;
-import br.czar.odonto.model.State;
+import br.czar.odonto.model.*;
 import br.czar.odonto.repository.CityRepository;
 import br.czar.odonto.repository.PatientRepository;
 import org.primefaces.event.FlowEvent;
@@ -58,6 +53,8 @@ public class PatientController extends Controller<Patient> {
 
 	@Override
 	public void store() {
+  	PhysicalPerson p = getEntity().getPhysicalPerson();
+  	getEntity().setPhysicalPerson(Security.encript(p));
 		super.store();
 		Util.redirect("/OdontoClinica/lista/paciente");
 	}

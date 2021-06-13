@@ -1,7 +1,9 @@
-<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" template="/WEB-INF/template/main.xhtml">
-	<ui:define name="topbar"/>
-	<ui:define name="content">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+								xmlns:ui="http://java.sun.com/jsf/facelets"
+								template="/WEB-INF/template/master.xhtml">
+	<ui:define name="topbar-view"/>
+	<ui:define name="content-view">
 		<ui:insert name="content"/>
 	</ui:define>
-	<ui:define name="footer"/>
+	<ui:define name="footer-view"/>
 </ui:composition>

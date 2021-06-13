@@ -12,14 +12,14 @@
 
 			<p:inputText
 				styleClass="p-col-12"
-				value="#{changePasswordController.code}"
+				value="#{ChangePasswordController.code}"
 				placeholder="Código recebido por email"
 				required="true"
 				requiredMessage="O campo não pode ficar vazio"
 			/>
 			<p:inputText
 				styleClass="p-col-6"
-				value="#{changePasswordController.password}"
+				value="#{ChangePasswordController.password}"
 				placeholder="Insira sua nova senha"
 				required="true"
 				requiredMessage="O campo não pode ficar vazio"
@@ -34,7 +34,7 @@
 			<p:commandButton
 				styleClass="p-ml-3 p-col-3"
 				process="@form"
-				actionListener="#{changePasswordController.changePassword}"
+				actionListener="#{ChangePasswordController.changePassword}"
 				update="@form messages"
 				value="Recuperar"
 			/>

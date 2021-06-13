@@ -3,6 +3,7 @@ package br.czar.odonto.repository;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
 import br.czar.odonto.aplication.JPAUtil;
@@ -27,19 +28,40 @@ public class PatientRepository extends Repository<Patient> {
   }
 
 	@SuppressWarnings("unchecked")
-  public List<Patient> findByEmail(String email) throws RepositoryException{
-    try {
-      EntityManager em = getEntityManager();
+	public Patient findByEmail(String email) throws RepositoryException{
+		try {
+			EntityManager em = getEntityManager();
 
-      String jpql = "SELECT p FROM Patient p WHERE p.physicalPerson.email = :email ORDER BY p.id";
-      Query query = em.createQuery(jpql);
-      query.setParameter("email",  email  );
+			String jpql = "SELECT p FROM Patient p WHERE p.physicalPerson.email = :email ORDER BY p.id";
+			Query query = em.createQuery(jpql);
+			query.setParameter("email",  email  );
 
-      return (List<Patient>)(query.getResultList());
-    } catch (Exception e) {
-      System.out.println("Erro ao realizar uma consulta ao banco.");
-      e.printStackTrace();
-      throw new RepositoryException("Erro ao realizar uma consulta ao banco.");
-    }
-  }
+			return (Patient)(query.getSingleResult());
+		} catch (Exception e) {
+			System.out.println("Erro ao realizar uma consulta ao banco.");
+			e.printStackTrace();
+			throw new RepositoryException("Erro ao realizar uma consulta ao banco.");
+		}
+	}
+
+	@SuppressWarnings("unchecked")
+	public Patient findByCredentials(String email, String password) throws RepositoryException, NoResultException {
+		try {
+			EntityManager em = getEntityManager();
+
+			String jpql = "SELECT p FROM Patient p WHERE p.physicalPerson.email = :email AND p.physicalPerson.password = :senha ORDER BY p.id";
+			Query query = em.createQuery(jpql);
+			query.setParameter("email",  email);
+			query.setParameter("senha",  password);
+
+			return (Patient)(query.getSingleResult());
+		} catch (NoResultException e) {
+			e.printStackTrace();
+			throw e;
+		} catch (Exception e) {
+			System.out.println("Erro ao realizar uma consulta ao banco.");
+			e.printStackTrace();
+			throw new RepositoryException("Erro ao realizar uma consulta ao banco.");
+		}
+	}
 }

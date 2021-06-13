@@ -2,26 +2,24 @@ package br.czar.odonto.controller;
 
 import br.czar.odonto.aplication.RepositoryException;
 import br.czar.odonto.aplication.Util;
+import br.czar.odonto.aplication.storage.Request;
 import br.czar.odonto.model.PasswordRecovery;
 import br.czar.odonto.model.PhysicalPerson;
 import br.czar.odonto.repository.PasswordRecoveryRepository;
 import br.czar.odonto.repository.PhysicalPersonRepository;
 
-import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import java.time.LocalDateTime;
 
 @Named
 @ViewScoped
-public class changePasswordController extends Controller<PasswordRecovery> {
+public class ChangePasswordController extends Controller<PasswordRecovery> {
 	private String code = null;
 	private String password = null;
 
-	public changePasswordController() {
-		String code = FacesContext.getCurrentInstance()
-			.getExternalContext()
-			.getRequestParameterMap().get("code");
+	public ChangePasswordController() {
+		String code = Request.getQuery("code");
 
 		if (code != null) this.code = code;
 	}
