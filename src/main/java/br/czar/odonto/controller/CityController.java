@@ -58,6 +58,6 @@ public class CityController extends Controller<City> {
     Flash flash = FacesContext.getCurrentInstance().getExternalContext().getFlash();
 
     flash.put(FLASH_KEY, city);
-    Util.redirect("/OdontoClinica/cadastro/cidade");
+    Util.redirect("/OdontoClinica/admin/editar/cidade");
   }
 }
