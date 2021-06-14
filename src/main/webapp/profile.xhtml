@@ -34,10 +34,10 @@
 				<p:outputLabel for="address">Endereço</p:outputLabel>
 				<p:inputText id="address" requiredMessage="O campo não pode ficar vazio" disabled="#{!profileController.editing}" value="Rua da Amizade Qd01 Lt13"/>
 			</div>
-			<p:commandButton rendered="#{!profileController.editing}" value="Alterar Senha" styleClass="p-col p-mr-2"/>
-			<p:commandButton rendered="#{!profileController.editing}" value="Editar" actionListener="#{profileController.enableEdit}" update="@form" styleClass="p-col p-ml-2"/>
-			<p:commandButton rendered="#{profileController.editing}" value="Cancelar" actionListener="#{profileController.disableEdit}" update="@form" styleClass="p-col p-mr-2"/>
-			<p:commandButton rendered="#{profileController.editing}" value="Salvar" actionListener="#{profileController.disableEdit}" update="@form" styleClass="p-col p-ml-2"/>
+			<p:commandButton rendered="#{!profileController.editing}" value="Alterar Senha" styleClass="p-col p-mx-2"/>
+			<p:commandButton rendered="#{!profileController.editing}" value="Editar" actionListener="#{profileController.enableEdit}" update="@form" styleClass="p-col p-mx-2"/>
+			<p:commandButton rendered="#{profileController.editing}" value="Cancelar" actionListener="#{profileController.disableEdit}" update="@form" styleClass="p-col p-mx-2"/>
+			<p:commandButton rendered="#{profileController.editing}" value="Salvar" actionListener="#{profileController.disableEdit}" update="@form" styleClass="p-col p-mx-2"/>
 		</h:form>
 
 	</ui:define>

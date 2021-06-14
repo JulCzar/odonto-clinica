@@ -56,7 +56,7 @@ public class PatientController extends Controller<Patient> {
   	PhysicalPerson p = getEntity().getPhysicalPerson();
   	getEntity().setPhysicalPerson(Security.encript(p));
 		super.store();
-		Util.redirect("/OdontoClinica/lista/paciente");
+		Util.redirect("/OdontoClinica/admin/lista/paciente");
 	}
 
 	@Override
@@ -95,7 +95,7 @@ public class PatientController extends Controller<Patient> {
     Flash flash = FacesContext.getCurrentInstance().getExternalContext().getFlash();
 
     flash.put(FLASH_KEY, patient);
-    Util.redirect("/OdontoClinica/editar/paciente");
+    Util.redirect("/OdontoClinica/admin/editar/paciente");
   }
 
   public List<City> getCities() {

@@ -1,0 +1,97 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+								xmlns:ui="http://java.sun.com/jsf/facelets"
+								template="../../WEB-INF/template/mainManagement.xhtml"
+								xmlns:h="http://java.sun.com/jsf/html"
+								xmlns:p="http://primefaces.org/ui"
+								xmlns:jsf="http://xmlns.jcp.org/jsf">
+	<ui:define name="content">
+		<div class='card'>
+			<h3 class="card-header title">Editar Paciente</h3>
+			<h:form styleClass="ui-fluid p-grid" id="form1">
+				<div class='p-col-6'>
+					<p:outputLabel for='@next' value="Nome" />
+					<p:inputText id='name' name='name' required="true" value="#{patientController.entity.physicalPerson.name}"
+											 requiredMessage="Informe seu nome" />
+				</div>
+				<div class='p-col-6'>
+					<p:outputLabel for='@next' value="Sobrenome" />
+					<p:inputText id='lastname' name='lastname' value="#{patientController.entity.physicalPerson.lastname}" />
+				</div>
+				<div class='p-col-12'>
+					<p:outputLabel for='@next' value="Alergias" />
+					<p:chips id='allergies' name='allergies' required="true" value="#{patientController.entity.allergies}"
+									 requiredMessage="Informe alergias" separator="," addOnPaste="true" addOnBlur="true"/>
+				</div>
+				<div class='p-col-6'>
+					<p:outputLabel for='@next' value="CPF" />
+					<p:inputMask mask="999.999.999-99" id='cpf' name='cpf' required="true"
+											 value="#{patientController.entity.physicalPerson.cpf}" requiredMessage="Informe seu cpf" />
+				</div>
+				<div class='p-col-6'>
+					<p:outputLabel for='@next' value="Email" />
+					<p:inputText id='email' name='email' required="true"
+											 value="#{patientController.entity.physicalPerson.email}" requiredMessage="Informe seu email" />
+				</div>
+				<div class='p-col-1'>
+					<p:outputLabel for='@next' value="DDD" />
+					<p:inputMask mask="99" id='area' required="true" value="#{patientController.entity.phone.area}"
+											 requiredMessage="É necessário Cadastrar pelo menos um telefone" />
+				</div>
+				<div class='p-col-5'>
+					<p:outputLabel for='@next' value="Telefone" />
+					<p:inputMask mask="9 9999-9999" id='phonenumber' required="true"
+											 value="#{patientController.entity.phone.number}"
+											 requiredMessage="É necessário Cadastrar pelo menos um telefone" />
+				</div>
+				<div class='p-col-6'>
+					<p:outputLabel for='@next' value="Endereço" />
+					<p:inputText id="fullAddress" required="true" readonly="true" onfocus="PF('addressFiller').show()"
+											 value="#{patientController.entity.physicalPerson.address.fullAddress}"
+											 styleClass="p-col-12 fullAddressInput">
+						<p:autoUpdate/>
+					</p:inputText>
+				</div>
+				<p:commandButton actionListener="#{patientController.store}" update="@form messages" value="Trocar Senha" styleClass="p-mt-3 p-col p-mx-2"/>
+				<p:commandButton actionListener="#{patientController.store}" update="@form messages" value="Cadastrar" styleClass="p-col p-mt-3 p-mx-2"/>
+			</h:form>
+			<p:dialog id="form2" header="Inserir Endereço" draggable="false" modal="true" widgetVar="addressFiller" width="50vw">
+				<h:form>
+					<div class="p-grid ui-fluid">
+						<div class='p-col-12'>
+							<p:outputLabel for='@next' value="Setor" />
+							<p:inputText id="department" styleClass="p-col-12" required="true"
+													 value="#{patientController.entity.physicalPerson.address.department}"
+													 requiredMessage="Informe seu Setor" />
+						</div>
+						<div class='p-col-10'>
+							<p:outputLabel for='@next' value="Rua" />
+							<p:inputText id="address" styleClass="p-col-12" required="true"
+													 value="#{patientController.entity.physicalPerson.address.street}" requiredMessage="Informe sua rua" />
+						</div>
+						<div class='p-col-2'>
+							<p:outputLabel for='@next' value="N°" />
+							<p:inputText id="number" styleClass="p-col-12"
+													 value="#{patientController.entity.physicalPerson.address.number}" />
+						</div>
+						<div class="p-col-4">
+							<p:outputLabel for="@next" value="Estado" />
+							<p:autoComplete var="s" itemLabel="#{s.name}" itemValue="#{s}" dropdown="true"
+															value="#{patientController.entity.physicalPerson.address.city.state}"
+															completeMethod="#{stateController.filterStates}"
+															forceSelection="true">
+								<p:ajax event="change" process="@this" update="city" />
+							</p:autoComplete>
+						</div>
+						<div class="p-col-8">
+							<p:outputLabel for="@next" value="Cidade" />
+							<p:autoComplete var="obj" id="city" dropdown="true" itemLabel="#{obj.name}" itemValue="#{obj}"
+															value="#{patientController.entity.physicalPerson.address.city}"
+															completeMethod="#{patientController.filterCities}"/>
+						</div>
+					</div>
+					<p:commandButton value="Concluir" process="form2" styleClass="p-col-12 p-mt-3" update="form2" oncomplete="PF('addressFiller').hide()"/>
+				</h:form>
+			</p:dialog>
+		</div>
+	</ui:define>
+</ui:composition>
