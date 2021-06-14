@@ -2,6 +2,7 @@ package br.czar.odonto.controller;
 
 import br.czar.odonto.aplication.RepositoryException;
 import br.czar.odonto.aplication.Util;
+import br.czar.odonto.aplication.storage.FlashStorage;
 import br.czar.odonto.model.City;
 import br.czar.odonto.model.State;
 import br.czar.odonto.repository.CityRepository;
@@ -23,8 +24,7 @@ public class CityController extends Controller<City> {
   private List<City> cities;
 
   public CityController() {
-    Flash flash = FacesContext.getCurrentInstance().getExternalContext().getFlash();
-    entity = (City) flash.get(FLASH_KEY);
+    entity = (City) FlashStorage.getItem(FLASH_KEY);
   }
 
   @Override
@@ -55,9 +55,7 @@ public class CityController extends Controller<City> {
   }
 
   public void edit(City city) {
-    Flash flash = FacesContext.getCurrentInstance().getExternalContext().getFlash();
-
-    flash.put(FLASH_KEY, city);
+    FlashStorage.setItem(FLASH_KEY, city);
     Util.redirect("/OdontoClinica/admin/editar/cidade");
   }
 }

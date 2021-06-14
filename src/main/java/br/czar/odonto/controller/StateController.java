@@ -60,7 +60,8 @@ public class StateController extends Controller<State> {
     Flash flash = FacesContext.getCurrentInstance().getExternalContext().getFlash();
 
     flash.put(FLASH_KEY, state);
-    Util.redirect("/OdontoClinica/cadastro/estado");
+    Util.redirect("/OdontoClinica/admin/editar/estado");
+
   }
 
   public List<State> filterStates(String name) {

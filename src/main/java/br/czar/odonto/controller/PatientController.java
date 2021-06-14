@@ -1,21 +1,17 @@
 package br.czar.odonto.controller;
 
-import java.io.Serial;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.stream.Collectors;
-
-import javax.faces.context.FacesContext;
-import javax.faces.context.Flash;
-import javax.faces.view.ViewScoped;
-import javax.inject.Named;
-
 import br.czar.odonto.aplication.Util;
+import br.czar.odonto.aplication.storage.FlashStorage;
 import br.czar.odonto.model.*;
 import br.czar.odonto.repository.CityRepository;
 import br.czar.odonto.repository.PatientRepository;
-import org.primefaces.event.FlowEvent;
+
+import javax.faces.view.ViewScoped;
+import javax.inject.Named;
+import java.io.Serial;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Named
 @ViewScoped
@@ -26,11 +22,6 @@ public class PatientController extends Controller<Patient> {
   private List<Patient> patients;
   private List<City> cities;
   private Integer index;
-
-  public PatientController() {
-    Flash flash = FacesContext.getCurrentInstance().getExternalContext().getFlash();
-    entity = (Patient) flash.get(FLASH_KEY);
-  }
 
   public Integer getIndex() {
   	if (index == null) index = 0;
@@ -92,9 +83,7 @@ public class PatientController extends Controller<Patient> {
   }
 
   public void edit(Patient patient) {
-    Flash flash = FacesContext.getCurrentInstance().getExternalContext().getFlash();
-
-    flash.put(FLASH_KEY, patient);
+    FlashStorage.setItem(FLASH_KEY, patient);
     Util.redirect("/OdontoClinica/admin/editar/paciente");
   }
 

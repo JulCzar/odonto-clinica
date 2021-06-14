@@ -59,7 +59,19 @@ public abstract class Controller<T extends DefaultEntity<T>> implements Serializ
   }
 
   public void update(T entity) {
-    System.out.println("Entrou no editar");
-    setEntity(entity);
+		Repository<T> repo = new Repository<T>();
+
+		try {
+			repo.beginTransaction();
+			repo.save(getEntity());
+			repo.commitTransaction();
+
+			Util.addInfoMessage("Cadastro realizado com sucesso.");
+		} catch (RepositoryException e) {
+			repo.rollbackTransaction();
+			Util.addErrorMessage("Cadastro não realizado.");
+		} finally {
+			clear();
+		}
   }
 }

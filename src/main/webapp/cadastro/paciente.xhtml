@@ -6,46 +6,46 @@
 		<div class='card' style="--width: 550px">
 			<h3 class="card-header title">Cadastro</h3>
 			<h:form>
-				<p:steps id="steps-view" activeIndex="#{patientController.index}">
+				<p:steps id="steps-view" activeIndex="#{PatientController.index}">
 					<p:menuitem value="Informações Pessoais"/>
 					<p:menuitem value="Endereço"/>
 					<p:menuitem value="Segurança"/>
 					<p:menuitem value="Confirmação"/>
 				</p:steps>
 				<p:wizard>
-					<p:ajax event="next" listener="#{patientController.increaseIndex()}" update="steps-view"/>
-					<p:ajax event="back" listener="#{patientController.decreaseIndex()}" update="steps-view"/>
+					<p:ajax event="next" listener="#{PatientController.increaseIndex()}" update="steps-view"/>
+					<p:ajax event="back" listener="#{PatientController.decreaseIndex()}" update="steps-view"/>
 					<p:tab id="personal" title="Informações pessoais">
 						<p:panel styleClass="ui-fluid">
 							<div class="p-grid">
 								<div class='p-col-6'>
 									<p:outputLabel for='@next' value="Nome" />
-									<p:inputText id='name' name='name' required="true" value="#{patientController.entity.physicalPerson.name}"
+									<p:inputText id='name' name='name' required="true" value="#{PatientController.entity.physicalPerson.name}"
 										requiredMessage="Informe seu nome" />
 								</div>
 								<div class='p-col-6'>
 									<p:outputLabel for='@next' value="Sobrenome" />
-									<p:inputText id='lastname' name='lastname' value="#{patientController.entity.physicalPerson.lastname}" />
+									<p:inputText id='lastname' name='lastname' value="#{PatientController.entity.physicalPerson.lastname}" />
 								</div>
 								<div class='p-col-6'>
 									<p:outputLabel for='@next' value="CPF" />
 									<p:inputMask mask="999.999.999-99" id='cpf' name='cpf' required="true"
-										value="#{patientController.entity.physicalPerson.cpf}" requiredMessage="Informe seu cpf" />
+															 value="#{PatientController.entity.physicalPerson.cpf}" requiredMessage="Informe seu cpf" />
 								</div>
 								<div class='p-col-6'>
 									<p:outputLabel for='@next' value="Email" />
 									<p:inputText id='email' name='email' required="true"
-										value="#{patientController.entity.physicalPerson.email}" requiredMessage="Informe seu email" />
+															 value="#{PatientController.entity.physicalPerson.email}" requiredMessage="Informe seu email" />
 								</div>
 								<div class='p-col-4'>
 									<p:outputLabel for='@next' value="DDD" />
-									<p:inputMask mask="99" id='area' required="true" value="#{patientController.entity.phone.area}"
+									<p:inputMask mask="99" id='area' required="true" value="#{PatientController.entity.phone.area}"
 										requiredMessage="É necessário Cadastrar pelo menos um telefone" />
 								</div>
 								<div class='p-col-8'>
 									<p:outputLabel for='@next' value="Telefone" />
 									<p:inputMask mask="9 9999-9999" id='phonenumber' required="true"
-										value="#{patientController.entity.phone.number}"
+										value="#{PatientController.entity.phone.number}"
 										requiredMessage="É necessário Cadastrar pelo menos um telefone" />
 								</div>
 							</div>
@@ -57,23 +57,23 @@
 								<div class='p-col-12'>
 									<p:outputLabel for='@next' value="Setor" />
 									<p:inputText id="department" styleClass="p-col-12" required="true"
-										value="#{patientController.entity.physicalPerson.address.department}"
+										value="#{PatientController.entity.physicalPerson.address.department}"
 										requiredMessage="Informe seu Setor" />
 								</div>
 								<div class='p-col-10'>
 									<p:outputLabel for='@next' value="Rua" />
 									<p:inputText id="address" styleClass="p-col-12" required="true"
-										value="#{patientController.entity.physicalPerson.address.street}" requiredMessage="Informe sua rua" />
+															 value="#{PatientController.entity.physicalPerson.address.street}" requiredMessage="Informe sua rua" />
 								</div>
 								<div class='p-col-2'>
 									<p:outputLabel for='@next' value="N°" />
 									<p:inputText id="number" styleClass="p-col-12"
-										value="#{patientController.entity.physicalPerson.address.number}" />
+										value="#{PatientController.entity.physicalPerson.address.number}" />
 								</div>
 								<div class="p-col-4">
 									<p:outputLabel for="@next" value="Estado" />
 									<p:autoComplete var="obj"
-										value="#{patientController.entity.physicalPerson.address.city.state}"
+										value="#{PatientController.entity.physicalPerson.address.city.state}"
 										completeMethod="#{stateController.filterStates}"
 										itemLabel="#{obj.name}"
 										forceSelection="true"
@@ -85,8 +85,8 @@
 								<div class="p-col-8">
 									<p:outputLabel for="@next" value="Cidade" />
 									<p:autoComplete var="obj" id="city"
-										value="#{patientController.entity.physicalPerson.address.city}"
-										completeMethod="#{patientController.filterCities}"
+										value="#{PatientController.entity.physicalPerson.address.city}"
+										completeMethod="#{PatientController.filterCities}"
 										itemLabel="#{obj.name}"
 										itemValue="#{obj}"
 									/>
@@ -100,8 +100,8 @@
 								<div class='p-col-6'>
 									<p:outputLabel for='@next' value="Senha" />
 									<p:password id="password" styleClass="p-col-12" required="true" toggleMask="true"
-										value="#{patientController.entity.physicalPerson.password}" redisplay="true"
-										requiredMessage="Escolha uma senha" />
+															value="#{PatientController.entity.physicalPerson.password}" redisplay="true"
+															requiredMessage="Escolha uma senha" />
 								</div>
 								<div class='p-col-6'>
 									<p:outputLabel for='@next' value="Confirmação de Senha" />
@@ -115,30 +115,30 @@
 						<div class="grid">
 							<div class="p-col-12">
 								<h:outputText value="Nome: "/>
-								<h:outputText value="#{patientController.entity.physicalPerson.fullName}" styleClass="outputLabel"/>
+								<h:outputText value="#{PatientController.entity.physicalPerson.fullName}" styleClass="outputLabel"/>
 							</div>
 
 							<div class="p-col-12">
 								<h:outputText value="CPF: "/>
-								<h:outputText value="#{patientController.entity.physicalPerson.cpf}" styleClass="outputLabel"/>
+								<h:outputText value="#{PatientController.entity.physicalPerson.cpf}" styleClass="outputLabel"/>
 							</div>
 
 							<div class="p-col-12">
 								<h:outputText value="Email: "/>
-								<h:outputText value="#{patientController.entity.physicalPerson.email}" styleClass="outputLabel"/>
+								<h:outputText value="#{PatientController.entity.physicalPerson.email}" styleClass="outputLabel"/>
 							</div>
 
 							<div class="p-col-12">
 								<h:outputText value="Telefone: "/>
-								<h:outputText value="#{patientController.entity.phone.fullNumber}" styleClass="outputLabel"/>
+								<h:outputText value="#{PatientController.entity.phone.fullNumber}" styleClass="outputLabel"/>
 							</div>
 
 							<div class="p-col-12">
 								<h:outputText value="Endereço: "/>
-								<h:outputText value="#{patientController.entity.physicalPerson.address.fullAddress}" styleClass="outputLabel"/>
+								<h:outputText value="#{PatientController.entity.physicalPerson.address.fullAddress}" styleClass="outputLabel"/>
 							</div>
-							<p:commandButton actionListener="#{patientController.store}" update="@form messages" value="Cadastrar"
-								styleClass="p-mt-3" />
+							<p:commandButton actionListener="#{PatientController.store}" update="@form messages" value="Cadastrar"
+															 styleClass="p-mt-3" />
 						</div>
 					</p:tab>
 				</p:wizard>

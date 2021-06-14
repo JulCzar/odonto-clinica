@@ -11,6 +11,7 @@
 		<class>br.czar.odonto.model.Phone</class>
 		<class>br.czar.odonto.model.State</class>
 		<class>br.czar.odonto.model.City</class>
+		<class>br.czar.odonto.model.Allergy</class>
 
 		<properties>
 			<!-- DB Driver -->
