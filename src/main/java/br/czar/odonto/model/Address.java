@@ -7,13 +7,7 @@ import java.io.Serial;
 public class Address extends DefaultEntity<Address> {
 	@Serial
 	private static final long serialVersionUID = -924620831899993085L;
-	@OneToOne(
-		cascade = {
-			CascadeType.PERSIST,
-			CascadeType.MERGE
-		},
-		fetch = FetchType.LAZY
-	)
+	@OneToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_city", unique = true)
 	private City city;
 	private String number;
@@ -45,6 +39,12 @@ public class Address extends DefaultEntity<Address> {
 		this.department = department;
 	}
 	public String getFullAddress() {
+		if (street == null) return "";
+		if (department == null) return street;
+		if (number == null) return street + ", " + department;
+		if (city.getName() == null) return street + ", " + department + " " + number;
+		if (city.getState() == null) return street + ", " + department + " " + number + " " + city;
+
 		return street + ", " + department + " " + number + " " + city.getName() + "-" + city.getState().getUf();
 	}
 	@Override

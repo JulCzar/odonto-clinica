@@ -15,7 +15,7 @@
 				<img alt="avatar" src="https://ui-avatars.com/api/?name=#{sessionController.userName}%26color=ffffff%26background=6a86a1"/>
 			</p:avatar>
 			<p:menu overlay="true" trigger="avatar" triggerEvent="click" value="Usuário" my="left top" at="left bottom" style="width: 100px">
-				<p:menuitem value="Perfil" icon="fas fa-user-alt"/>
+				<p:menuitem value="Perfil" icon="fas fa-user-alt" outcome="/profile"/>
 				<p:menuitem value="Sair" actionListener="#{sessionController.logout}" icon="fas fa-sign-out-alt"/>
 			</p:menu>
 		</div>

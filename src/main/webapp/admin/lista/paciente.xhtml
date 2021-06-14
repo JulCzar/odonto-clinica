@@ -3,18 +3,14 @@
 		<h:form id="form">
 			<div class="card ui-fluid">
 				<p:growl id="messages" showDetail="true" />
-				<h3 class="card-header title">Paciente</h3>
-				<p:dataTable id="dt-patient" widgetVar="dtPatient" var="patient" value="#{patientController.patients}"
-										 reflow="true" styleClass="patient-table" rowKey="#{patient.id}" paginatorPosition="bottom">
-
-					<p:column headerText="Code">
-						<h:outputText value="#{patient.id}" />
-					</p:column>
-					<p:column headerText="Name">
-						<h:outputText value="#{patient.physicalPerson.name}" />
+				<h3 class="card-header title">Pacientes</h3>
+				<p:dataTable id="dt-patient" var="patient" value="#{patientController.patients}"
+										 reflow="true" paginatorPosition="bottom">
+					<p:column headerText="Name" >
+						<p:outputLabel value="#{patient.physicalPerson.name}" />
 					</p:column>
 					<p:column headerText="CPF">
-						<h:outputText value="#{patient.physicalPerson.cpf}" />
+						<p:outputLabel value="#{patient.physicalPerson.cpf}" />
 					</p:column>
 					<p:column exportable="false" headerText="Ações" styleClass='p-text-center'>
 						<p:commandButton icon="pi pi-pencil" update="@form"

@@ -4,11 +4,7 @@
 			<div class="card ui-fluid">
 				<p:growl id="messages" showDetail="true" />
 				<h3 class="card-header title">Dentista</h3>
-				<p:dataTable id="dt-patient" widgetVar="dtPatient" var="dentist" value="#{dentistController.dentists}"
-										 reflow="true" styleClass="patient-table" rowKey="#{dentist.id}" paginatorPosition="bottom">
-					<p:column headerText="Code">
-						<h:outputText value="#{dentist.id}" />
-					</p:column>
+				<p:dataTable id="dt-patient" var="dentist" value="#{dentistController.dentists}" reflow="true">
 					<p:column headerText="Name">
 						<h:outputText value="#{dentist.physicalPerson.name}" />
 					</p:column>
@@ -24,7 +20,7 @@
 														 update="dt-patient" actionListener="#{dentistController.destroy(dentist)}" />
 					</p:column>
 				</p:dataTable>
-				<p:commandButton value="Novo" actionListener="#{redirect.to('/OdontoClinica/cadastro/dentista')}"
+				<p:commandButton value="Novo" actionListener="#{redirect.to('/OdontoClinica/admin/cadastro/dentista')}"
 												 styleClass="ui-button-success p-mt-3" />
 			</div>
 		</h:form>

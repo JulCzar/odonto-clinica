@@ -9,16 +9,8 @@
 			<h:form id="form">
 				<div class="card crud-demo">
 					<p:growl id="messages" showDetail="true"/>
-
 					<h3 class="card-header title">Estados</h3>
-
-					<p:dataTable id="dt-state" widgetVar="dtState" var="state" value="#{stateController.states}"
-											 reflow="true" styleClass="state-table"
-											 paginatorPosition="bottom">
-
-						<p:column headerText="Code" >
-							<h:outputText value="#{state.id}"/>
-						</p:column>
+					<p:dataTable id="dt-state" var="state" value="#{stateController.states}" reflow="true">
 						<p:column headerText="Name" >
 							<h:outputText value="#{state.name}"/>
 						</p:column>

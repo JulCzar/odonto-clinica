@@ -1,0 +1,21 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+								xmlns:ui="http://java.sun.com/jsf/facelets"
+								template="../../WEB-INF/template/mainManagement.xhtml"
+								xmlns:h="http://java.sun.com/jsf/html"
+								xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="content">
+		<div class='card'>
+			<h3 class="card-header title">Cadastrar Exame</h3>
+			<h:form styleClass="ui-fluid">
+				<div class="p-grid">
+					<div class='p-col-12'>
+						<p:outputLabel for='@next' value="Nome" />
+						<p:inputText id='name' name='name' required="true" requiredMessage="Informe o nome" />
+					</div>
+				</div>
+				<p:commandButton update="@form messages" value="Cadastrar" styleClass="p-mt-3" />
+			</h:form>
+		</div>
+	</ui:define>
+</ui:composition>

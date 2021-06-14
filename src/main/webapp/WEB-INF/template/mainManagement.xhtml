@@ -1,42 +1,10 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-								xmlns:h="http://java.sun.com/jsf/html"
 								xmlns:ui="http://java.sun.com/jsf/facelets"
 								xmlns:p="http://primefaces.org/ui" template="/WEB-INF/template/master.xhtml">
 	<ui:define name="content-view">
 		<div class='f-w'>
 			<div class='block p-grid p-d-flex '>
-				<h:form class='pannel-menu-container p-col-4 p-md-3'>
-					<p:panelMenu style="width: 100%">
-						<p:submenu label="Usuário">
-							<p:menuitem value="Perfil"/>
-							<p:menuitem value="Cadastrar"/>
-						</p:submenu>
-						<p:submenu label="Dentistas">
-							<p:menuitem value="Listar" outcome="/lista/dentista"/>
-							<p:menuitem value="Cadastrar"/>
-						</p:submenu>
-						<p:submenu label="Pacientes">
-							<p:menuitem value="Listar" outcome="/lista/paciente"/>
-							<p:menuitem value="Cadastrar"/>
-						</p:submenu>
-						<p:submenu label="Agenda">
-							<p:menuitem value="Visitas"/>
-							<p:menuitem value="Gerenciar"/>
-						</p:submenu>
-						<p:submenu label="Exames">
-							<p:menuitem value="Listar"/>
-							<p:menuitem value="Cadastrar"/>
-						</p:submenu>
-						<p:submenu label="Estados">
-							<p:menuitem value="Listar" outcome="/lista/estado"/>
-							<p:menuitem value="Cadastrar"/>
-						</p:submenu>
-						<p:submenu label="Cidades">
-							<p:menuitem value="Listar" outcome="/lista/cidade"/>
-							<p:menuitem value="Cadastrar"/>
-						</p:submenu>
-					</p:panelMenu>
-				</h:form>
+				<ui:include src="sidebar.xhtml"/>
 				<div class='block p-col-8 p-md-9'>
 					<div class='block p-px-4 p-fluid'>
 						<ui:insert name="content"/>

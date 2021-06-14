@@ -1,18 +1,36 @@
-<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
-	<div class="layout-sidebar">
-		<ul id="layout-menu" class="layout-menu">
-			<li>
-				<p:commandLink action='#{redirect.to("lista/paciente")}'>
-					<i class="pi pi-globe" />
-					<span>Listar Pacientes</span>
-				</p:commandLink>
-			</li>
-			<li>
-				<p:commandLink action='#{redirect.to("lista/estado")}'>
-					<i class="pi pi-globe" />
-					<span>Listar Estados</span>
-				</p:commandLink>
-			</li>
-		</ul>
-	</div>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+								xmlns:h="http://java.sun.com/jsf/html"
+								xmlns:ui="http://java.sun.com/jsf/facelets"
+								xmlns:p="http://primefaces.org/ui">
+	<h:form class='pannel-menu-container p-col-4 p-md-3'>
+		<p:panelMenu style="width: 100%" >
+			<p:submenu label="Usuário" expanded="false">
+				<p:menuitem value="Perfil" outcome="/profile"/>
+			</p:submenu>
+			<p:submenu label="Dentistas" expanded="false">
+				<p:menuitem value="Listar" outcome="/admin/lista/dentista"/>
+				<p:menuitem value="Cadastrar" outcome="/admin/cadastro/dentista"/>
+			</p:submenu>
+			<p:submenu label="Pacientes" expanded="false">
+				<p:menuitem value="Listar" outcome="/admin/lista/paciente"/>
+				<p:menuitem value="Cadastrar" outcome="/admin/cadastro/paciente"/>
+			</p:submenu>
+			<p:submenu label="Agenda" expanded="false">
+				<p:menuitem value="Visitas" outcome="/admin/visitas/agenda"/>
+				<p:menuitem value="Agendar Visita" outcome="/cadastro/agendar"/>
+			</p:submenu>
+			<p:submenu label="Exames" expanded="false">
+				<p:menuitem value="Listar" outcome="/admin/lista/exames"/>
+				<p:menuitem value="Cadastrar" outcome="/admin/cadastro/exame"/>
+			</p:submenu>
+			<p:submenu label="Estados" expanded="false">
+				<p:menuitem value="Listar" outcome="/admin/lista/estado"/>
+				<p:menuitem value="Cadastrar" outcome="/admin/cadastro/estado"/>
+			</p:submenu>
+			<p:submenu label="Cidades" expanded="false">
+				<p:menuitem value="Listar" outcome="/admin/lista/cidade"/>
+				<p:menuitem value="Cadastrar" outcome="/admin/cadastro/cidade"/>
+			</p:submenu>
+		</p:panelMenu>
+	</h:form>
 </ui:composition>
