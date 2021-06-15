@@ -55,7 +55,6 @@ public class EditController extends Controller<Dentist> {
 	public void update() {
 		List<Specialization> specializationsList = entity.getSpecializations();
 
-		System.out.println(specializationsList);
 		for (String s : specializations) {
 			if (!specializationsList.contains(new Specialization(s.trim())))
 				specializationsList.add(new Specialization(s.trim()));
