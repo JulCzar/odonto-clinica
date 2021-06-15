@@ -8,38 +8,7 @@
 		<div class='card'>
 			<h3 class="card-header title">Cadastro</h3>
 			<h:form styleClass="ui-fluid">
-				<p:schedule id="schedule" value="#{scheduleModelController.eventModel}" widgetVar="myschedule">
-					<p:ajax event="dateSelect" listener="#{scheduleModelController.onDateSelect}" update="eventDetails"
-									oncomplete="PF('eventDialog').show();"/>
-					<p:ajax event="eventSelect" listener="#{scheduleModelController.onEventSelect}" update="eventDetails"
-									oncomplete="PF('eventDialog').show();"/>
-					<p:ajax event="eventMove" listener="#{scheduleModelController.onEventMove}" update="messages"/>
-					<p:ajax event="eventResize" listener="#{scheduleModelController.onEventResize}" update="messages"/>
-				</p:schedule>
-
-				<p:dialog widgetVar="eventDialog" header="Event Details" showEffect="fade" hideEffect="fade">
-					<h:panelGrid id="eventDetails" columns="2" cellpadding="7">
-						<p:outputLabel for="title" value="Titles" styleClass="p-text-bold"/>
-						<p:inputText id="title" value="#{scheduleModelController.event.title}" required="true"/>
-
-						<p:outputLabel for="from" value="From" styleClass="p-text-bold"/>
-						<p:datePicker id="from" value="#{scheduleModelController.event.startDate}" pattern="dd/MM/yyyy"
-													showTime="true" appendTo="@(body)"/>
-
-						<p:outputLabel for="to" value="To" styleClass="p-text-bold"/>
-						<p:datePicker id="to" value="#{scheduleModelController.event.endDate}" pattern="dd/MM/yyyy"
-													showTime="true" appendTo="@(body)"/>
-
-						<p:outputLabel for="allDay" value="All Day" styleClass="p-text-bold"/>
-						<h:selectBooleanCheckbox id="allDay" value="#{scheduleModelController.event.allDay}"/>
-					</h:panelGrid>
-
-					<div class="p-d-flex p-jc-between p-mt-3">
-						<p:commandButton type="reset" value="Reset" styleClass="p-text-bold ui-button-outlined"/>
-						<p:commandButton id="addButton" value="Save" action="#{scheduleModelController.addEvent}"
-														 oncomplete="PF('myschedule').update();PF('eventDialog').hide();"/>
-					</div>
-				</p:dialog>
+				
 			</h:form>
 		</div>
 	</ui:define>

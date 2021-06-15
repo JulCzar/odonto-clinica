@@ -13,6 +13,7 @@
 		<class>br.czar.odonto.model.City</class>
 		<class>br.czar.odonto.model.Allergy</class>
 		<class>br.czar.odonto.model.Specialization</class>
+		<class>br.czar.odonto.model.Exam</class>
 
 		<properties>
 			<!-- DB Driver -->
