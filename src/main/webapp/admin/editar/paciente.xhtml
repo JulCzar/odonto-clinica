@@ -51,7 +51,7 @@
 					</p:inputText>
 				</div>
 				<p:commandButton  update="@form messages" value="Trocar Senha" styleClass="p-mt-3 p-col p-mx-2"/>
-				<p:commandButton actionListener="#{editPatientControl.store}" update="@form messages" value="Salvar" styleClass="p-col p-mt-3 p-mx-2"/>
+				<p:commandButton actionListener="#{editPatientControl.update}" update="@form messages" value="Salvar" styleClass="p-col p-mt-3 p-mx-2"/>
 			</h:form>
 			<p:dialog id="form2" header="Inserir Endereço" draggable="false" modal="true" widgetVar="addressFiller" width="50vw">
 				<h:form>

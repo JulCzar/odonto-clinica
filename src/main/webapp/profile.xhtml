@@ -1,44 +1,68 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" template="/WEB-INF/template/mainManagement.xhtml">
 	<ui:define name="content">
 		<h3 class='card-header title p-mb-5'>Perfil</h3>
-		<h:form styleClass="ui-fluid p-grid">
+		<h:form id="profileForm" styleClass="ui-fluid p-grid">
 			<div class='p-col-6'>
 				<p:outputLabel for="name">Nome</p:outputLabel>
-				<p:inputText id="name" requiredMessage="O campo não pode ficar vazio" disabled="#{!profileController.editing}" value="Júlio César"/>
+				<p:inputText id="name" requiredMessage="O campo não pode ficar vazio" disabled="#{!profileController.editing}" value="#{profileController.entity.physicalPerson.name}"/>
 			</div>
 			<div class='p-col-6'>
 				<p:outputLabel for="lastname">Sobrenome</p:outputLabel>
-				<p:inputText id="lastname" requiredMessage="O campo não pode ficar vazio" disabled="#{!profileController.editing}" value="B. Monteiro"/>
+				<p:inputText id="lastname" requiredMessage="O campo não pode ficar vazio" disabled="#{!profileController.editing}" value="#{profileController.entity.physicalPerson.lastname}"/>
 			</div>
 			<div class='p-col-12'>
 				<p:outputLabel for="allergies">Alergias</p:outputLabel>
-				<p:chips id="allergies" requiredMessage="O campo não pode ficar vazio" disabled="#{!profileController.editing}" value="#{profileController.allergies}"/>
+				<p:chips id="allergies" requiredMessage="O campo não pode ficar vazio" disabled="#{!profileController.editing}" value="#{profileController.entity.allergies}"/>
 			</div>
 			<div class='p-col-6'>
 				<p:outputLabel for="email">Email</p:outputLabel>
-				<p:inputText id="email" requiredMessage="O campo não pode ficar vazio" disabled="#{!profileController.editing}" value="julczar21@outlook.com"/>
+				<p:inputText id="email" requiredMessage="O campo não pode ficar vazio" disabled="#{!profileController.editing}" value="#{profileController.entity.physicalPerson.email}"/>
 			</div>
 			<div class='p-col-6'>
 				<p:outputLabel for="cpf">CPF</p:outputLabel>
-				<p:inputText id="cpf" requiredMessage="O campo não pode ficar vazio" disabled="#{!profileController.editing}" value="julczar21@outlook.com"/>
+				<p:inputText id="cpf" requiredMessage="O campo não pode ficar vazio" disabled="#{!profileController.editing}" value="#{profileController.entity.physicalPerson.cpf}"/>
 			</div>
 			<div class='p-col-1'>
 				<p:outputLabel for="area">DDD</p:outputLabel>
-				<p:inputText id="area" requiredMessage="O campo não pode ficar vazio" disabled="#{!profileController.editing}" value="63"/>
+				<p:inputText id="area" requiredMessage="O campo não pode ficar vazio" disabled="#{!profileController.editing}" value="#{profileController.entity.phone.area}"/>
 			</div>
 			<div class='p-col-5'>
 				<p:outputLabel for="phone">Telefone</p:outputLabel>
-				<p:inputMask mask="9 9999-9999" id="phone" requiredMessage="O campo não pode ficar vazio" disabled="#{!profileController.editing}" value="9 9272-7242"/>
+				<p:inputMask mask="9 9999-9999" id="phone" requiredMessage="O campo não pode ficar vazio" disabled="#{!profileController.editing}" value="#{profileController.entity.phone.number}"/>
 			</div>
 			<div class='p-col-6'>
 				<p:outputLabel for="address">Endereço</p:outputLabel>
-				<p:inputText id="address" requiredMessage="O campo não pode ficar vazio" disabled="#{!profileController.editing}" value="Rua da Amizade Qd01 Lt13"/>
+				<p:inputText id="address" readonly="true" requiredMessage="O campo não pode ficar vazio" disabled="#{!profileController.editing}" value="#{profileController.entity.address.fullAddress}"/>
 			</div>
-			<p:commandButton rendered="#{!profileController.editing}" value="Alterar Senha" styleClass="p-col p-mx-2"/>
-			<p:commandButton rendered="#{!profileController.editing}" value="Editar" actionListener="#{profileController.enableEdit}" update="@form" styleClass="p-col p-mx-2"/>
-			<p:commandButton rendered="#{profileController.editing}" value="Cancelar" actionListener="#{profileController.disableEdit}" update="@form" styleClass="p-col p-mx-2"/>
-			<p:commandButton rendered="#{profileController.editing}" value="Salvar" actionListener="#{profileController.disableEdit}" update="@form" styleClass="p-col p-mx-2"/>
+			<p:commandButton rendered="#{!profileController.editing}" value="Alterar Senha" onclick="PF('changePassword').show()" styleClass="p-col p-mx-2"/>
+			<p:commandButton rendered="#{!profileController.editing}" value="Editar" actionListener="#{profileController.enableEdit}" update="@form profileForm changePassword" styleClass="p-col p-mx-2"/>
+			<p:commandButton rendered="#{profileController.editing}" value="Cancelar" actionListener="#{profileController.disableEdit}" update="@form profileForm changePassword" process="@this" styleClass="p-col p-mx-2"/>
+			<p:commandButton rendered="#{profileController.editing}" value="Salvar" actionListener="#{profileController.disableEdit}" update="@form profileForm changePassword" styleClass="p-col p-mx-2"/>
 		</h:form>
+		<p:dialog id="changePassword" header="Alterar Senha" draggable="false" modal="true" widgetVar="changePassword" width="50vw">
+			<h:form>
+				<div class="p-grid ui-fluid">
+					<div class='p-col-12'>
+						<p:outputLabel for='@next' value="Senha" />
+						<p:password id="password" styleClass="p-col-12" required="true"
+												 requiredMessage="Informe seu Setor" />
+					</div>
+					<div class='p-col-12'>
+						<p:outputLabel for='@next' value="Confirme sua senha" />
+						<p:password id="confirmPassword" styleClass="p-col-12" required="true"
+												  requiredMessage="Informe sua rua" />
+					</div>
+				</div>
+				<div class="p-mt-3 p-grid ui-fluid">
+					<div class="p-col-6 p-px-1">
+						<p:commandButton value="Cancelar" onclick="PF('changePassword').hide()"/>
+					</div>
+					<div class="p-col-6 p-px-1">
+						<p:commandButton value="Concluir" process="changePassword" update="changePassword" oncomplete="PF('changePassword').hide()"/>
+					</div>
+				</div>
+			</h:form>
+		</p:dialog>
 
 	</ui:define>
 </ui:composition>
