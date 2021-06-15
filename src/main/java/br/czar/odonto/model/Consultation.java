@@ -21,10 +21,10 @@ public class Consultation extends DefaultEntity<Consultation> {
 	private Dentist dentist;
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	private Exam exam;
-	private String status;
+	private ConsultationStatus status;
 
 	public Consultation() {
-		this.status = "Em Aberto";
+		this.status = ConsultationStatus.ABERTO;
 	}
 
 	public LocalDateTime getDayHour() {
@@ -55,11 +55,11 @@ public class Consultation extends DefaultEntity<Consultation> {
 		this.dentist = dentist;
 	}
 
-	public String getStatus() {
+	public ConsultationStatus getStatus() {
 		return status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(ConsultationStatus status) {
 		this.status = status;
 	}
 

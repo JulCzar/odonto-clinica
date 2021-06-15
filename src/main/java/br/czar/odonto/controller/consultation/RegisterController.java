@@ -66,6 +66,10 @@ public class RegisterController extends Controller<Consultation> {
 		return dentists;
 	}
 
+	public ConsultationStatus[] getStatuses() {
+		return ConsultationStatus.values();
+	}
+
 	public List<Patient> getPatients() {
 		PatientRepository er = new PatientRepository();
 		if (patients == null) {

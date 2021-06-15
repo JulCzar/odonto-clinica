@@ -50,6 +50,6 @@ public class ListController extends Controller<Consultation> {
 
 	public void edit(Consultation patient) {
 		FlashStorage.setItem(FLASH_KEY, patient);
-		Util.redirect("/OdontoClinica/admin/visitas/detalhe");
+		Util.redirect("/OdontoClinica/admin/visitas/detalhes");
 	}
 }

@@ -1,0 +1,59 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+								xmlns:ui="http://java.sun.com/jsf/facelets"
+								xmlns:h="http://java.sun.com/jsf/html"
+								xmlns:f="http://java.sun.com/jsf/core"
+								xmlns:p="http://primefaces.org/ui"
+								xmlns:jsf="http://xmlns.jcp.org/jsf"
+								template="/WEB-INF/template/mainManagement.xhtml">
+	<ui:define name="sidebar"/>
+	<ui:define name="content">
+		<div class='card'>
+			<h3 class="card-header title">Detalhes Consulta</h3>
+			<h:form styleClass="p-grid ui-fluid">
+				<div class='p-col-12'>
+					<p:outputLabel for="@next">Data</p:outputLabel>
+					<p:datePicker
+						id="date"
+						disabled="#{consultationEditController.entity.status.id != 1}"
+						required="true"
+						showTime="true"
+						mask="99/99/9999 99:99"
+						requiredMessage="Informe o dia da consulta"
+						mindate="#{consultationEditController.minDate}"
+						value="#{consultationEditController.entity.dayHour}"
+					/>
+				</div>
+				<div class="p-col-12">
+					<p:outputLabel for="@next" value="Exame"/>
+					<p:selectOneMenu
+						id="group"
+						required="true"
+						requiredMessage="É necessário informar o exame"
+						value="#{consultationEditController.entity.exam}"
+						disabled="#{consultationEditController.entity.status.id != 1}"
+					>
+						<f:selectItem itemLabel="Selecione Um" itemValue=""/>
+						<f:selectItems value="#{consultationEditController.exams}" var="e" itemLabel="#{e.name}" itemValue="#{e}"/>
+					</p:selectOneMenu>
+				</div>
+				<div class='p-col-12'>
+					<p:outputLabel for="@next" value="Paciente"/>
+					<p:autoComplete var="patient" id="patient" dropdown="true" required="true" itemValue="#{patient}"
+													disabled="#{consultationEditController.entity.status.id != 1}"
+													value="#{consultationEditController.entity.patient}"
+													completeMethod="#{consultationEditController.filterPatients}"
+													minQueryLength="3" forceSelection="true" itemLabel="#{patient.physicalPerson.name}"
+													emptyMessage="Nenhuma correspondência" requiredMessage="É necessário selecionar um paciente"
+					/>
+				</div>
+				<div class='p-col-12' jsf:rendered="#{consultationEditController.entity.status.id != 1}">
+					<p:outputLabel for="@next" value="Status"/>
+					<p:inputText id="status" disabled="true" value="#{consultationEditController.entity.status.label}"/>
+				</div>
+				<p:commandButton rendered="#{consultationEditController.entity.status.id == 1}" actionListener="#{consultationEditController.cancel}" update="@form messages" process="@form" value="Cancelar" styleClass="p-mx-2 p-mt-3 p-col"/>
+				<p:commandButton rendered="#{consultationEditController.entity.status.id == 1}" actionListener="#{consultationEditController.update}" update="@form messages" process="@form" value="Atualizar" styleClass="p-mx-2 p-mt-3 p-col"/>
+				<p:commandButton rendered="#{consultationEditController.entity.status.id == 1}" actionListener="#{consultationEditController.complete}" update="@form messages" process="@form" value="Concluir" styleClass="p-mx-2 p-mt-3 p-col"/>
+			</h:form>
+		</div>
+	</ui:define>
+</ui:composition>

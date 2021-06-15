@@ -15,6 +15,7 @@
 		<class>br.czar.odonto.model.Specialization</class>
 		<class>br.czar.odonto.model.Exam</class>
 		<class>br.czar.odonto.model.Consultation</class>
+		<class>br.czar.odonto.converter.ConsultationStatusConverter</class>
 
 		<properties>
 			<!-- DB Driver -->
