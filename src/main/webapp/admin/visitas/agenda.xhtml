@@ -6,9 +6,23 @@
 
 	<ui:define name="content">
 		<div class='card'>
-			<h3 class="card-header title">Cadastro</h3>
+			<h3 class="card-header title">Agenda</h3>
 			<h:form styleClass="ui-fluid">
-				
+				<p:dataTable id="dt-state" var="state" value="#{{}}" reflow="true">
+					<p:column headerText="Paciente" >
+						<h:outputText value="#{state.name}"/>
+					</p:column>
+					<p:column headerText="Hora" >
+						<h:outputText value="#{state.name}"/>
+					</p:column>
+					<p:column headerText="Exame" >
+						<h:outputText value="#{state.name}"/>
+					</p:column>
+					<p:column exportable="false" headerText="Ações" styleClass="p-text-center">
+						<p:commandButton icon="pi pi-pencil" update="@form" styleClass="edit-button rounded-button ui-button-success" process="@this" actionListener="#{stateController.edit(state)}"/>
+						<p:commandButton class="ui-button-warning rounded-button p-ml-3" icon="pi pi-trash" process="@this" update="@form" oncomplete="PF('deleteProductDialog').show()" actionListener="#{stateController.destroy(state)}"/>
+					</p:column>
+				</p:dataTable>
 			</h:form>
 		</div>
 	</ui:define>

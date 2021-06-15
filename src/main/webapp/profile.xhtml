@@ -2,35 +2,35 @@
 	<ui:define name="content">
 		<h3 class='card-header title p-mb-5'>Perfil</h3>
 		<h:form styleClass="ui-fluid p-grid">
-			<div class='p-field p-col-6'>
+			<div class='p-col-6'>
 				<p:outputLabel for="name">Nome</p:outputLabel>
 				<p:inputText id="name" requiredMessage="O campo não pode ficar vazio" disabled="#{!profileController.editing}" value="Júlio César"/>
 			</div>
-			<div class='p-field p-col-6'>
+			<div class='p-col-6'>
 				<p:outputLabel for="lastname">Sobrenome</p:outputLabel>
 				<p:inputText id="lastname" requiredMessage="O campo não pode ficar vazio" disabled="#{!profileController.editing}" value="B. Monteiro"/>
 			</div>
-			<div class='p-field p-col-12'>
+			<div class='p-col-12'>
 				<p:outputLabel for="allergies">Alergias</p:outputLabel>
-				<p:chips id="allergies" requiredMessage="O campo não pode ficar vazio" disabled="#{!profileController.editing}"/>
+				<p:chips id="allergies" requiredMessage="O campo não pode ficar vazio" disabled="#{!profileController.editing}" value="#{profileController.allergies}"/>
 			</div>
-			<div class='p-field p-col-6'>
+			<div class='p-col-6'>
 				<p:outputLabel for="email">Email</p:outputLabel>
 				<p:inputText id="email" requiredMessage="O campo não pode ficar vazio" disabled="#{!profileController.editing}" value="julczar21@outlook.com"/>
 			</div>
-			<div class='p-field p-col-6'>
+			<div class='p-col-6'>
 				<p:outputLabel for="cpf">CPF</p:outputLabel>
 				<p:inputText id="cpf" requiredMessage="O campo não pode ficar vazio" disabled="#{!profileController.editing}" value="julczar21@outlook.com"/>
 			</div>
-			<div class='p-field p-col-1'>
+			<div class='p-col-1'>
 				<p:outputLabel for="area">DDD</p:outputLabel>
 				<p:inputText id="area" requiredMessage="O campo não pode ficar vazio" disabled="#{!profileController.editing}" value="63"/>
 			</div>
-			<div class='p-field p-col-5'>
+			<div class='p-col-5'>
 				<p:outputLabel for="phone">Telefone</p:outputLabel>
 				<p:inputMask mask="9 9999-9999" id="phone" requiredMessage="O campo não pode ficar vazio" disabled="#{!profileController.editing}" value="9 9272-7242"/>
 			</div>
-			<div class='p-field p-col-6'>
+			<div class='p-col-6'>
 				<p:outputLabel for="address">Endereço</p:outputLabel>
 				<p:inputText id="address" requiredMessage="O campo não pode ficar vazio" disabled="#{!profileController.editing}" value="Rua da Amizade Qd01 Lt13"/>
 			</div>

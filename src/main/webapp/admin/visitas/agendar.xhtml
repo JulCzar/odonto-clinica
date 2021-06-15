@@ -3,19 +3,19 @@
 								xmlns:h="http://java.sun.com/jsf/html"
 								xmlns:f="http://java.sun.com/jsf/core"
 								xmlns:p="http://primefaces.org/ui"
-								template="/WEB-INF/template/mainNoSidebar.xhtml">
+								template="/WEB-INF/template/mainManagement.xhtml">
 	<ui:define name="sidebar"/>
 	<ui:define name="content">
-		<div class='card ui-fluid' style="--width: 400px">
+		<div class='card ui-fluid'>
 			<h3 class="card-header title">Agendar Visita</h3>
 			<h:form>
 				<div class='p-field'>
 					<p:outputLabel for="@next">Data</p:outputLabel>
-					<p:datePicker id='date' required="true"/>
+					<p:datePicker id='date' mask="99/99/9999" required="true"/>
 				</div>
 				<div class='p-field'>
 					<p:outputLabel for="@next">Hora</p:outputLabel>
-					<p:datePicker id='hour' timeOnly="true" required="true"/>
+					<p:datePicker id='hour' mask="99:99" timeOnly="true" required="true"/>
 				</div>
 				<div class="p-field">
 					<p:outputLabel for="@next" value="Exame"/>
