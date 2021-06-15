@@ -59,9 +59,7 @@ public class EditPatientController extends Controller<Patient> {
 
 		List<Allergy> allergyList = entity.getAllergies();
 		for (String s : allergies)
-			if (!allergyList.contains(new Allergy(s))) allergyList.add(new Allergy(s.trim()));
-
-		allergyList.removeIf(a -> !allergies.contains(a.getName()));
+			allergyList.add(new Allergy(s.trim()));
 
 		getEntity().setPhysicalPerson(Security.encript(p));
 		super.store();

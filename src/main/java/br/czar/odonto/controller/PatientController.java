@@ -19,6 +19,7 @@ public class PatientController extends Controller<Patient> {
   @Serial
   private static final long serialVersionUID = -90981056471624046L;
   private static final String FLASH_KEY = "patient-to-edit";
+	private List<String> allergies;
   private List<Patient> patients;
   private List<City> cities;
   private Integer index;
@@ -28,23 +29,24 @@ public class PatientController extends Controller<Patient> {
   	return index;
 	}
 
-	private void setIndex(Integer i) {
-  	index = i;
+	public List<String> getAllergies() {
+		if (allergies == null) allergies = new ArrayList<>();
+
+		return allergies;
 	}
 
-	public void increaseIndex() {
-		setIndex(getIndex() + 1);
-	}
-
-	public void decreaseIndex() {
-		if (index == null || index.equals(0)) return;
-
-		setIndex(getIndex() - 1);
+	public void setAllergies(List<String> allergies) {
+		this.allergies = allergies;
 	}
 
 	@Override
 	public void store() {
-  	PhysicalPerson p = getEntity().getPhysicalPerson();
+		PhysicalPerson p = getEntity().getPhysicalPerson();
+
+		List<Allergy> allergyList = entity.getAllergies();
+		for (String s : allergies)
+			allergyList.add(new Allergy(s.trim()));
+
   	getEntity().setPhysicalPerson(Security.encript(p));
 		super.store();
 		Util.redirect("/OdontoClinica/admin/lista/paciente");
