@@ -12,9 +12,7 @@
 
 					<h3 class="card-header title">Exames</h3>
 
-					<p:dataTable id="dt-state" widgetVar="dtState" var="exam" value="#{examListController.exams}"
-											 reflow="true" styleClass="state-table"
-											 paginatorPosition="bottom">
+					<p:dataTable id="dt-state" widgetVar="dtState" var="exam" value="#{examListController.exams}" reflow="true">
 						<p:column headerText="Name" >
 							<h:outputText value="#{exam.name}"/>
 						</p:column>

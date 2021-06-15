@@ -4,7 +4,7 @@
 			<div class="card ui-fluid">
 				<p:growl id="messages" showDetail="true" />
 				<h3 class="card-header title">Pacientes</h3>
-				<p:dataTable id="dt-patient" var="patient" value="#{patientController.patients}"
+				<p:dataTable id="dt-patient" var="patient" value="#{patientListController.patients}"
 										 reflow="true" paginatorPosition="bottom">
 					<p:column headerText="Name" >
 						<p:outputLabel value="#{patient.physicalPerson.name}" />
@@ -15,9 +15,9 @@
 					<p:column exportable="false" headerText="Ações" styleClass='p-text-center'>
 						<p:commandButton icon="pi pi-pencil" update="@form"
 														 styleClass="edit-button rounded-button ui-button-success" process="@this"
-														 actionListener="#{patientController.edit(patient)}" />
+														 actionListener="#{patientListController.edit(patient)}" />
 						<p:commandButton class="ui-button-warning rounded-button p-ml-3" icon="pi pi-trash" process="@this"
-														 update="dt-patient" actionListener="#{patientController.destroy(patient)}" />
+														 update="dt-patient" actionListener="#{patientListController.destroy(patient)}" />
 					</p:column>
 				</p:dataTable>
 				<p:commandButton value="Novo" actionListener="#{redirect.to('/OdontoClinica/admin/cadastro/paciente')}"

@@ -14,6 +14,7 @@
 		<class>br.czar.odonto.model.Allergy</class>
 		<class>br.czar.odonto.model.Specialization</class>
 		<class>br.czar.odonto.model.Exam</class>
+		<class>br.czar.odonto.model.Consultation</class>
 
 		<properties>
 			<!-- DB Driver -->

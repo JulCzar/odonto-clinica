@@ -8,21 +8,38 @@
 		<div class='card'>
 			<h3 class="card-header title">Agenda</h3>
 			<h:form styleClass="ui-fluid">
-				<p:dataTable id="dt-state" var="state" value="#{{}}" reflow="true">
+				<p:dataTable id="dt-state" var="c" value="#{consultationListController.consultations}" reflow="true">
 					<p:column headerText="Paciente" >
-						<h:outputText value="#{state.name}"/>
+						<h:outputText value="#{c.patient.physicalPerson.name}"/>
 					</p:column>
-					<p:column headerText="Hora" >
-						<h:outputText value="#{state.name}"/>
+					<p:column headerText="Dia" >
+						<h:outputText value="#{c.dateString}"/>
 					</p:column>
 					<p:column headerText="Exame" >
-						<h:outputText value="#{state.name}"/>
+						<h:outputText value="#{c.exam.name}"/>
+					</p:column>
+					<p:column headerText="Status" >
+						<h:outputText value="#{c.status}"/>
 					</p:column>
 					<p:column exportable="false" headerText="Ações" styleClass="p-text-center">
-						<p:commandButton icon="pi pi-pencil" update="@form" styleClass="edit-button rounded-button ui-button-success" process="@this" actionListener="#{stateController.edit(state)}"/>
-						<p:commandButton class="ui-button-warning rounded-button p-ml-3" icon="pi pi-trash" process="@this" update="@form" oncomplete="PF('deleteProductDialog').show()" actionListener="#{stateController.destroy(state)}"/>
+						<p:commandButton
+							update="@form"
+							process="@this"
+							icon="pi pi-pencil"
+							styleClass="edit-button rounded-button ui-button-success"
+							actionListener="#{consultationListController.edit(c)}"
+						/>
+						<p:commandButton
+							update="@form"
+							process="@this"
+							icon="pi pi-trash"
+							oncomplete="PF('deleteProductDialog').show()"
+							class="ui-button-warning rounded-button p-ml-3"
+							actionListener="#{consultationListController.destroy(c)}"
+						/>
 					</p:column>
 				</p:dataTable>
+				<p:commandButton value="Agendar" actionListener="#{redirect.to('/OdontoClinica/admin/visitas/agendar')}" styleClass="ui-button-success p-mt-3" />
 			</h:form>
 		</div>
 	</ui:define>

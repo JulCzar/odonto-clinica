@@ -14,34 +14,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Named("editPatientControl")
+@Named("patientRegisterController")
 @ViewScoped
-public class EditPatientController extends Controller<Patient> {
+public class RegisterController extends Controller<Patient> {
 	@Serial
 	private static final long serialVersionUID = -90981056471624046L;
-	private static final String FLASH_KEY = "patient-to-edit";
 	private List<String> allergies;
 	private List<Patient> patients;
 	private List<City> cities;
-	private Integer index;
-
-	public EditPatientController() {
-		entity = (Patient) FlashStorage.getItemAndKeep(FLASH_KEY);
-
-		if (entity == null || entity.getAllergies() == null) return;
-		for (Allergy a : entity.getAllergies()) {
-			getAllergies().add(a.getName());
-		}
-	}
-
-	public Integer getIndex() {
-		if (index == null) index = 0;
-		return index;
-	}
-
-	private void setIndex(Integer i) {
-		index = i;
-	}
 
 	public List<String> getAllergies() {
 		if (allergies == null) allergies = new ArrayList<>();
@@ -55,25 +35,14 @@ public class EditPatientController extends Controller<Patient> {
 
 	@Override
 	public void store() {
-		PhysicalPerson p = getEntity().getPhysicalPerson();
-
 		List<Allergy> allergyList = entity.getAllergies();
+		List<String> allergies = getAllergies();
+
 		for (String s : allergies)
 			allergyList.add(new Allergy(s.trim()));
 
+		PhysicalPerson p = getEntity().getPhysicalPerson();
 		getEntity().setPhysicalPerson(Security.encript(p));
-		super.store();
-		Util.redirect("/OdontoClinica/admin/lista/paciente");
-	}
-
-	public void update() {
-		List<Allergy> allergyList = entity.getAllergies();
-
-		for (String s : allergies)
-			if (!allergyList.contains(new Allergy(s.trim())))
-				allergyList.add(new Allergy(s.trim()));
-		allergyList.removeIf(a -> !allergies.contains(a.getName()));
-
 		super.store();
 		Util.redirect("/OdontoClinica/admin/lista/paciente");
 	}
@@ -103,16 +72,6 @@ public class EditPatientController extends Controller<Patient> {
 			}
 		}
 		return patients;
-	}
-	public void destroy(Patient entity) {
-		this.entity = entity;
-		destroy();
-		patients = null;
-	}
-
-	public void edit(Patient patient) {
-		FlashStorage.setItem(FLASH_KEY, patient);
-		Util.redirect("/OdontoClinica/admin/editar/paciente");
 	}
 
 	public List<City> getCities() {

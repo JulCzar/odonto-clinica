@@ -24,35 +24,15 @@ public class DentistController extends Controller<Dentist> {
 	private static final long serialVersionUID = 3872792410902756484L;
 	private static final String FLASH_KEY = "dentist-to-edit";
 	private List<Dentist> dentists;
-	private Integer index;
 
 	public DentistController() {
 		entity = (Dentist) FlashStorage.getItemAndKeep(FLASH_KEY);
 	}
 
-	public Integer getIndex() {
-		if (index == null) index = 0;
-		return index;
-	}
-
-	private void setIndex(Integer i) {
-		index = i;
-	}
-
-	public void increaseIndex() {
-		setIndex(getIndex() + 1);
-	}
-
-	public void decreaseIndex() {
-		if (index == null || index.equals(0)) return;
-
-		setIndex(getIndex() - 1);
-	}
-
 	@Override
 	public void store() {
 		super.store();
-		Util.redirect("/OdontoClinica/lista/paciente");
+		Util.redirect("/OdontoClinica/admin/lista/dentista");
 	}
 
 	@Override

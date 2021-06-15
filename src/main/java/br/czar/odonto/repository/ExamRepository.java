@@ -26,5 +26,4 @@ public class ExamRepository extends Repository<Exam> {
     Query q = em.createQuery(jpql);
     return (List<Exam>)(q.getResultList());
   }
-
 }
