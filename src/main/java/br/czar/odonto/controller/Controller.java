@@ -28,8 +28,6 @@ public abstract class Controller<T extends DefaultEntity<T>> implements Serializ
       repo.beginTransaction();
       repo.save(getEntity());
       repo.commitTransaction();
-
-      Util.addInfoMessage("Cadastro realizado com sucesso.");
     } catch (RepositoryException e) {
       repo.rollbackTransaction();
       Util.addErrorMessage("Cadastro não realizado.");
@@ -44,11 +42,9 @@ public abstract class Controller<T extends DefaultEntity<T>> implements Serializ
       repo.beginTransaction();
       repo.remove(getEntity());
       repo.commitTransaction();
-
-      Util.addInfoMessage("Paciente removido com sucesso.");
     } catch (RepositoryException e) {
       e.printStackTrace();
-      Util.addErrorMessage("Paciente removido com sucesso.");
+      Util.addErrorMessage("Problema ao remover Paciente.");
     } finally {
       clear();
     }
@@ -58,15 +54,13 @@ public abstract class Controller<T extends DefaultEntity<T>> implements Serializ
     entity = null;
   }
 
-  public void update(T entity) {
+  public void update() {
 		Repository<T> repo = new Repository<T>();
 
 		try {
 			repo.beginTransaction();
 			repo.save(getEntity());
 			repo.commitTransaction();
-
-			Util.addInfoMessage("Cadastro realizado com sucesso.");
 		} catch (RepositoryException e) {
 			repo.rollbackTransaction();
 			Util.addErrorMessage("Cadastro não realizado.");

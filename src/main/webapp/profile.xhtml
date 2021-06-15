@@ -44,13 +44,11 @@
 				<div class="p-grid ui-fluid">
 					<div class='p-col-12'>
 						<p:outputLabel for='@next' value="Senha" />
-						<p:password id="password" styleClass="p-col-12" required="true"
-												 requiredMessage="Informe seu Setor" />
+						<p:password id="password" styleClass="p-col-12" required="true" value="#{profileController.password}" requiredMessage="Informe uma nova senha" />
 					</div>
 					<div class='p-col-12'>
 						<p:outputLabel for='@next' value="Confirme sua senha" />
-						<p:password id="confirmPassword" styleClass="p-col-12" required="true"
-												  requiredMessage="Informe sua rua" />
+						<p:password id="confirmPassword" styleClass="p-col-12" required="true" requiredMessage="Insira sua senha novamente" value="#{profileController.confirmPassword}" />
 					</div>
 				</div>
 				<div class="p-mt-3 p-grid ui-fluid">
@@ -58,7 +56,7 @@
 						<p:commandButton value="Cancelar" onclick="PF('changePassword').hide()"/>
 					</div>
 					<div class="p-col-6 p-px-1">
-						<p:commandButton value="Concluir" process="changePassword" update="changePassword" oncomplete="PF('changePassword').hide()"/>
+						<p:commandButton value="Concluir" actionListener="#{profileController.changePassword}" process="changePassword" update="changePassword profileForm" oncomplete="PF('changePassword').hide()"/>
 					</div>
 				</div>
 			</h:form>

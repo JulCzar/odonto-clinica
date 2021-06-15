@@ -22,7 +22,9 @@
 		<p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
 			<i class="fas fa-spinner fa-3x fa-spin"/>
 		</p:dialog>
-		<p:growl id="messages"/>
+		<p:growl id="messages">
+			<p:autoUpdate/>
+		</p:growl>
 		<div class="layout-wrapper">
 			<ui:insert name="topbar-view">
 				<ui:include src="topbar.xhtml" />
