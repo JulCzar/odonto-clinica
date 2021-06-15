@@ -11,6 +11,7 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
 import br.czar.odonto.aplication.Util;
+import br.czar.odonto.aplication.storage.FlashStorage;
 import br.czar.odonto.model.City;
 import br.czar.odonto.model.Dentist;
 import br.czar.odonto.repository.CityRepository;
@@ -21,14 +22,12 @@ import br.czar.odonto.repository.DentistRepository;
 public class DentistController extends Controller<Dentist> {
 	@Serial
 	private static final long serialVersionUID = 3872792410902756484L;
-	private static final String FLASH_KEY = "patient-to-edit";
+	private static final String FLASH_KEY = "dentist-to-edit";
 	private List<Dentist> dentists;
-	private List<City> cities;
 	private Integer index;
 
 	public DentistController() {
-		Flash flash = FacesContext.getCurrentInstance().getExternalContext().getFlash();
-		entity = (Dentist) flash.get(FLASH_KEY);
+		entity = (Dentist) FlashStorage.getItemAndKeep(FLASH_KEY);
 	}
 
 	public Integer getIndex() {
@@ -83,34 +82,7 @@ public class DentistController extends Controller<Dentist> {
 	}
 
 	public void edit(Dentist patient) {
-		Flash flash = FacesContext.getCurrentInstance().getExternalContext().getFlash();
-
-		flash.put(FLASH_KEY, patient);
-		Util.redirect("/OdontoClinica/editar/dentista");
-	}
-
-	public List<City> getCities() {
-		if (cities == null) {
-			CityRepository cr = new CityRepository();
-			try {
-				cities = cr.findAll();
-			} catch (Exception e) {
-				e.printStackTrace();
-				return new ArrayList<>();
-			}
-		}
-
-		return cities
-			.stream()
-			.filter(c -> c.getState()
-				.getId()
-				.equals(entity
-					.getPhysicalPerson()
-					.getAddress()
-					.getCity()
-					.getState()
-					.getId()
-				))
-			.collect(Collectors.toList());
+		FlashStorage.setItem(FLASH_KEY, patient);
+		Util.redirect("/OdontoClinica/admin/editar/dentista");
 	}
 }

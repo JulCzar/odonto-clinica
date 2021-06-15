@@ -12,10 +12,9 @@
 						<h:outputText value="#{dentist.physicalPerson.cpf}" />
 					</p:column>
 					<p:column exportable="false" headerText="Ações" styleClass='p-text-center'>
-						<p:commandButton icon="pi pi-pencil" update="@form"
-														 process="@this"
+						<p:commandButton icon="pi pi-pencil" update="@form" process="@this"
 														 styleClass="edit-button rounded-button ui-button-success"
-														 actionListener="#{dentistController.edit(dentist)}" />
+														 actionListener="#{dentistController.edit(dentist)}"/>
 						<p:commandButton class="ui-button-warning rounded-button p-ml-3" icon="pi pi-trash" process="@this"
 														 update="dt-patient" actionListener="#{dentistController.destroy(dentist)}" />
 					</p:column>

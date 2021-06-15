@@ -59,9 +59,9 @@ public class PatientController extends Controller<Patient> {
       entity.setPhone(new Phone());
       entity.setAllergies(new ArrayList<>());
       entity.setPhysicalPerson(new PhysicalPerson());
-      entity.getPhysicalPerson().setAddress(new Address());
-      entity.getPhysicalPerson().getAddress().setCity(new City());
-      entity.getPhysicalPerson().getAddress().getCity().setState(new State());
+      entity.setAddress(new Address());
+      entity.getAddress().setCity(new City());
+      entity.getAddress().getCity().setState(new State());
     }
     return entity;
   }
@@ -105,7 +105,6 @@ public class PatientController extends Controller<Patient> {
             .filter(c -> c.getState()
                     .getId()
                     .equals(entity
-                            .getPhysicalPerson()
                             .getAddress()
                             .getCity()
                             .getState()

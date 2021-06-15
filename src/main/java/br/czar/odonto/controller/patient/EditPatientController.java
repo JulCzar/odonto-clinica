@@ -69,7 +69,9 @@ public class EditPatientController extends Controller<Patient> {
 	public void update() {
 		List<Allergy> allergyList = entity.getAllergies();
 
-		for (String s : allergies) if (!allergyList.contains(new Allergy(s))) allergyList.add(new Allergy(s.trim()));
+		for (String s : allergies)
+			if (!allergyList.contains(new Allergy(s.trim())))
+				allergyList.add(new Allergy(s.trim()));
 		allergyList.removeIf(a -> !allergies.contains(a.getName()));
 
 		super.store();
@@ -83,9 +85,9 @@ public class EditPatientController extends Controller<Patient> {
 			entity.setPhone(new Phone());
 			entity.setAllergies(new ArrayList<>());
 			entity.setPhysicalPerson(new PhysicalPerson());
-			entity.getPhysicalPerson().setAddress(new Address());
-			entity.getPhysicalPerson().getAddress().setCity(new City());
-			entity.getPhysicalPerson().getAddress().getCity().setState(new State());
+			entity.setAddress(new Address());
+			entity.getAddress().setCity(new City());
+			entity.getAddress().getCity().setState(new State());
 		}
 		return entity;
 	}
@@ -129,7 +131,6 @@ public class EditPatientController extends Controller<Patient> {
 			.filter(c -> c.getState()
 				.getId()
 				.equals(entity
-					.getPhysicalPerson()
 					.getAddress()
 					.getCity()
 					.getState()

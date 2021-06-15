@@ -1,0 +1,49 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+								xmlns:ui="http://java.sun.com/jsf/facelets"
+								template="../../WEB-INF/template/mainManagement.xhtml"
+								xmlns:h="http://java.sun.com/jsf/html"
+								xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="content">
+		<div class='card'>
+			<h3 class="card-header title">Editar Dentista</h3>
+			<h:form styleClass="p-grid ui-fluid">
+				<div class='p-col-6'>
+					<p:outputLabel for='@next' value="Nome" />
+					<p:inputText id='name' name='name' required="true" requiredMessage="Informe seu nome" value="#{dentistEditController.entity.physicalPerson.name}"/>
+				</div>
+				<div class='p-col-6'>
+					<p:outputLabel for='@next' value="Sobrenome" />
+					<p:inputText id='lastname' name='lastname' required="true" requiredMessage="Informe seu Sobrenome" value="#{dentistEditController.entity.physicalPerson.lastname}"/>
+				</div>
+				<div class='p-col-12'>
+					<p:outputLabel for='@next' value="Especializações" />
+					<p:chips id='allergies' name='allergies' required="true" value="#{dentistEditController.specializations}"
+									 requiredMessage="Informe alergias" separator="," addOnPaste="true" addOnBlur="true"/>
+				</div>
+				<div class='p-col-6'>
+					<p:outputLabel for='@next' value="CPF" />
+					<p:inputMask mask="999.999.999-99" id='cpf' name='cpf' required="true" requiredMessage="Informe seu cpf" value="#{dentistEditController.entity.physicalPerson.cpf}"/>
+				</div>
+				<div class='p-col-6'>
+					<p:outputLabel for='@next' value="Registro" />
+					<p:inputText id='registry' name='cpf' required="true" requiredMessage="Informe o registro" value="#{dentistEditController.entity.register}"/>
+				</div>
+				<div class='p-col-1'>
+					<p:outputLabel for='@next' value="DDD" />
+					<p:inputMask mask="99" id='area' required="true" requiredMessage="É necessário Cadastrar o telefone" value="#{dentistEditController.entity.phone.area}"/>
+				</div>
+				<div class='p-col-5'>
+					<p:outputLabel for='@next' value="Telefone" />
+					<p:inputMask mask="9 9999-9999" id='phonenumber' required="true" requiredMessage="É necessário Cadastrar pelo menos um telefone" value="#{dentistEditController.entity.phone.number}"/>
+				</div>
+				<div class='p-col-6'>
+					<p:outputLabel for='@next' value="Email" />
+					<p:inputText id='email' name='email' required="true" requiredMessage="Informe seu email" value="#{dentistEditController.entity.physicalPerson.email}"/>
+				</div>
+				<p:commandButton  update="@form messages" value="Trocar Senha" styleClass="p-mt-3 p-col p-mx-2"/>
+				<p:commandButton actionListener="#{dentistEditController.update}" update="@form messages" value="Salvar" styleClass="p-col p-mt-3 p-mx-2"/>
+			</h:form>
+		</div>
+	</ui:define>
+</ui:composition>

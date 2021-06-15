@@ -47,7 +47,7 @@
 					<div class='p-col-6'>
 						<p:outputLabel for='@next' value="Endereço" />
 						<p:inputText id="fullAddress" required="true" readonly="true" onfocus="PF('addressFiller').show()"
-												 value="#{patientController.entity.physicalPerson.address.fullAddress}"
+												 value="#{patientController.entity.address.fullAddress}"
 												 styleClass="p-col-12 fullAddressInput">
 							<p:autoUpdate/>
 						</p:inputText>
@@ -72,23 +72,23 @@
 						<div class='p-col-12'>
 							<p:outputLabel for='@next' value="Setor" />
 							<p:inputText id="department" styleClass="p-col-12" required="true"
-													 value="#{patientController.entity.physicalPerson.address.department}"
+													 value="#{patientController.entity.address.department}"
 													 requiredMessage="Informe seu Setor" />
 						</div>
 						<div class='p-col-10'>
 							<p:outputLabel for='@next' value="Rua" />
 							<p:inputText id="address" styleClass="p-col-12" required="true"
-													 value="#{patientController.entity.physicalPerson.address.street}" requiredMessage="Informe sua rua" />
+													 value="#{patientController.entity.address.street}" requiredMessage="Informe sua rua" />
 						</div>
 						<div class='p-col-2'>
 							<p:outputLabel for='@next' value="N°" />
 							<p:inputText id="number" styleClass="p-col-12"
-													 value="#{patientController.entity.physicalPerson.address.number}" />
+													 value="#{patientController.entity.address.number}" />
 						</div>
 						<div class="p-col-4">
 							<p:outputLabel for="@next" value="Estado" />
 							<p:autoComplete var="s" itemLabel="#{s.name}" itemValue="#{s}" dropdown="true"
-															value="#{patientController.entity.physicalPerson.address.city.state}"
+															value="#{patientController.entity.address.city.state}"
 															completeMethod="#{stateController.filterStates}"
 															forceSelection="true">
 								<p:ajax event="change" process="@this" update="city" />
@@ -97,7 +97,7 @@
 						<div class="p-col-8">
 							<p:outputLabel for="@next" value="Cidade" />
 							<p:autoComplete var="obj" id="city" dropdown="true" itemLabel="#{obj.name}" itemValue="#{obj}"
-															value="#{patientController.entity.physicalPerson.address.city}"
+															value="#{patientController.entity.address.city}"
 															completeMethod="#{patientController.filterCities}"/>
 						</div>
 					</div>

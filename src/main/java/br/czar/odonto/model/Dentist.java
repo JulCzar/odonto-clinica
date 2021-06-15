@@ -8,22 +8,19 @@ import java.util.List;
 public class Dentist extends DefaultEntity<Dentist> {
 	@Serial
 	private static final long serialVersionUID = 1483241996299043812L;
-	@Transient
-	private List<String> specializations;
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<Specialization> specializations;
+	@OneToOne(cascade = {CascadeType.PERSIST,CascadeType.MERGE},fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_telefone", unique = true)
+	private Phone phone;
 	private String register;
-	@OneToOne(
-		cascade = {
-			CascadeType.PERSIST,
-			CascadeType.ALL
-		},
-		fetch = FetchType.LAZY
-	)
+	@OneToOne(cascade = {CascadeType.PERSIST,CascadeType.ALL},fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_physical_person", unique = true)
 	private PhysicalPerson physicalPerson;
-	public List<String> getSpecializations() {
+	public List<Specialization> getSpecializations() {
 		return specializations;
 	}
-	public void setSpecializations(List<String> specializations) {
+	public void setSpecializations(List<Specialization> specializations) {
 		this.specializations = specializations;
 	}
 	public String getRegister() {
@@ -37,6 +34,12 @@ public class Dentist extends DefaultEntity<Dentist> {
 	}
 	public void setPhysicalPerson(PhysicalPerson physicalPerson) {
 		this.physicalPerson = physicalPerson;
+	}
+	public Phone getPhone() {
+		return phone;
+	}
+	public void setPhone(Phone phone) {
+		this.phone = phone;
 	}
 	@Override
 	public int hashCode() {
@@ -59,14 +62,12 @@ public class Dentist extends DefaultEntity<Dentist> {
 		} else if (!physicalPerson.equals(other.physicalPerson))
 			return false;
 		if (register == null) {
-			if (other.register != null)
-				return false;
-		} else if (!register.equals(other.register))
-			return false;
-		return true;
+			return other.register == null;
+		}
+		return register.equals(other.register);
 	}
 	@Override
 	public String toString() {
-		return "Dentist = {" + "specializations: " + specializations + ", register: " + register + ", person: " + physicalPerson + " }";
+		return "Dentist = {phone: "+ phone + ", specializations: " + specializations + ", register: " + register + ", person: " + physicalPerson + " }";
 	}
 }

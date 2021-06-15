@@ -23,15 +23,4 @@ public class AllergyRepository extends Repository<Allergy> {
 		Query q = em.createQuery(jpql);
 		return (List<Allergy>)(q.getResultList());
 	}
-
-	public void clear_allergies() {
-		String queryStr = "DELETE FROM allergy as al WHERE al.id IN ( SELECT DISTINCT al.id FROM allergy as al FULL OUTER JOIN patient_allergy as pa ON al.id = pa.allergies_id WHERE al.id IS NULL OR pa.allergies_id IS NULL OR al.id <> NEW.id );".formatted();
-		System.out.println("here");
-		try {
-			Query query = em.createNativeQuery(queryStr);
-			query.executeUpdate();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 }

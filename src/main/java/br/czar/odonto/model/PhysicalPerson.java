@@ -13,12 +13,6 @@ public class PhysicalPerson extends Person {
 	private String cpf;
 	private String password;
 	private String lastname;
-	@OneToOne(
-		cascade = CascadeType.ALL,
-		fetch = FetchType.LAZY
-	)
-	@JoinColumn(name = "id_endereco", unique = true)
-	private Address address;
 
 	public String getCpf() {
 		return cpf;
@@ -42,16 +36,8 @@ public class PhysicalPerson extends Person {
 	public String getFullName() {
 		return super.getName() + " " + lastname;
 	}
-
-	public Address getAddress() {
-		return address;
-	}
-	public void setAddress(Address address) {
-		this.address = address;
-	}
-
 	@Override
 	public String toString() {
-		return "PhysicalPerson = { id: " + getId() + ", name: " + getName() + ", email: " + getEmail()+ ", address: " + getAddress() + ", cpf: " + getCpf() + ", password: " + password + ", lastname: " + lastname + " }";
+		return "PhysicalPerson = { id: " + getId() + ", name: " + getName() + ", email: " + getEmail()+ ", cpf: " + getCpf() + ", password: " + password + ", lastname: " + lastname + " }";
 	}
 }
