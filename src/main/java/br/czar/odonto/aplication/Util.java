@@ -1,6 +1,9 @@
 package br.czar.odonto.aplication;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.application.FacesMessage.Severity;
@@ -10,13 +13,16 @@ import javax.faces.component.visit.VisitCallback;
 import javax.faces.component.visit.VisitContext;
 import javax.faces.component.visit.VisitResult;
 import javax.faces.context.FacesContext;
+import javax.imageio.ImageIO;
 
 import org.apache.commons.codec.digest.DigestUtils;
 
 import com.sun.faces.component.visit.FullVisitContext;
 
 public class Util {
-  // não permitir instância
+
+	public static final String PATH_IMAGES = File.separator + "images";
+	public static final String PATH_IMAGES_USER = PATH_IMAGES + File.separator + "usuario";
   public Util() {}
 
 	public static void addErrorMessage(String msg) {
@@ -72,5 +78,17 @@ public class Util {
     });
 
     return found[0];
+	}
+
+	public static void saveUserAvatar(InputStream inputStream, String imageType, int userId) throws IOException {
+		String diretorio = System.getProperty("user.home") + PATH_IMAGES_USER;
+
+		File file = new File(diretorio);
+		if (!file.exists()) file.mkdirs();
+
+		BufferedImage bImage = ImageIO.read(inputStream);
+
+		File arquivoFinal = new File(diretorio + File.separator + userId + "." + imageType);
+		ImageIO.write(bImage, imageType, arquivoFinal);
 	}
 }

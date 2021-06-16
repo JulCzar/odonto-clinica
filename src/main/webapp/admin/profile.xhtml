@@ -1,6 +1,16 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" template="/WEB-INF/template/mainManagement.xhtml">
 	<ui:define name="content">
 		<h3 class='card-header title p-mb-5'>Perfil</h3>
+		<h:form enctype="multipart/form-data">
+			<p:fileUpload listener="#{profileController.upload}"
+										label="#{profileController.avatarName}"
+										mode="advanced"
+										update="@all messages"
+										oncomplete="PF('loading').hide()"
+										auto="false" sizeLimit="2000000"/>
+
+			<p:growl id="messages" showDetail="true" />
+		</h:form>
 		<h:form id="profileForm" styleClass="ui-fluid p-grid">
 			<div class='p-col-6'>
 				<p:outputLabel for="name">Nome</p:outputLabel>
@@ -37,7 +47,7 @@
 			<p:commandButton rendered="#{!profileController.editing}" value="Alterar Senha" onclick="PF('changePassword').show()" styleClass="p-col p-mx-2"/>
 			<p:commandButton rendered="#{!profileController.editing}" value="Editar" actionListener="#{profileController.enableEdit}" update="@form profileForm changePassword" styleClass="p-col p-mx-2"/>
 			<p:commandButton rendered="#{profileController.editing}" value="Cancelar" actionListener="#{profileController.disableEdit}" update="@form profileForm changePassword" process="@this" styleClass="p-col p-mx-2"/>
-			<p:commandButton rendered="#{profileController.editing}" value="Salvar" actionListener="#{profileController.disableEdit}" update="@form profileForm changePassword" styleClass="p-col p-mx-2"/>
+			<p:commandButton rendered="#{profileController.editing}" value="Salvar" actionListener="#{profileController.update}" update="@form profileForm changePassword" styleClass="p-col p-mx-2"/>
 		</h:form>
 		<p:dialog id="changePassword" header="Alterar Senha" draggable="false" modal="true" widgetVar="changePassword" width="50vw">
 			<h:form>
