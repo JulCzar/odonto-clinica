@@ -45,14 +45,18 @@ public class Util {
 		FacesContext.getCurrentInstance()
 			.addMessage(clientId, new FacesMessage(severity, msg, null));
 	}
-	
+
 	public static void redirect(String page) {
 		String destination = page;
 		if (!page.contains(".xhtml"))
 			destination += ".xhtml";
+		directRedirect(destination);
+	}
+
+	public static void directRedirect(String page) {
 		try {
 			FacesContext.getCurrentInstance()
-				.getExternalContext().redirect(destination);
+				.getExternalContext().redirect(page);
 		} catch (IOException e) {
 			e.printStackTrace();
 			addErrorMessage("Problemas ao redirecionar a página.");

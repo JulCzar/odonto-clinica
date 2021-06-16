@@ -28,7 +28,19 @@ public class PatientRepository extends Repository<Patient> {
   }
 
 	@SuppressWarnings("unchecked")
-	public Patient findByEmail(String email) throws RepositoryException{
+  public List<Patient> findByName(String name) throws RepositoryException {
+		EntityManager em = getEntityManager();
+
+		String jpql = "SELECT p FROM Patient p WHERE UPPER(p.physicalPerson.name) LIKE UPPER(:name) ORDER BY p.physicalPerson.name";
+
+		Query q = em.createQuery(jpql);
+		q.setParameter("name", "%"+name+"%");
+
+		return (List<Patient>)(q.getResultList());
+	}
+
+	@SuppressWarnings("unchecked")
+	public Patient findByEmail(String email) throws RepositoryException {
 		try {
 			EntityManager em = getEntityManager();
 

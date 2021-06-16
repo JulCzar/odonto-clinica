@@ -1,0 +1,50 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+								xmlns:ui="http://java.sun.com/jsf/facelets"
+								xmlns:h="http://java.sun.com/jsf/html"
+								xmlns:p="http://primefaces.org/ui"
+								xmlns:f="http://java.sun.com/jsf/core"
+								template="/WEB-INF/template/mainManagement.xhtml">
+	<ui:define name="content">
+		<h3 class='card-header title p-mb-5'>Relatório de pacientes</h3>
+		<h:form styleClass="ui-fluid">
+			<div class="p-grid">
+				<div class="p-col-12">
+					<p:outputLabel id="labelNome" value="Filtro por Nome:" />
+					<p:inputText value="#{patientReportController.filter}"/>
+				</div>
+				<div class="p-col-4">
+					<p:commandButton value="Gerar Relatório" ajax="false" styleClass="p-col-4"
+													 disabled="#{patientReportController.patients.isEmpty()}"
+													 actionListener="#{patientReportController.generate}"
+													 onclick="this.form.target='_blank'"/>
+				</div>
+				<div class="p-col-4">
+					<p:commandButton value="Limpar" styleClass="p-col-4"
+												 process="@this" update="@form"
+												 actionListener="#{patientReportController.clear}">
+						<p:ajax update="@form" resetValues="true" />
+					</p:commandButton>
+				</div>
+				<div class="p-col-4">
+					<p:commandButton value="Buscar Pacientes" process="@form"
+													 update="@form" actionListener="#{patientReportController.search}" />
+				</div>
+			</div>
+			<p:dataTable id="dtListagem" var="entity" value="#{patientReportController.patients}">
+				<p:column headerText="Cpf">
+					<h:commandLink value="#{entity.physicalPerson.cpf}" />
+				</p:column>
+
+				<p:column headerText="Nome">
+					<h:outputText value="#{entity.physicalPerson.name}" />
+				</p:column>
+
+				<p:column headerText="Data de Cadastro">
+					<h:outputText value="#{dateConverterController.formatDate(entity.physicalPerson.created)}" />
+				</p:column>
+
+			</p:dataTable>
+
+		</h:form>
+	</ui:define>
+</ui:composition>
