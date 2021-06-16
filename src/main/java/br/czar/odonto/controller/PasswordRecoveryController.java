@@ -43,6 +43,7 @@ public class PasswordRecoveryController extends Controller<PasswordRecovery> {
 	}
 
 	public void recoverPassword() {
+		String link = "http://localhost:8080/OdontoClinica/senha/recuperar.xhtml";
 		PhysicalPersonRepository repo = new PhysicalPersonRepository();
 		PhysicalPerson p = null;
 		try {
@@ -57,8 +58,7 @@ public class PasswordRecoveryController extends Controller<PasswordRecovery> {
 
 			try {
 				storeRecoveryPassword();
-				mailSender.sendMail("Seu codigo de recuperacao é: "
-					+ "<br/>Você também pode clicar no link: http://localhost:8080/senha/recuperar.xhtml?code=" + code, getEmail(), "Password Recovery");
+				mailSender.sendMail("Acesse "+link+" e insira seu codigo de recuperacao: "+code+" \nVocê tambem pode clicar no link: " +link+"?code="+code, getEmail(), "Password Recovery");
 				Util.addInfoMessage("Foi enviado um email com instruções para recuperação de senha");
 			} catch (MessagingException e) {
 				e.printStackTrace();

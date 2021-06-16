@@ -20,10 +20,23 @@ public class EditController extends Controller<Patient> {
 	@Serial
 	private static final long serialVersionUID = -90981056471624046L;
 	private static final String FLASH_KEY = "patient-to-edit";
+	private String password, confirmPassword;
 	private List<String> allergies;
 	private List<Patient> patients;
 	private List<City> cities;
 
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	public String getConfirmPassword() {
+		return this.confirmPassword;
+	}
+	public void setConfirmPassword(String confirmPassword){
+		this.confirmPassword = confirmPassword;
+	}
 	public EditController() {
 		entity = (Patient) FlashStorage.getItemAndKeep(FLASH_KEY);
 
@@ -69,6 +82,18 @@ public class EditController extends Controller<Patient> {
 
 		super.store();
 		Util.redirect("/OdontoClinica/admin/lista/paciente");
+	}
+
+	public void updatePassword() {
+		if (!getPassword().equals(getConfirmPassword())) {
+			Util.addInfoMessage("As senhas não correspondem");
+			return;
+		}
+		getEntity().getPhysicalPerson().setPassword(getPassword());
+		getEntity().setPhysicalPerson(Security.encript(getEntity().getPhysicalPerson()));
+
+		super.store();
+		Util.addInfoMessage("Senha atualizada!");
 	}
 
 	@Override

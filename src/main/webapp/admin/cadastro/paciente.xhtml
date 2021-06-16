@@ -60,11 +60,12 @@
 					<div class='p-field p-col-6'>
 						<p:outputLabel for='@next' value="Confirmação de Senha" />
 						<p:password id="password-confirm" styleClass="p-col-12" required="true" toggleMask="true" redisplay="true"
-												requiredMessage="Repita sua senha" />
+												requiredMessage="Repita sua senha" value="#{patientRegisterController.confirmPassword}"/>
 					</div>
 				</div>
 				<p:commandButton actionListener="#{patientRegisterController.store}" update="@form messages" value="Cadastrar" styleClass="p-mt-3"/>
 			</h:form>
+
 			<p:dialog id="form2" header="Inserir Endereço" draggable="false" modal="true" widgetVar="addressFiller" width="50vw">
 				<h:form>
 					<div class="p-grid ui-fluid">

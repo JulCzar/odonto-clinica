@@ -50,9 +50,10 @@
 						<p:autoUpdate/>
 					</p:inputText>
 				</div>
-				<p:commandButton  update="@form messages" value="Trocar Senha" styleClass="p-mt-3 p-col p-mx-2"/>
+				<p:commandButton  update="@form messages" value="Trocar Senha" onclick="PF('changePassword').show()" styleClass="p-mt-3 p-col p-mx-2"/>
 				<p:commandButton actionListener="#{editPatientControl.update}" update="@form messages" value="Salvar" styleClass="p-col p-mt-3 p-mx-2"/>
 			</h:form>
+
 			<p:dialog id="form2" header="Inserir Endereço" draggable="false" modal="true" widgetVar="addressFiller" width="50vw">
 				<h:form>
 					<div class="p-grid ui-fluid">
@@ -88,7 +89,30 @@
 															completeMethod="#{editPatientControl.filterCities}"/>
 						</div>
 					</div>
-					<p:commandButton value="Concluir" process="form2" styleClass="p-col-12 p-mt-3" update="form2" oncomplete="PF('addressFiller').hide()"/>
+					<p:commandButton value="Concluir" process="form2" styleClass="p-col-12 p-mt-3" update="changePassword form1 form2" oncomplete="PF('addressFiller').hide()"/>
+				</h:form>
+			</p:dialog>
+
+			<p:dialog id="changePassword" header="Alterar Senha" draggable="false" modal="true" widgetVar="changePassword" width="50vw">
+				<h:form>
+					<div class="p-grid ui-fluid">
+						<div class='p-col-12'>
+							<p:outputLabel for='@next' value="Senha" />
+							<p:password id="password" styleClass="p-col-12" required="true" value="#{editPatientControl.password}" requiredMessage="Informe uma nova senha" />
+						</div>
+						<div class='p-col-12'>
+							<p:outputLabel for='@next' value="Confirme sua senha" />
+							<p:password id="confirmPassword" styleClass="p-col-12" required="true" requiredMessage="Insira sua senha novamente" value="#{editPatientControl.confirmPassword}" />
+						</div>
+					</div>
+					<div class="p-mt-3 p-grid ui-fluid">
+						<div class="p-col-6 p-px-1">
+							<p:commandButton value="Cancelar" onclick="PF('changePassword').hide()"/>
+						</div>
+						<div class="p-col-6 p-px-1">
+							<p:commandButton value="Concluir" actionListener="#{editPatientControl.updatePassword}" process="changePassword" update="changePassword form1 form2" oncomplete="PF('changePassword').hide()"/>
+						</div>
+					</div>
 				</h:form>
 			</p:dialog>
 		</div>

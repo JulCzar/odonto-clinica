@@ -19,6 +19,7 @@ import java.util.stream.Collectors;
 public class RegisterController extends Controller<Patient> {
 	@Serial
 	private static final long serialVersionUID = -90981056471624046L;
+	private String confirmPassword;
 	private List<String> allergies;
 	private List<Patient> patients;
 	private List<City> cities;
@@ -32,9 +33,20 @@ public class RegisterController extends Controller<Patient> {
 	public void setAllergies(List<String> allergies) {
 		this.allergies = allergies;
 	}
+	public String getConfirmPassword() {
+		return this.confirmPassword;
+	}
+	public void setConfirmPassword(String confirmPassword){
+		this.confirmPassword = confirmPassword;
+	}
 
 	@Override
 	public void store() {
+		if (!getEntity().getPhysicalPerson().getPassword().equals(getConfirmPassword())) {
+			Util.addInfoMessage("As senhas não correspondem");
+			return;
+		}
+
 		List<Allergy> allergyList = entity.getAllergies();
 		List<String> allergies = getAllergies();
 
