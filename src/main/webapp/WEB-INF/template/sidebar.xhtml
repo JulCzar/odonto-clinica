@@ -4,7 +4,7 @@
 								xmlns:p="http://primefaces.org/ui">
 	<h:form class='pannel-menu-container p-col-4 p-md-3'>
 		<p:panelMenu style="width: 100%" >
-			<p:submenu label="Usuário" expanded="false">
+			<p:submenu rendered="#{sessionController.logged}" label="Usuário" expanded="false">
 				<p:menuitem value="Perfil" outcome="/profile"/>
 			</p:submenu>
 			<p:submenu label="Dentistas" expanded="false">
@@ -16,7 +16,7 @@
 				<p:menuitem value="Cadastrar" outcome="/admin/cadastro/paciente"/>
 			</p:submenu>
 			<p:submenu label="Agenda" expanded="false">
-				<p:menuitem value="Visitas" outcome="/admin/visitas/agenda"/>
+				<p:menuitem value="Consultas" outcome="/admin/visitas/agenda"/>
 				<p:menuitem value="Agendar Consulta" outcome="/admin/visitas/agendar" />
 			</p:submenu>
 			<p:submenu label="Exames" expanded="false">

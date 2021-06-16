@@ -4,7 +4,7 @@
 			<div class="card ui-fluid">
 				<p:growl id="messages" showDetail="true" />
 				<h3 class="card-header title">Dentista</h3>
-				<p:dataTable id="dt-patient" var="dentist" value="#{dentistController.dentists}" reflow="true">
+				<p:dataTable id="dt-patient" var="dentist" value="#{dentistListController.dentists}" reflow="true">
 					<p:column headerText="Name">
 						<h:outputText value="#{dentist.physicalPerson.name}" />
 					</p:column>
@@ -14,13 +14,15 @@
 					<p:column exportable="false" headerText="Ações" styleClass='p-text-center'>
 						<p:commandButton icon="pi pi-pencil" update="@form" process="@this"
 														 styleClass="edit-button rounded-button ui-button-success"
-														 actionListener="#{dentistController.edit(dentist)}"/>
+														 actionListener="#{dentistListController.edit(dentist)}"/>
 						<p:commandButton class="ui-button-warning rounded-button p-ml-3" icon="pi pi-trash" process="@this"
-														 update="dt-patient" actionListener="#{dentistController.destroy(dentist)}" />
+														 update="dt-patient" actionListener="#{dentistListController.destroy(dentist)}" />
 					</p:column>
 				</p:dataTable>
-				<p:commandButton value="Novo" actionListener="#{redirect.to('/OdontoClinica/admin/cadastro/dentista')}"
-												 styleClass="ui-button-success p-mt-3" />
+				<p:commandButton value="Novo"
+												 styleClass="ui-button-success p-mt-3"
+												 actionListener="#{redirect.to('/OdontoClinica/admin/cadastro/dentista')}"
+				/>
 			</div>
 		</h:form>
 	</ui:define>

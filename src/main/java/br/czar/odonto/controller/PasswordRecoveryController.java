@@ -33,8 +33,8 @@ public class PasswordRecoveryController extends Controller<PasswordRecovery> {
 	}
 
 	private String createCode() {
-		double c1 = Math.floor(Math.random() * 1000);
-		double c2 = Math.floor(Math.random() * 1000);
+		double c1 = Math.floor(Math.random() * 9999);
+		double c2 = Math.floor(Math.random() * 9999);
 
 		DecimalFormat format = new DecimalFormat("0000");
 		String code = format.format(c1)+"-"+format.format(c2);

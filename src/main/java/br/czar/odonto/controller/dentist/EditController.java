@@ -32,33 +32,18 @@ public class EditController extends Controller<Dentist> {
 	public Dentist getEntity() {
 		if (entity == null) {
 			entity = new Dentist();
-			entity.setPhone(new Phone());
 			entity.setSpecializations(new ArrayList<>());
 			entity.setPhysicalPerson(new PhysicalPerson());
 		}
 		return entity;
 	}
 
-	@Override
-	public void store() {
-		PhysicalPerson p = getEntity().getPhysicalPerson();
-
-		List<Specialization> SpecializationList = entity.getSpecializations();
-		for (String s : specializations)
-			SpecializationList.add(new Specialization(s.trim()));
-
-		getEntity().setPhysicalPerson(Security.encript(p));
-		super.store();
-		Util.redirect("/OdontoClinica/admin/lista/dentista");
-	}
-
 	public void update() {
 		List<Specialization> specializationsList = entity.getSpecializations();
 
-		for (String s : specializations) {
+		for (String s : specializations)
 			if (!specializationsList.contains(new Specialization(s.trim())))
 				specializationsList.add(new Specialization(s.trim()));
-		}
 
 		specializationsList.removeIf(s -> !specializations.contains(s.getName()));
 

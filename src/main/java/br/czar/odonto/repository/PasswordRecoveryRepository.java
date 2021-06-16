@@ -22,7 +22,7 @@ public class PasswordRecoveryRepository extends Repository<PasswordRecovery> {
 		try {
 			EntityManager em = getEntityManager();
 
-			String jpql = "SELECT p FROM PasswordRecovery p WHERE p.code = :code ORDER BY p.created asc";
+			String jpql = "SELECT p FROM PasswordRecovery p WHERE p.code = :code ORDER BY p.created desc";
 			Query query = em.createQuery(jpql);
 			query.setParameter("code",  code);
 

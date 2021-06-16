@@ -30,15 +30,7 @@
 						<p:outputLabel for='@next' value="Registro" />
 						<p:inputText id='registry' name='cpf' required="true" requiredMessage="Informe o registro" value="#{dentistRegisterController.entity.register}"/>
 					</div>
-					<div class='p-col-1'>
-						<p:outputLabel for='@next' value="DDD" />
-						<p:inputMask mask="99" id='area' required="true" requiredMessage="É necessário Cadastrar o telefone" value="#{dentistRegisterController.entity.phone.area}"/>
-					</div>
-					<div class='p-col-5'>
-						<p:outputLabel for='@next' value="Telefone" />
-						<p:inputMask mask="9 9999-9999" id='phonenumber' required="true" requiredMessage="É necessário Cadastrar pelo menos um telefone" value="#{dentistRegisterController.entity.phone.number}"/>
-					</div>
-					<div class='p-col-6'>
+					<div class='p-col-12'>
 						<p:outputLabel for='@next' value="Email" />
 						<p:inputText id='email' name='email' required="true" requiredMessage="Informe seu email" value="#{dentistRegisterController.entity.physicalPerson.email}"/>
 					</div>

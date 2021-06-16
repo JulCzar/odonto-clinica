@@ -48,6 +48,12 @@ public class CityController extends Controller<City> {
     }
     return cities;
   }
+  
+  @Override
+	public void store() {
+		super.store();
+		Util.redirect("/OdontoClinica/admin/lista/cidade");
+	}
   public void destroy(City city) {
     this.entity = city;
     destroy();

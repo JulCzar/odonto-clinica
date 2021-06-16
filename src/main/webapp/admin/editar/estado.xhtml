@@ -16,7 +16,7 @@
                     <p:outputLabel for="uf">Sigla</p:outputLabel>
                     <p:inputText id='uf' value="#{stateController.entity.uf}" maxlength="2" oninput="(function (i) { i.value = i.value.toUpperCase() })(this)" requiredMessage="O Campo não pode ficar vazio" required="true"/>
                 </div>
-                <p:commandButton actionListener="#{stateController.store}" update="@form messages" process="@form" value="Cadastrar" styleClass="p-mt-3"/>
+                <p:commandButton actionListener="#{stateController.store}" update="@form messages" process="@form" value="Salvar" styleClass="p-mt-3"/>
             </h:form>
         </div>
     </ui:define>

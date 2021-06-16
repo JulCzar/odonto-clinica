@@ -37,6 +37,12 @@ public class StateController extends Controller<State> {
 
     return entity;
   }
+  
+  @Override
+	public void store() {
+		super.store();
+		Util.redirect("/OdontoClinica/admin/lista/estado");
+	}
 
   public List<State> getStates() {
     StateRepository sr = new StateRepository();

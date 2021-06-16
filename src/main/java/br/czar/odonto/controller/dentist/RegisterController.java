@@ -21,7 +21,6 @@ public class RegisterController extends Controller<Dentist> {
 	public Dentist getEntity() {
 		if (entity == null) {
 			entity = new Dentist();
-			entity.setPhone(new Phone());
 			entity.setSpecializations(new ArrayList<>());
 			entity.setPhysicalPerson(new PhysicalPerson());
 		}

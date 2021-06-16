@@ -7,36 +7,47 @@
 
 	<ui:define name="sidebar"/>
 	<ui:define name="content">
-		<h:form styleClass="p-grid">
+		<h:form styleClass="p-grid ui-fluid">
 			<h3 class="card-header title">Alterar senha</h3>
 
-			<p:inputText
-				styleClass="p-col-12"
-				value="#{ChangePasswordController.code}"
-				placeholder="Código recebido por email"
-				required="true"
-				requiredMessage="O campo não pode ficar vazio"
-			/>
-			<p:inputText
-				styleClass="p-col-6"
-				value="#{ChangePasswordController.password}"
-				placeholder="Insira sua nova senha"
-				required="true"
-				requiredMessage="O campo não pode ficar vazio"
-			/>
-			<p:inputText
-				styleClass="p-col-6"
-				placeholder="Confirme sua senha"
-				required="true"
-				requiredMessage="O campo não pode ficar vazio"
-			/>
-
+			<div class="p-col-12">
+				<p:outputLabel for="@next" value="Código"/>
+				<p:inputText id="code" name="code" required="true" styleClass="p-col-12"
+										 placeholder="Código recebido por email"
+										 value="#{changePasswordController.code}"
+										 requiredMessage="O campo não pode ficar vazio"
+				/>
+			</div>
+			<div class="p-col-12">
+				<p:outputLabel for="@next" value="Email"/>
+				<p:inputText id="email" name="email" required="true" styleClass="p-col-12"
+										 value="#{changePasswordController.email}"
+										 requiredMessage="O campo não pode ficar vazio"
+										 placeholder="Email da conta que deseja alterar a senha"
+				/>
+			</div>
+			<div class="p-col-12">
+				<p:outputLabel for="@next" value="Senha"/>
+				<p:inputText id="password" name="password" required="true" styleClass="p-col-6"
+										 placeholder="Insira sua nova senha"
+										 value="#{changePasswordController.password}"
+										 requiredMessage="O campo não pode ficar vazio"
+				/>
+			</div>
+			<div class="p-col-12">
+				<p:outputLabel for="@next" value="Confirmação de senha"/>
+				<p:inputText id="confirmPassword" name="password" required="true" styleClass="p-col-6"
+										 placeholder="Confirme sua senha"
+										 requiredMessage="O campo não pode ficar vazio"
+										 value="#{changePasswordController.confirmPassword}"
+				/>
+			</div>
 			<p:commandButton
-				styleClass="p-ml-3 p-col-3"
 				process="@form"
-				actionListener="#{ChangePasswordController.changePassword}"
+				value="Alterar senha"
 				update="@form messages"
-				value="Recuperar"
+				styleClass="p-mx-2"
+				actionListener="#{changePasswordController.changePassword}"
 			/>
 		</h:form>
 	</ui:define>

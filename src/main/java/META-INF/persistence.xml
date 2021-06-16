@@ -42,10 +42,10 @@
 			<property name="hibernate.hbm2ddl.auto" value="update" />
 
 			<!-- Show SQL in console -->
-			<property name="hibernate.show_sql" value="false" />
+			<property name="hibernate.show_sql" value="true" />
 
 			<!-- Show SQL formatted -->
-			<property name="hibernate.format_sql" value="false" />
+			<property name="hibernate.format_sql" value="true" />
 		</properties>
 	</persistence-unit>
 </persistence>
