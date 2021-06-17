@@ -42,6 +42,7 @@ public class RegisterController extends Controller<Patient> {
 
 	@Override
 	public void store() {
+		entity.setActive(true);
 		if (!getEntity().getPhysicalPerson().getPassword().equals(getConfirmPassword())) {
 			Util.addInfoMessage("As senhas não correspondem");
 			return;

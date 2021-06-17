@@ -5,8 +5,6 @@ import br.czar.odonto.aplication.Util;
 import br.czar.odonto.aplication.storage.Request;
 import br.czar.odonto.controller.Controller;
 import br.czar.odonto.model.PasswordRecovery;
-import br.czar.odonto.model.Patient;
-import br.czar.odonto.model.PhysicalPerson;
 import br.czar.odonto.model.Security;
 import br.czar.odonto.repository.PasswordRecoveryRepository;
 import br.czar.odonto.repository.PhysicalPersonRepository;

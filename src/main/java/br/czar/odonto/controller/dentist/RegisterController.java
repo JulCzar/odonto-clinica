@@ -29,6 +29,7 @@ public class RegisterController extends Controller<Dentist> {
 
 	@Override
 	public void store() {
+		entity.setActive(true);
 		PhysicalPerson p = getEntity().getPhysicalPerson();
 
 		List<Specialization> SpecializationList = entity.getSpecializations();
