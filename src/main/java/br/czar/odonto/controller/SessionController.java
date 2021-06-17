@@ -5,7 +5,9 @@ import javax.inject.Named;
 
 import br.czar.odonto.aplication.storage.SessionStorage;
 import br.czar.odonto.aplication.Util;
+import br.czar.odonto.model.Dentist;
 import br.czar.odonto.model.Patient;
+import br.czar.odonto.model.PhysicalPerson;
 
 
 @Named
@@ -13,22 +15,37 @@ import br.czar.odonto.model.Patient;
 public class SessionController {
 	public static final String LOGGED_USER = "logged-user";
 	
-	public Patient getUserdata() {
+	public PhysicalPerson getUserdata() {
 		Object obj = SessionStorage.getItem(LOGGED_USER);
 		
-		if (obj == null) obj = new Patient();
+		if (obj == null) return null;
+		if (obj instanceof Dentist)
+			return ((Dentist)obj).getPhysicalPerson();
 		
-		return (Patient)obj;
+		return ((Patient)obj).getPhysicalPerson();
+	}
+
+	public boolean isDentist() {
+		Object user = SessionStorage.getItem(LOGGED_USER);
+
+		if (user == null) return false;
+		return (user instanceof Dentist);
+	}
+
+	public boolean isPatient() {
+		Object user = SessionStorage.getItem(LOGGED_USER);
+
+		if (user == null) return false;
+		return (user instanceof Patient);
 	}
 	
 	public boolean isLogged() {
-		return getUserdata().getPhysicalPerson() != null; 
+		return getUserdata() != null;
 	}
 	
 	public String getUserName() {
-		Patient p = getUserdata();
-		String nome = p.getPhysicalPerson() == null?"Usuario":p.getPhysicalPerson().getName();
-		return nome;
+		PhysicalPerson p = getUserdata();
+		return p == null?"Usuario":p.getName();
 	}
 	
 	public void logout() {

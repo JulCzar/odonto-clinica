@@ -16,7 +16,7 @@ public class PatientReport extends ReportServlet {
 	@Override
 	public HashMap<String, Class<?>> getParameters() {
 		HashMap<String, Class<?>> param = new HashMap<>();
-		param.put("NOME", String.class);
+		param.put("nome", String.class);
 		return param;
 	}
 

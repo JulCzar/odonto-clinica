@@ -7,7 +7,7 @@
 	<ui:define name="content">
 		<div class='card'>
 			<h3 class="card-header title">Editar Dentista</h3>
-			<h:form styleClass="p-grid ui-fluid">
+			<h:form id="form1" styleClass="p-grid ui-fluid">
 				<div class='p-col-6'>
 					<p:outputLabel for='@next' value="Nome" />
 					<p:inputText id='name' name='name' required="true" requiredMessage="Informe seu nome" value="#{dentistEditController.entity.physicalPerson.name}"/>
@@ -33,9 +33,32 @@
 					<p:outputLabel for='@next' value="Email" />
 					<p:inputText id='email' name='email' required="true" requiredMessage="Informe seu email" value="#{dentistEditController.entity.physicalPerson.email}"/>
 				</div>
-				<p:commandButton  update="@form messages" value="Trocar Senha" styleClass="p-mt-3 p-col p-mx-2"/>
+				<p:commandButton update="@form messages" value="Trocar Senha" process="changePassword" onclick="PF('changePassword').show()" styleClass="p-mt-3 p-col p-mx-2"/>
 				<p:commandButton actionListener="#{dentistEditController.update}" update="@form messages" value="Salvar" styleClass="p-col p-mt-3 p-mx-2"/>
 			</h:form>
+
+			<p:dialog id="changePassword" header="Alterar Senha" draggable="false" modal="true" widgetVar="changePassword" width="50vw">
+				<h:form>
+					<div class="p-grid ui-fluid">
+						<div class='p-col-12'>
+							<p:outputLabel for='@next' value="Senha" />
+							<p:password id="password" styleClass="p-col-12" required="true" value="#{dentistEditController.password}" requiredMessage="Informe uma nova senha" />
+						</div>
+						<div class='p-col-12'>
+							<p:outputLabel for='@next' value="Confirme sua senha" />
+							<p:password id="confirmPassword" styleClass="p-col-12" required="true" requiredMessage="Insira sua senha novamente" value="#{dentistEditController.confirmPassword}" />
+						</div>
+					</div>
+					<div class="p-mt-3 p-grid ui-fluid">
+						<div class="p-col-6 p-px-1">
+							<p:commandButton value="Cancelar" onclick="PF('changePassword').hide()"/>
+						</div>
+						<div class="p-col-6 p-px-1">
+							<p:commandButton value="Concluir" actionListener="#{dentistEditController.updatePassword}" process="changePassword" update="changePassword form1" oncomplete="PF('changePassword').hide()"/>
+						</div>
+					</div>
+				</h:form>
+			</p:dialog>
 		</div>
 	</ui:define>
 </ui:composition>

@@ -36,7 +36,7 @@ public class ReportController implements Serializable {
 	}
 
 	public void generate() {
-		Util.directRedirect("/OdontoClinica/paciente/relatorio?NOME="+getFilter());
+		Util.directRedirect("/OdontoClinica/paciente/relatorio?nome="+getFilter());
 	}
 
 	public String getFilter() {

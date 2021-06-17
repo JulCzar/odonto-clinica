@@ -4,26 +4,26 @@
 
 	<ui:define name="content">
 		<div class='card ui-fluid p-mt-5' style="--width: 400px">
-			<h3 class="card-header title">Login</h3>
+			<h3 class="card-header title">Logar como dentista</h3>
 			<h:form>
 				<div class="p-field">
 					<p:outputLabel for="@next" value="Email" />
-					<p:inputText id="email" value="#{authenticate.email}"
+					<p:inputText id="email" value="#{loginDentist.email}"
 											 requiredMessage="Informe o email para realizar o login" required="true" />
 				</div>
 				<div class="p-field">
 					<p:outputLabel for="@next" value="Senha" />
-					<p:password toggleMask="true" id="password" value="#{authenticate.password}" styleClass="p-col-12"
+					<p:password toggleMask="true" id="password" value="#{loginDentist.password}" styleClass="p-col-12"
 											 requiredMessage="Informe a senha para realizar o login" required="true" />
 				</div>
 				<div>
-					<p>Não possui conta? <p:commandLink process="@this" actionListener='#{redirect.to("cadastro/paciente")}' value="Cadastrar-se"/></p>
-					<div class="p-d-flex p-flex-column">
-						<p:commandLink process="@this" actionListener='#{redirect.to("senha/esqueci")}' value="Esqueceu sua senha?"/>
-						<p:commandLink process="@this" actionListener='#{redirect.to("loginDentista")}' value="Você é um dentista?"/>
-					</div>
+					<p>Não possui conta? <p:commandLink process="@this" actionListener='#{redirect.to("cadastro/paciente")}'>
+						Cadastrar-se</p:commandLink>
+					</p>
+					<p:commandLink process="@this" actionListener='#{redirect.to("senha/esqueci")}'>Esqueceu sua senha?
+					</p:commandLink>
 				</div>
-				<p:commandButton actionListener="#{authenticate.login}" process="@this email password"
+				<p:commandButton actionListener="#{loginDentist.login}" process="@this email password"
 												 update="@form messages" value="logar" styleClass="p-mt-3" />
 			</h:form>
 		</div>

@@ -17,6 +17,7 @@ public class EditController extends Controller<Dentist> {
 	@Serial
 	private static final long serialVersionUID = -909810564745689156L;
 	private static final String FLASH_KEY = "dentist-to-edit";
+	private String password, confirmPassword;
 	private List<String> specializations;
 
 	public EditController() {
@@ -51,11 +52,39 @@ public class EditController extends Controller<Dentist> {
 		Util.redirect("/OdontoClinica/admin/lista/dentista");
 	}
 
+	public void updatePassword() {
+		if (!getPassword().equals(getConfirmPassword())) {
+			Util.addInfoMessage("As senhas não correspondem");
+			return;
+		}
+		getEntity().getPhysicalPerson().setPassword(getPassword());
+		getEntity().setPhysicalPerson(Security.encript(getEntity().getPhysicalPerson()));
+
+		super.store();
+		Util.addInfoMessage("Senha atualizada!");
+	}
+
 	public List<String> getSpecializations() {
 		if (specializations == null)
 			specializations = new ArrayList<>();
 
 		return specializations;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getConfirmPassword() {
+		return confirmPassword;
+	}
+
+	public void setConfirmPassword(String confirmPassword) {
+		this.confirmPassword = confirmPassword;
 	}
 
 	public void setSpecializations(List<String> specializations) {
