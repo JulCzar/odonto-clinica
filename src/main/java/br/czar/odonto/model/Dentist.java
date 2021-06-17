@@ -14,6 +14,14 @@ public class Dentist extends DefaultEntity<Dentist> {
 	@OneToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_physical_person", unique = true)
 	private PhysicalPerson physicalPerson;
+	private boolean active;
+
+	public boolean isActive() {
+		return active;
+	}
+	public void setActive(boolean active) {
+		this.active = active;
+	}
 	public List<Specialization> getSpecializations() {
 		return specializations;
 	}
@@ -31,6 +39,9 @@ public class Dentist extends DefaultEntity<Dentist> {
 	}
 	public void setPhysicalPerson(PhysicalPerson physicalPerson) {
 		this.physicalPerson = physicalPerson;
+	}
+	public String getActiveStatus() {
+		return active?"Ativo":"Inativo";
 	}
 
 	@Override

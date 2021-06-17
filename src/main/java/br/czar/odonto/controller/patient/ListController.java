@@ -49,11 +49,18 @@ public class ListController extends Controller<Patient> {
     }
     return patients;
   }
-  public void destroy(Patient entity) {
-    this.entity = entity;
-    destroy();
-    patients = null;
-  }
+	public void destroy(Patient entity) {
+		this.entity = entity;
+		entity.setActive(false);
+		super.store();
+		patients = null;
+	}
+	public void unlock(Patient entity) {
+		this.entity = entity;
+		entity.setActive(true);
+		super.store();
+		patients = null;
+	}
 
   public void edit(Patient patient) {
     FlashStorage.setItem(FLASH_KEY, patient);

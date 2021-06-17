@@ -15,6 +15,7 @@ import br.czar.odonto.aplication.storage.FlashStorage;
 import br.czar.odonto.controller.Controller;
 import br.czar.odonto.model.City;
 import br.czar.odonto.model.Dentist;
+import br.czar.odonto.model.Patient;
 import br.czar.odonto.repository.CityRepository;
 import br.czar.odonto.repository.DentistRepository;
 
@@ -49,7 +50,14 @@ public class ListController extends Controller<Dentist> {
 	}
 	public void destroy(Dentist entity) {
 		this.entity = entity;
-		destroy();
+		entity.setActive(false);
+		super.store();
+		dentists = null;
+	}
+	public void unlock(Dentist entity) {
+		this.entity = entity;
+		entity.setActive(true);
+		super.store();
 		dentists = null;
 	}
 

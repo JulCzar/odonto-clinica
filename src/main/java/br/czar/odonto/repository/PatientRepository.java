@@ -61,7 +61,12 @@ public class PatientRepository extends Repository<Patient> {
 		try {
 			EntityManager em = getEntityManager();
 
-			String jpql = "SELECT p FROM Patient p WHERE p.physicalPerson.email = :email AND p.physicalPerson.password = :senha ORDER BY p.id";
+			String jpql = "SELECT p " +
+				"FROM Patient p " +
+				"WHERE p.physicalPerson.email = :email " +
+				"AND p.physicalPerson.password = :senha " +
+				"AND p.active = true " +
+				"ORDER BY p.id";
 			Query query = em.createQuery(jpql);
 			query.setParameter("email",  email);
 			query.setParameter("senha",  password);

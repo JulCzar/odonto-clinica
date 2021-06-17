@@ -29,7 +29,14 @@ public class Patient extends DefaultEntity<Patient>{
 	private Address address;
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Allergy> allergies;
+	private boolean active;
 
+	public boolean isActive() {
+		return active;
+	}
+	public void setActive(boolean active) {
+		this.active = active;
+	}
 	public Phone getPhone() {
 		return phone;
 	}
@@ -56,7 +63,9 @@ public class Patient extends DefaultEntity<Patient>{
 	public void setAddress(Address address) {
 		this.address = address;
 	}
-
+	public String getActiveStatus() {
+		return active?"Ativo":"Inativo";
+	}
 
 	@Override
 	public String toString() {
