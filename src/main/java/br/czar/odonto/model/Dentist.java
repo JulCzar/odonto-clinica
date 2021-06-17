@@ -8,7 +8,7 @@ import java.util.List;
 public class Dentist extends DefaultEntity<Dentist> {
 	@Serial
 	private static final long serialVersionUID = 1483241996299043812L;
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL)
 	private List<Specialization> specializations;
 	private String register;
 	@OneToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)

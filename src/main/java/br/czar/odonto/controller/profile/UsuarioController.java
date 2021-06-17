@@ -57,7 +57,7 @@ public class UsuarioController extends Controller<Patient> {
 			try {
 				avatarInputStream = uploadFile.getInputStream();
 				avatarName = uploadFile.getFileName();
-				Util.saveUserAvatar(avatarInputStream, "png", getEntity().getId());
+				Util.saveUserAvatar(avatarInputStream, "png", getEntity().getPhysicalPerson().getId());
 			} catch (IOException e) {
 				Util.addErrorMessage("Erro ao salvar. Não foi possível salvar a imagem do usuário.");
 				e.printStackTrace();

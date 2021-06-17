@@ -4,10 +4,7 @@ import br.czar.odonto.aplication.RepositoryException;
 import br.czar.odonto.aplication.Util;
 import br.czar.odonto.aplication.storage.SessionStorage;
 import br.czar.odonto.controller.Controller;
-import br.czar.odonto.model.Allergy;
-import br.czar.odonto.model.Dentist;
-import br.czar.odonto.model.Patient;
-import br.czar.odonto.model.Security;
+import br.czar.odonto.model.*;
 import br.czar.odonto.repository.DentistRepository;
 import br.czar.odonto.repository.PatientRepository;
 import org.primefaces.event.FileUploadEvent;
@@ -29,6 +26,7 @@ public class AdminController extends Controller<Dentist> {
 	private static final long serialVersionUID = 2122937466427799647L;
 	private static final String FLASH_KEY = "logged-user";
 	private String password, confirmPassword, avatarName;
+	private List<String> specializations;
 	private InputStream avatarInputStream;
 	private boolean editing;
 
@@ -36,19 +34,25 @@ public class AdminController extends Controller<Dentist> {
 		setEditing(false);
 	}
 
+	private Dentist getSessionUser() {
+		return (Dentist)SessionStorage.getItem(FLASH_KEY);
+	}
 	@Override
 	public Dentist getEntity() {
 		if (entity == null) {
 			DentistRepository pr = new DentistRepository();
-			Dentist p = (Dentist)SessionStorage.getItem(FLASH_KEY);
+			Dentist p = getSessionUser();
 			try {
 				entity = pr.find(p.getId());
-				System.out.println(entity);
+				List<String> specializations = new ArrayList<>();
+				entity.getSpecializations().forEach(s -> specializations.add(s.getName()));
+				setSpecializations(specializations);
 			} catch (RepositoryException e) {
 				entity = new Dentist();
 				e.printStackTrace();
 			}
 		}
+
 		return entity;
 	}
 
@@ -59,7 +63,7 @@ public class AdminController extends Controller<Dentist> {
 			try {
 				avatarInputStream = uploadFile.getInputStream();
 				avatarName = uploadFile.getFileName();
-				Util.saveUserAvatar(avatarInputStream, "png", getEntity().getId());
+				Util.saveUserAvatar(avatarInputStream, "png", getEntity().getPhysicalPerson().getId());
 			} catch (IOException e) {
 				Util.addErrorMessage("Erro ao salvar. Não foi possível salvar a imagem do usuário.");
 				e.printStackTrace();
@@ -71,14 +75,13 @@ public class AdminController extends Controller<Dentist> {
 	}
 
 	public void update() {
-		if (avatarInputStream != null) {
-			try {
-				Util.saveUserAvatar(avatarInputStream, "png", getEntity().getId());
-			} catch (IOException e) {
-				Util.addErrorMessage("Erro ao salvar. Não foi possível salvar a imagem do usuário.");
-				e.printStackTrace();
-			}
-		}
+		List<Specialization> specializationsList = entity.getSpecializations();
+
+		for (String s : specializations)
+			if (!specializationsList.contains(new Specialization(s.trim())))
+				specializationsList.add(new Specialization(s.trim()));
+
+		specializationsList.removeIf(s -> !specializations.contains(s.getName()));
 
 		super.store();
 		disableEdit();
@@ -130,10 +133,10 @@ public class AdminController extends Controller<Dentist> {
 	public void setConfirmPassword(String password) {
 		this.confirmPassword = password;
 	}
-	public List<String> getAllergies() {
-		Object o = SessionStorage.getItem(FLASH_KEY);
-		if (o == null) return new ArrayList<>();
-		if (o instanceof Patient) return ((Patient)o).getAllergies().stream().map(Allergy::getName).collect(Collectors.toList());
-		return new ArrayList<>();
+	public List<String> getSpecializations() {
+		return specializations;
+	}
+	public void setSpecializations(List<String> specializations) {
+		this.specializations = specializations;
 	}
 }

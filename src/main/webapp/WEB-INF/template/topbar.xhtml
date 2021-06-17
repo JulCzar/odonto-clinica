@@ -15,7 +15,8 @@
 				<img alt="avatar" src="${pageContext.request.contextPath}/OdontoClinica/avatar?id=#{sessionController.userdata.id}" width="45" height="45"/>
 			</p:avatar>
 			<p:menu rendered="#{sessionController.logged}" overlay="true" trigger="avatar" triggerEvent="click" value="Usuário" my="left top" at="left bottom" style="width: 100px">
-				<p:menuitem value="Perfil" icon="fas fa-user-alt" outcome="/auth/profile"/>
+				<p:menuitem rendered="#{sessionController.dentist}" value="Perfil" icon="fas fa-user-alt" outcome="/admin/profile"/>
+				<p:menuitem rendered="#{sessionController.patient}" value="Perfil" icon="fas fa-user-alt" outcome="/auth/profile"/>
 				<p:menuitem value="Sair" actionListener="#{sessionController.logout}" icon="fas fa-sign-out-alt"/>
 			</p:menu>
 		</div>
