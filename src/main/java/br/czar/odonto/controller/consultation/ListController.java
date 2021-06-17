@@ -2,9 +2,11 @@ package br.czar.odonto.controller.consultation;
 
 import br.czar.odonto.aplication.Util;
 import br.czar.odonto.aplication.storage.FlashStorage;
+import br.czar.odonto.aplication.storage.SessionStorage;
 import br.czar.odonto.controller.Controller;
 import br.czar.odonto.model.Consultation;
 import br.czar.odonto.model.Dentist;
+import br.czar.odonto.model.Patient;
 import br.czar.odonto.repository.ConsultationRepository;
 import br.czar.odonto.repository.DentistRepository;
 
@@ -35,6 +37,20 @@ public class ListController extends Controller<Consultation> {
 		if (consultations == null) {
 			try {
 				consultations = pr.findAll();
+			}catch (Exception e) {
+				consultations = new ArrayList<>();
+				e.printStackTrace();
+			}
+		}
+		return consultations;
+	}
+
+	public List<Consultation> getConsultationsOfLoggedUser() {
+		ConsultationRepository pr = new ConsultationRepository();
+		if (consultations == null) {
+			try {
+				Patient p = (Patient) SessionStorage.getItem("logged-user");
+				consultations = pr.findAllOfPatient(p);
 			}catch (Exception e) {
 				consultations = new ArrayList<>();
 				e.printStackTrace();

@@ -19,11 +19,12 @@
 				<p:menuitem value="Cadastrar" outcome="/admin/cadastro/paciente"/>
 			</p:submenu>
 			<p:submenu rendered="#{sessionController.dentist}" label="Agenda" expanded="false">
-				<p:menuitem value="Consultas" outcome="/admin/visitas/agenda"/>
-				<p:menuitem value="Agendar Consulta" outcome="/admin/visitas/agendar" />
+				<p:menuitem value="Consultas" outcome="/admin/consultas/agenda"/>
+				<p:menuitem value="Agendar Consulta" outcome="/admin/consultas/agendar" />
 			</p:submenu>
-			<p:submenu rendered="#{sessionController.dentist}" label="Consultas" expanded="false">
-				<p:menuitem value="Agendar" outcome="/admin/visitas/agendar" />
+			<p:submenu rendered="#{sessionController.patient}" label="Consultas" expanded="false">
+				<p:menuitem value="Consultas" outcome="/admin/consultas/lista"/>
+				<p:menuitem value="Agendar" outcome="/auth/consultas/agendar" />
 			</p:submenu>
 			<p:submenu rendered="#{sessionController.dentist}" label="Exames" expanded="false">
 				<p:menuitem value="Listar" outcome="/admin/lista/exames"/>
