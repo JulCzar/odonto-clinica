@@ -2,6 +2,7 @@ package br.czar.odonto.controller.consultation;
 
 import br.czar.odonto.aplication.RepositoryException;
 import br.czar.odonto.aplication.Util;
+import br.czar.odonto.aplication.storage.SessionStorage;
 import br.czar.odonto.controller.Controller;
 import br.czar.odonto.model.*;
 import br.czar.odonto.repository.DentistRepository;
@@ -86,8 +87,11 @@ public class RegisterController extends Controller<Consultation> {
 	@Override
 	public void store() {
 		try {
+			Object loggedUser = SessionStorage.getItem("logged-user");
+			if (loggedUser instanceof Dentist) getEntity().setDentist((Dentist)loggedUser);
+			if (loggedUser instanceof Patient) getEntity().setPatient((Patient)loggedUser);
 			super.store();
-			Util.redirect("/OdontoClinica/admin/consultas/agenda");
+			Util.addInfoMessage("A consulta foi agendada com sucesso!");
 		} catch (Exception e) {
 			e.printStackTrace();
 			Util.addWarnMessage("Houve um erro ao processar a requisição");
@@ -96,6 +100,18 @@ public class RegisterController extends Controller<Consultation> {
 
 	public List<Patient> filterPatients(String name) {
 		return getPatients()
+			.stream()
+			.filter(c -> c
+				.getPhysicalPerson()
+				.getName()
+				.toLowerCase()
+				.startsWith(name.toLowerCase())
+			)
+			.collect(Collectors.toList());
+	}
+
+	public List<Dentist> filterDentist(String name) {
+		return getDentists()
 			.stream()
 			.filter(c -> c
 				.getPhysicalPerson()
