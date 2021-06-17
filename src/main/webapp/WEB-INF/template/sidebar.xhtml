@@ -23,8 +23,8 @@
 				<p:menuitem value="Agendar Consulta" outcome="/admin/consultas/agendar" />
 			</p:submenu>
 			<p:submenu rendered="#{sessionController.patient}" label="Consultas" expanded="false">
-				<p:menuitem value="Consultas" outcome="/admin/consultas/lista"/>
-				<p:menuitem value="Agendar" outcome="/auth/consultas/agendar" />
+				<p:menuitem value="Consultas" outcome="/auth/consulta/lista"/>
+				<p:menuitem value="Agendar" outcome="/auth/consulta/agendar" />
 			</p:submenu>
 			<p:submenu rendered="#{sessionController.dentist}" label="Exames" expanded="false">
 				<p:menuitem value="Listar" outcome="/admin/lista/exames"/>

@@ -8,7 +8,7 @@
 			<div class="p-d-flex p-ai-center title">Odonto Clinica</div>
 			<p:tabMenu styleClass="p-ml-auto" activeIndex="-1">
 				<p:menuitem value="Home" outcome="/index"/>
-				<p:menuitem rendered="#{sessionController.patient}" value="Consulta" outcome="/auth/consulta/lista"/>
+				<p:menuitem rendered="#{sessionController.patient}" value="Consultas" outcome="/auth/consulta/lista"/>
 				<p:menuitem rendered="#{sessionController.dentist}" value="Gestão" outcome="/admin/gerir"/>
 				<p:menuitem rendered="#{!sessionController.logged}" value="Login" outcome="/login" icon="fas fa-sign-in-alt"/>
 			</p:tabMenu>
