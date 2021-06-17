@@ -70,6 +70,11 @@ public class ChangeController extends Controller<PasswordRecovery> {
 			Util.addInfoMessage("Senha Alterada com sucesso");
 		} catch (RepositoryException e) {
 			e.printStackTrace();
+		} finally {
+			code = null;
+			email = null;
+			password = null;
+			confirmPassword = null;
 		}
 	}
 

@@ -12,7 +12,7 @@
 
 			<div class="p-col-12">
 				<p:outputLabel for="@next" value="Código"/>
-				<p:inputText id="code" name="code" required="true" styleClass="p-col-12"
+				<p:inputMask id="code" name="code" required="true" styleClass="p-col-12" mask="9999-9999"
 										 placeholder="Código recebido por email"
 										 value="#{changePasswordController.code}"
 										 requiredMessage="O campo não pode ficar vazio"
@@ -28,7 +28,7 @@
 			</div>
 			<div class="p-col-12">
 				<p:outputLabel for="@next" value="Senha"/>
-				<p:inputText id="password" name="password" required="true" styleClass="p-col-6"
+				<p:password id="password" name="password" required="true" styleClass="p-col-6" toggleMask="true"
 										 placeholder="Insira sua nova senha"
 										 value="#{changePasswordController.password}"
 										 requiredMessage="O campo não pode ficar vazio"
@@ -36,7 +36,7 @@
 			</div>
 			<div class="p-col-12">
 				<p:outputLabel for="@next" value="Confirmação de senha"/>
-				<p:inputText id="confirmPassword" name="password" required="true" styleClass="p-col-6"
+				<p:password id="confirmPassword" name="password" required="true" styleClass="p-col-6" toggleMask="true"
 										 placeholder="Confirme sua senha"
 										 requiredMessage="O campo não pode ficar vazio"
 										 value="#{changePasswordController.confirmPassword}"
