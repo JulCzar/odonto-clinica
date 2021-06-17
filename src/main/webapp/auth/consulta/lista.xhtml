@@ -1,0 +1,29 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+								xmlns:ui="http://java.sun.com/jsf/facelets"
+								template="/WEB-INF/template/main.xhtml"
+								xmlns:h="http://java.sun.com/jsf/html"
+								xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="content">
+		<div class='card'>
+			<h3 class="card-header title">Agenda</h3>
+			<h:form styleClass="ui-fluid">
+				<p:dataTable id="dt-state" var="c" value="#{consultationListController.consultations}" reflow="true">
+					<p:column headerText="Paciente" >
+						<h:outputText value="#{c.patient.physicalPerson.name}"/>
+					</p:column>
+					<p:column headerText="Dia" >
+						<h:outputText value="#{c.dateString}"/>
+					</p:column>
+					<p:column headerText="Exame" >
+						<h:outputText value="#{c.exam.name}"/>
+					</p:column>
+					<p:column headerText="Status" >
+						<h:outputText value="#{c.status.label}"/>
+					</p:column>
+				</p:dataTable>
+				<p:commandButton value="Agendar" actionListener="#{redirect.to('/OdontoClinica/auth/visitas/agendar')}" styleClass="ui-button-success p-mt-3" />
+			</h:form>
+		</div>
+	</ui:define>
+</ui:composition>

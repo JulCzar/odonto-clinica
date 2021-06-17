@@ -87,7 +87,7 @@ public class RegisterController extends Controller<Consultation> {
 	public void store() {
 		try {
 			super.store();
-			Util.redirect("/OdontoClinica/admin/visitas/agenda");
+			Util.redirect("/OdontoClinica/admin/consultas/agenda");
 		} catch (Exception e) {
 			e.printStackTrace();
 			Util.addWarnMessage("Houve um erro ao processar a requisição");

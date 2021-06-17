@@ -1,0 +1,49 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+								xmlns:ui="http://java.sun.com/jsf/facelets"
+								xmlns:h="http://java.sun.com/jsf/html"
+								xmlns:f="http://java.sun.com/jsf/core"
+								xmlns:p="http://primefaces.org/ui"
+								template="/WEB-INF/template/main.xhtml">
+	<ui:define name="sidebar"/>
+	<ui:define name="content">
+		<div class='card ui-fluid'>
+			<h3 class="card-header title">Agendar Consulta</h3>
+			<h:form>
+				<div class='p-field'>
+					<p:outputLabel for="@next">Data</p:outputLabel>
+					<p:datePicker
+						id='date'
+						required="true"
+						showTime="true"
+						mindate="#{consultationRegisterController.minDate}"
+						mask="99/99/9999 99:99"
+						requiredMessage="Informe o dia da consulta"
+						value="#{consultationRegisterController.entity.dayHour}"
+					/>
+				</div>
+				<div class="p-field">
+					<p:outputLabel for="@next" value="Exame"/>
+					<p:selectOneMenu
+						id="group"
+						required="true"
+						requiredMessage="É necessário informar o exame"
+						value="#{consultationRegisterController.entity.exam}"
+					>
+						<f:selectItem itemLabel="Selecione Um" itemValue=""/>
+						<f:selectItems value="#{consultationRegisterController.exams}" var="e" itemLabel="#{e.name}" itemValue="#{e}"/>
+					</p:selectOneMenu>
+				</div>
+				<div class='p-field'>
+					<p:outputLabel for="@next" value="Paciente"/>
+					<p:autoComplete var="patient" id="patient" dropdown="true" required="true" itemValue="#{patient}"
+													value="#{consultationRegisterController.entity.patient}"
+													completeMethod="#{consultationRegisterController.filterPatients}"
+													minQueryLength="3" forceSelection="true" itemLabel="#{patient.physicalPerson.name}"
+													emptyMessage="Nenhuma correspondência" requiredMessage="É necessário selecionar um paciente"
+					/>
+				</div>
+				<p:commandButton actionListener="#{consultationRegisterController.store}" update="@form messages" process="@form" value="Cadastrar" styleClass="p-mt-3"/>
+			</h:form>
+		</div>
+	</ui:define>
+</ui:composition>

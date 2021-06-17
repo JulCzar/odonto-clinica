@@ -53,19 +53,19 @@ public class EditController extends Controller<Consultation> {
 
 	public void update() {
 		super.store();
-		Util.redirect("/OdontoClinica/admin/visitas/agenda");
+		Util.redirect("/OdontoClinica/admin/consultas/agenda");
 	}
 
 	public void cancel() {
 		getEntity().setStatus(ConsultationStatus.CANCELADO);
 		super.store();
-		Util.redirect("/OdontoClinica/admin/visitas/agenda");
+		Util.redirect("/OdontoClinica/admin/consultas/agenda");
 	}
 
 	public void complete() {
 		getEntity().setStatus(ConsultationStatus.CONCLUIDO);
 		super.store();
-		Util.redirect("/OdontoClinica/admin/visitas/agenda");
+		Util.redirect("/OdontoClinica/admin/consultas/agenda");
 	}
 
 	public List<Dentist> getDentists() {
