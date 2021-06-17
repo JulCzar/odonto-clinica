@@ -2,7 +2,7 @@
 	<ui:define name="content">
 		<h3 class='card-header title p-mb-5'>Perfil</h3>
 		<h:form enctype="multipart/form-data">
-			<p:fileUpload listener="#{profileController.upload}"
+			<p:fileUpload listener="#{adminProfileController.upload}"
 										label="#{profileController.avatarName}"
 										mode="advanced"
 										update="@all messages"
@@ -14,51 +14,43 @@
 		<h:form id="profileForm" styleClass="ui-fluid p-grid">
 			<div class='p-col-6'>
 				<p:outputLabel for="name">Nome</p:outputLabel>
-				<p:inputText id="name" requiredMessage="O campo não pode ficar vazio" disabled="#{!profileController.editing}" value="#{profileController.entity.physicalPerson.name}"/>
+				<p:inputText id="name" requiredMessage="O campo não pode ficar vazio" disabled="#{!adminProfileController.editing}" value="#{adminProfileController.entity.physicalPerson.name}"/>
 			</div>
 			<div class='p-col-6'>
 				<p:outputLabel for="lastname">Sobrenome</p:outputLabel>
-				<p:inputText id="lastname" requiredMessage="O campo não pode ficar vazio" disabled="#{!profileController.editing}" value="#{profileController.entity.physicalPerson.lastname}"/>
+				<p:inputText id="lastname" requiredMessage="O campo não pode ficar vazio" disabled="#{!adminProfileController.editing}" value="#{adminProfileController.entity.physicalPerson.lastname}"/>
 			</div>
 			<div class='p-col-12'>
-				<p:outputLabel for="allergies">Alergias</p:outputLabel>
-				<p:chips id="allergies" requiredMessage="O campo não pode ficar vazio" disabled="#{!profileController.editing}" value="#{profileController.entity.allergies}"/>
-			</div>
-			<div class='p-col-6'>
-				<p:outputLabel for="email">Email</p:outputLabel>
-				<p:inputText id="email" requiredMessage="O campo não pode ficar vazio" disabled="#{!profileController.editing}" value="#{profileController.entity.physicalPerson.email}"/>
+				<p:outputLabel for="allergies">Especializações</p:outputLabel>
+				<p:chips id="allergies" requiredMessage="O campo não pode ficar vazio" disabled="#{!adminProfileController.editing}" value="#{adminProfileController.entity.specializations}"/>
 			</div>
 			<div class='p-col-6'>
 				<p:outputLabel for="cpf">CPF</p:outputLabel>
-				<p:inputText id="cpf" requiredMessage="O campo não pode ficar vazio" disabled="#{!profileController.editing}" value="#{profileController.entity.physicalPerson.cpf}"/>
-			</div>
-			<div class='p-col-1'>
-				<p:outputLabel for="area">DDD</p:outputLabel>
-				<p:inputText id="area" requiredMessage="O campo não pode ficar vazio" disabled="#{!profileController.editing}" value="#{profileController.entity.phone.area}"/>
-			</div>
-			<div class='p-col-5'>
-				<p:outputLabel for="phone">Telefone</p:outputLabel>
-				<p:inputMask mask="9 9999-9999" id="phone" requiredMessage="O campo não pode ficar vazio" disabled="#{!profileController.editing}" value="#{profileController.entity.phone.number}"/>
+				<p:inputText id="cpf" requiredMessage="O campo não pode ficar vazio" disabled="#{!adminProfileController.editing}" value="#{adminProfileController.entity.physicalPerson.cpf}"/>
 			</div>
 			<div class='p-col-6'>
-				<p:outputLabel for="address">Endereço</p:outputLabel>
-				<p:inputText id="address" readonly="true" requiredMessage="O campo não pode ficar vazio" disabled="#{!profileController.editing}" value="#{profileController.entity.address.fullAddress}"/>
+				<p:outputLabel for="email">Registro</p:outputLabel>
+				<p:inputText id="register" requiredMessage="O campo não pode ficar vazio" disabled="#{!adminProfileController.editing}" value="#{adminProfileController.entity.physicalPerson.email}"/>
 			</div>
-			<p:commandButton rendered="#{!profileController.editing}" value="Alterar Senha" onclick="PF('changePassword').show()" styleClass="p-col p-mx-2"/>
-			<p:commandButton rendered="#{!profileController.editing}" value="Editar" actionListener="#{profileController.enableEdit}" update="@form profileForm changePassword" styleClass="p-col p-mx-2"/>
-			<p:commandButton rendered="#{profileController.editing}" value="Cancelar" actionListener="#{profileController.disableEdit}" update="@form profileForm changePassword" process="@this" styleClass="p-col p-mx-2"/>
-			<p:commandButton rendered="#{profileController.editing}" value="Salvar" actionListener="#{profileController.update}" update="@form profileForm changePassword" styleClass="p-col p-mx-2"/>
+			<div class='p-col-12'>
+				<p:outputLabel for="email">Email</p:outputLabel>
+				<p:inputText id="email" requiredMessage="O campo não pode ficar vazio" disabled="#{!adminProfileController.editing}" value="#{adminProfileController.entity.physicalPerson.email}"/>
+			</div>
+			<p:commandButton rendered="#{!adminProfileController.editing}" value="Alterar Senha" onclick="PF('changePassword').show()" styleClass="p-col p-mx-2"/>
+			<p:commandButton rendered="#{!adminProfileController.editing}" value="Editar" actionListener="#{adminProfileController.enableEdit}" update="@form profileForm changePassword" styleClass="p-col p-mx-2"/>
+			<p:commandButton rendered="#{adminProfileController.editing}" value="Cancelar" actionListener="#{adminProfileController.disableEdit}" update="@form profileForm changePassword" process="@this" styleClass="p-col p-mx-2"/>
+			<p:commandButton rendered="#{adminProfileController.editing}" value="Salvar" actionListener="#{adminProfileController.update}" update="@form profileForm changePassword" styleClass="p-col p-mx-2"/>
 		</h:form>
 		<p:dialog id="changePassword" header="Alterar Senha" draggable="false" modal="true" widgetVar="changePassword" width="50vw">
 			<h:form>
 				<div class="p-grid ui-fluid">
 					<div class='p-col-12'>
 						<p:outputLabel for='@next' value="Senha" />
-						<p:password id="password" styleClass="p-col-12" required="true" value="#{profileController.password}" requiredMessage="Informe uma nova senha" />
+						<p:password id="password" styleClass="p-col-12" required="true" value="#{adminProfileController.password}" requiredMessage="Informe uma nova senha" />
 					</div>
 					<div class='p-col-12'>
 						<p:outputLabel for='@next' value="Confirme sua senha" />
-						<p:password id="confirmPassword" styleClass="p-col-12" required="true" requiredMessage="Insira sua senha novamente" value="#{profileController.confirmPassword}" />
+						<p:password id="confirmPassword" styleClass="p-col-12" required="true" requiredMessage="Insira sua senha novamente" value="#{adminProfileController.confirmPassword}" />
 					</div>
 				</div>
 				<div class="p-mt-3 p-grid ui-fluid">
@@ -66,7 +58,7 @@
 						<p:commandButton value="Cancelar" onclick="PF('changePassword').hide()"/>
 					</div>
 					<div class="p-col-6 p-px-1">
-						<p:commandButton value="Concluir" actionListener="#{profileController.changePassword}" process="changePassword" update="changePassword profileForm" oncomplete="PF('changePassword').hide()"/>
+						<p:commandButton value="Concluir" actionListener="#{adminProfileController.changePassword}" process="changePassword" update="changePassword profileForm" oncomplete="PF('changePassword').hide()"/>
 					</div>
 				</div>
 			</h:form>

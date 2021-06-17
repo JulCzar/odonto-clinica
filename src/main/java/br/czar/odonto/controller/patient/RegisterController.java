@@ -56,7 +56,9 @@ public class RegisterController extends Controller<Patient> {
 		PhysicalPerson p = getEntity().getPhysicalPerson();
 		getEntity().setPhysicalPerson(Security.encript(p));
 		super.store();
-		Util.redirect("/OdontoClinica/admin/lista/paciente");
+		setConfirmPassword(null);
+		setAllergies(null);
+		Util.addInfoMessage("Cadastro realizado com sucesso!");
 	}
 
 	@Override

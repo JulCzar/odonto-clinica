@@ -8,14 +8,14 @@
 			<div class="p-d-flex p-ai-center title">Odonto Clinica</div>
 			<p:tabMenu styleClass="p-ml-auto" activeIndex="-1">
 				<p:menuitem value="Home" outcome="/index"/>
-				<p:menuitem rendered="#{sessionController.logged}" value="Gestão" outcome="/admin/gerir"/>
+				<p:menuitem rendered="#{sessionController.dentist}" value="Gestão" outcome="/admin/gerir"/>
 				<p:menuitem rendered="#{!sessionController.logged}" value="Login" outcome="/login" icon="fas fa-sign-in-alt"/>
 			</p:tabMenu>
 			<p:avatar id="avatar" rendered="#{sessionController.logged}" styleClass="p-ml-3 p-mr-2" size="large" shape="circle">
 				<img alt="avatar" src="${pageContext.request.contextPath}/OdontoClinica/avatar?id=#{sessionController.userdata.id}" width="45" height="45"/>
 			</p:avatar>
 			<p:menu rendered="#{sessionController.logged}" overlay="true" trigger="avatar" triggerEvent="click" value="Usuário" my="left top" at="left bottom" style="width: 100px">
-				<p:menuitem value="Perfil" icon="fas fa-user-alt" outcome="/admin/profile"/>
+				<p:menuitem value="Perfil" icon="fas fa-user-alt" outcome="/auth/profile"/>
 				<p:menuitem value="Sair" actionListener="#{sessionController.logout}" icon="fas fa-sign-out-alt"/>
 			</p:menu>
 		</div>

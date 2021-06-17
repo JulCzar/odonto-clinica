@@ -1,8 +1,9 @@
-package br.czar.odonto.controller;
+package br.czar.odonto.controller.profile;
 
 import br.czar.odonto.aplication.RepositoryException;
 import br.czar.odonto.aplication.Util;
 import br.czar.odonto.aplication.storage.SessionStorage;
+import br.czar.odonto.controller.Controller;
 import br.czar.odonto.model.Allergy;
 import br.czar.odonto.model.Patient;
 import br.czar.odonto.model.Security;
@@ -20,9 +21,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Named
+@Named("profileController")
 @ViewScoped
-public class ProfileController extends Controller<Patient> {
+public class UsuarioController extends Controller<Patient> {
 	@Serial
 	private static final long serialVersionUID = 2122937466427799647L;
 	private static final String FLASH_KEY = "logged-user";
@@ -30,7 +31,7 @@ public class ProfileController extends Controller<Patient> {
 	private InputStream avatarInputStream;
 	private boolean editing;
 
-	public ProfileController() {
+	public UsuarioController() {
 		setEditing(false);
 	}
 

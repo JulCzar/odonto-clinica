@@ -20,11 +20,9 @@ public abstract class ReportServlet extends HttpServlet {
 
 	public abstract String getJasperFile();
 	public abstract HashMap<String, Class<?>> getParameters();
-
 	public abstract Connection getConnection();
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-		throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			String name = request.getServletContext().getRealPath("/reports/" + getJasperFile());
 

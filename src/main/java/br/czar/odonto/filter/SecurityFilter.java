@@ -13,9 +13,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.sun.mail.iap.Response;
+
+import br.czar.odonto.aplication.storage.Request;
+import br.czar.odonto.model.Dentist;
 import br.czar.odonto.model.Patient;
 
-@WebFilter(filterName = "SecurityFilter", urlPatterns = {"/admin/*"})
+@WebFilter(filterName = "SecurityFilter", urlPatterns = {"/admin/*","/auth/*"})
 public class SecurityFilter implements Filter {
 	public static final String LOGGED_USER = "logged-user";
 
@@ -33,6 +37,8 @@ public class SecurityFilter implements Filter {
 		servletResponse.setDateHeader("Expires", 0); 
 		
 		HttpSession session = servletRequest.getSession(false);
+		String endereco = servletRequest.getRequestURI();
+		System.out.println(endereco);
 		
 		Object user = (session != null)
 			?session.getAttribute(LOGGED_USER)
@@ -40,7 +46,14 @@ public class SecurityFilter implements Filter {
 		
 		if (user == null)
 			servletResponse.sendRedirect("/OdontoClinica/login.xhtml");
-		else if (user instanceof Patient) 
+		else if (endereco.contains("/auth/")) {
+			if (user instanceof Patient) {
+				chain.doFilter(req,res);
+			}else {
+				servletResponse.sendRedirect("/OdontoClinica/index.xhtml");
+			}
+		}
+		else if (user instanceof Dentist)
 			chain.doFilter(req, res);
 		else
 			servletResponse.sendRedirect("/OdontoClinica/index.xhtml");
@@ -48,7 +61,7 @@ public class SecurityFilter implements Filter {
 	
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
-		System.out.println("SecurityFilter Iniciado.");
+		System.out.println("Admin Filter Iniciado.");
 		Filter.super.init(filterConfig);
 	}
 
